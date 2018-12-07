@@ -34,5 +34,5 @@ public class Transport {
 
     @ManyToOne
     @JoinColumn(name = "client_id")
-    private Client client;
+    private Client owner;
 }

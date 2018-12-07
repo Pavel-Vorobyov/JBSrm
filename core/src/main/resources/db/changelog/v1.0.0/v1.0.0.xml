@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="0001" author="pavel" runAlways="true">
+    <changeSet id="0001" author="pavel" runAlways="true" runOnChange="true">
         <sqlFile path="sql/db-client-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
         <sqlFile path="sql/db-transport-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
         <sqlFile path="sql/db-product-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>

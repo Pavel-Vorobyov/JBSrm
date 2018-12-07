@@ -4,6 +4,7 @@ spring:
     username: admin
     password: 123qwe123
   jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL95Dialect
@@ -11,9 +12,12 @@ spring:
         cache.use_query_cache: false
         generate_statistics: false
         temp.use_jdbc_metadata_defaults: false
+        jdbc.lob.non_contextual_creation: true
         jdbc.batch_size: 500
         order_inserts: true
         batch_fetch_style: DYNAMIC
         show_sql: true
   liquibase.change-log: classpath:/db/changelog/liquibase-changelog.xml
   logging.level.liquibase: INFO
+server:
+  port: 8080

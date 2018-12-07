@@ -24,13 +24,12 @@ public class Ttn {
     @Column(name = "id")
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "waybill_id")
+    @OneToOne(mappedBy = "waybill")
     private Waybill waybill;
 
     @OneToMany(
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
+            mappedBy = "product")
     private List<Product> products;
 
     @NotNull

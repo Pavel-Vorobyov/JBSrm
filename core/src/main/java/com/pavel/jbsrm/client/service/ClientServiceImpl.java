@@ -1,6 +1,7 @@
 package com.pavel.jbsrm.client.service;
 
 import com.pavel.jbsrm.client.Client;
+import com.pavel.jbsrm.client.dto.ClientDto;
 import com.pavel.jbsrm.client.dto.CreateClientDto;
 import com.pavel.jbsrm.client.dto.UpdateClientDto;
 import com.pavel.jbsrm.client.repository.ClientRepository;
@@ -18,21 +19,26 @@ public class ClientServiceImpl implements ClientService {
     private ClientRepository clientRepository;
 
     @Override
-    public Client createClient(@Valid CreateClientDto createClientDto) {
+    public ClientDto createClient(@Valid CreateClientDto createClientDto) {
         Client client = ObjectMapperUtills.mapTo(createClientDto, Client.class);
-        return clientRepository.save(client);
+        return ObjectMapperUtills.mapTo(clientRepository.save(client), ClientDto.class);
     }
 
     @Override
-    public Client updateClient(long id, @Valid UpdateClientDto updateClientDto) {
+    public ClientDto updateClient(long id, @Valid UpdateClientDto updateClientDto) {
         Optional<Client> client = clientRepository.findById(id);
-        client.ifPresent(cl -> ObjectMapperUtills.mapTo(cl, updateClientDto));
+        client.ifPresent(cl -> ObjectMapperUtills.mapTo(updateClientDto, cl));
 
-        return client.map(cl -> clientRepository.save(cl)).orElse(null);
+        return ObjectMapperUtills.mapTo(client.map(cl -> clientRepository.save(cl)).orElse(null), ClientDto.class);
     }
 
     @Override
     public void deleteClient(long id) {
         clientRepository.deleteById(id);
+    }
+
+    @Override
+    public ClientDto find(long id) {
+        return ObjectMapperUtills.mapTo(clientRepository.findById(id), ClientDto.class);
     }
 }

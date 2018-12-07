@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -23,26 +25,25 @@ public class Client {
     @Column(name = "id")
     private long id;
 
-    @Size(max = 80)
+    @Length(max = 80)
     @NotBlank
     @Column(name = "title")
     private String title;
 
-    @Size(max = 80)
+    @Length(max = 80)
     @NotBlank
     @Column(name = "email")
     private String email;
 
-    @Size(max = 80)
+    @Length(max = 80)
     @NotBlank
     @Column(name = "phone")
     private String phone;
 
-    @NotNull
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "client_role")
     private ClientRole clientRole;
 
-    @NotNull
     @Column(name = "is_active")
     private boolean isActive;
 }
