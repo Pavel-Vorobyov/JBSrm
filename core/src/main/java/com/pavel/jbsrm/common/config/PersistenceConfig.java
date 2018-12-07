@@ -30,8 +30,7 @@ public class PersistenceConfig {
     Properties additionalProperties() {
         Properties properties = new Properties();
         properties.setProperty("show_sql", "true");
-        properties.setProperty(
-                "hibernate.dialect", "org.hibernate.dialect.PostgreSQL94Dialect");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL94Dialect");
 
         return properties;
     }
