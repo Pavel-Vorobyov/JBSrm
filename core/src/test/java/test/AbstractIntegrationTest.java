@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @ContextConfiguration(classes = IntegrationTestConfig.class)
-public class AbstractIntegrationTest extends AbstractTransactionalJUnit4SpringContextTests {
+public abstract class AbstractIntegrationTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @PersistenceContext
     protected EntityManager entityManager;
