@@ -39,6 +39,10 @@ public class Client {
     private String phone;
 
     @NotNull
+    @Enumerated(value = EnumType.STRING)
+    private ClientRole clientRole;
+
+    @NotNull
     @Column(name = "is_active")
     private boolean isActive;
 }

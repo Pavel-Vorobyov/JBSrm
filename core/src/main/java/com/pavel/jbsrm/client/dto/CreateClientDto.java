@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.validation.constraints.NotEmpty;
 
 @Data
-public class UpdateClientDto {
+public class CreateClientDto {
 
     @NotEmpty
     private String title;
@@ -19,7 +19,4 @@ public class UpdateClientDto {
 
     @NotEmpty
     private ClientRole clientRole;
-
-    @NotEmpty
-    private boolean isActive;
 }
