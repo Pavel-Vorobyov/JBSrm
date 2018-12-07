@@ -1,0 +1,11 @@
+version: "3"
+services:
+  db:
+    image: postgres:9.6
+    container_name: pg-jbsrm
+    ports:
+    - "5446:5432"
+    environment:
+      POSTGRES_PASSWORD: 123qwe123
+      POSTGRES_USER: admin
+      POSTGRES_DB: jbsrm
