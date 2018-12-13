@@ -1,5 +1,7 @@
 package com.pavel.jbsrm.ttn;
 
+import com.pavel.jbsrm.common.hibernate.EnumType;
+import com.pavel.jbsrm.common.hibernate.Enumerated;
 import com.pavel.jbsrm.product.Product;
 import com.pavel.jbsrm.waybill.Waybill;
 import lombok.AllArgsConstructor;
@@ -24,13 +26,16 @@ public class Ttn {
     @Column(name = "id")
     private long id;
 
-    @OneToOne(mappedBy = "waybill")
-    private Waybill waybill;
+//    @OneToOne(mappedBy = "waybill")
+//    private Waybill waybill;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            mappedBy = "product")
-    private List<Product> products;
+//    @OneToMany(
+//            cascade = CascadeType.ALL,
+//            mappedBy = "product")
+//    private List<Product> products;
+
+    @Enumerated(EnumType.POSTGRES)
+    private TtnState ttnState;
 
     @NotNull
     @Column(name = "is_approved")

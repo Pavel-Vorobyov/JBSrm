@@ -1,16 +1,15 @@
 package com.pavel.jbsrm.client;
 
+import com.pavel.jbsrm.common.hibernate.EnumType;
+import com.pavel.jbsrm.common.hibernate.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Data
 @Builder
@@ -21,7 +20,7 @@ import javax.validation.constraints.Size;
 public class Client {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 
@@ -40,8 +39,7 @@ public class Client {
     @Column(name = "phone")
     private String phone;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "client_role")
+    @Enumerated(EnumType.POSTGRES)
     private ClientRole clientRole;
 
     @Column(name = "is_active")

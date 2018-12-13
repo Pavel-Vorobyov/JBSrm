@@ -55,7 +55,7 @@ public class Waybill {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    private List<CheckPoint> checkPoints = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY)
+//    private List<CheckPoint> checkPoints = new ArrayList<>();
 }

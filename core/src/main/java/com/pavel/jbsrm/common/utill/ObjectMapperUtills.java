@@ -2,10 +2,13 @@ package com.pavel.jbsrm.common.utill;
 
 import org.modelmapper.ModelMapper;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 public class ObjectMapperUtills {
     private static ModelMapper modelMapper = new ModelMapper();
 
-    public static <D, E> D mapTo(E dto, Class<D> entity) {
+    public static <D> D mapTo(Object dto, Class<D> entity) {
         return modelMapper.map(dto, entity);
     }
 

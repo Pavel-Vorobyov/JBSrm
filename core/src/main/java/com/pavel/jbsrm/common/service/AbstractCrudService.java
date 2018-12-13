@@ -1,14 +1,24 @@
 package com.pavel.jbsrm.common.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import javax.validation.Valid;
+import java.util.List;
 
-public interface AbstractCrudService<CreateDto, UpdateDto, ResultClass> {
+public interface AbstractCrudService<CreateDto, UpdateDto, ResultDto, Entity> {
 
-    ResultClass createClient(@Valid CreateDto createClientDto);
+    ResultDto createEntity(@Valid CreateDto createEntityDto);
 
-    ResultClass updateClient(long id, @Valid UpdateDto updateClientDto);
+    ResultDto updateEntity(long id, @Valid UpdateDto updateEntityDto);
 
-    void deleteClient(long id);
+    void deleteEntity(long id);
 
-    ResultClass find(long id);
+    void restoreClient(long id);
+
+    ResultDto find(long id);
+
+    List<ResultDto> findAllByPropsMatch(String searchParams);
+
+    Page<ResultDto> findAllPageByActive(boolean isActive, Pageable pageable);
 }

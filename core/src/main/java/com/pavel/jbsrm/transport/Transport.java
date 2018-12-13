@@ -1,6 +1,8 @@
 package com.pavel.jbsrm.transport;
 
 import com.pavel.jbsrm.client.Client;
+import com.pavel.jbsrm.common.hibernate.EnumType;
+import com.pavel.jbsrm.common.hibernate.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,8 +25,7 @@ public class Transport {
     @Column(name = "id")
     private long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "body_type")
+    @Enumerated(EnumType.POSTGRES)
     private TransportType bodyType;
 
     @Size(max = 200)

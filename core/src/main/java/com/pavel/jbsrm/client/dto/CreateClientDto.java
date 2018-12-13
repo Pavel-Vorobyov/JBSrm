@@ -17,6 +17,5 @@ public class CreateClientDto {
     @NotEmpty
     private String phone;
 
-    @NotEmpty
     private ClientRole clientRole;
 }

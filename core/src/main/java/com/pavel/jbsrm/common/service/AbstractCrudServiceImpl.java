@@ -1,34 +1,69 @@
 package com.pavel.jbsrm.common.service;
 
+import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import javax.validation.Valid;
+import java.util.List;
 
-public class AbstractCrudServiceImpl <CreateDto, UpdateDto, ResultClass> implements AbstractCrudService<CreateDto, UpdateDto, ResultClass> {
+public class AbstractCrudServiceImpl <CreateDto, UpdateDto, ResultDto, Entity> implements AbstractCrudService<CreateDto, UpdateDto, ResultDto, Entity> {
 
-    private CrudRepository crudRepository;
+    private PagingAndSortingRepository entityRepository;
 
-    public AbstractCrudServiceImpl(CrudRepository crudRepository) {
-        this.crudRepository = crudRepository;
+    private Class<? extends CreateDto> createDtoClass;
+    private Class<? extends UpdateDto> updateDtoClass;
+    private Class<? extends ResultDto> resultDtoClass;
+    private Class<? extends Entity> entityClass;
+
+    public AbstractCrudServiceImpl(PagingAndSortingRepository entityRepository,
+                                   Class<? extends CreateDto> createDtoClass,
+                                   Class<? extends UpdateDto> updateDtoClass,
+                                   Class<? extends ResultDto> resultDtoClass,
+                                   Class<? extends Entity> entityClass) {
+        this.entityRepository = entityRepository;
+        this.createDtoClass = createDtoClass;
+        this.updateDtoClass = updateDtoClass;
+        this.resultDtoClass = resultDtoClass;
+        this.entityClass = entityClass;
     }
 
     @Override
-    public ResultClass createClient(@Valid CreateDto createClientDto) {
+    public ResultDto createEntity(@Valid CreateDto createEntityDto) {
+        Entity client = ObjectMapperUtills.mapTo(createEntityDto, entityClass);
+//        client(true);
+        return ObjectMapperUtills.mapTo(entityRepository.save(client), resultDtoClass);
+    }
+
+    @Override
+    public ResultDto updateEntity(long id, @Valid UpdateDto updateEntityDto) {
         return null;
     }
 
     @Override
-    public ResultClass updateClient(long id, @Valid UpdateDto updateClientDto) {
+    public void deleteEntity(long id) {
+
+    }
+
+    @Override
+    public void restoreClient(long id) {
+
+    }
+
+    @Override
+    public ResultDto find(long id) {
         return null;
     }
 
     @Override
-    public void deleteClient(long id) {
-
+    public List<ResultDto> findAllByPropsMatch(String searchParams) {
+        return null;
     }
 
     @Override
-    public ResultClass find(long id) {
+    public Page<ResultDto> findAllPageByActive(boolean isActive, Pageable pageable) {
         return null;
     }
 }
