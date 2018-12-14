@@ -1,7 +1,5 @@
 package com.pavel.jbsrm.product.service;
 
-import com.pavel.jbsrm.client.Client;
-import com.pavel.jbsrm.client.dto.ClientDto;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
 import com.pavel.jbsrm.product.Product;
 import com.pavel.jbsrm.product.ProductState;

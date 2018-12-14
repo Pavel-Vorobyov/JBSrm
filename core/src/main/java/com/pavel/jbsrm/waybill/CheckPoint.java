@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -22,6 +23,10 @@ public class CheckPoint {
     @GeneratedValue
     @Column(name = "id")
     private long id;
+
+//    @NotNull
+//    @JoinColumn(name = "waybill_id")
+//    private Waybill waybill;
 
     @Size(max = 255)
     @NotBlank
