@@ -42,6 +42,6 @@ public class Client {
     @Enumerated(EnumType.POSTGRES)
     private ClientRole clientRole;
 
-    @Column(name = "is_active")
-    private boolean isActive;
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 }

@@ -36,14 +36,14 @@ public class ClientController {
     public Page<ClientDto> findAllClients(
             @Nullable @RequestParam Integer page,
             @Nullable @RequestParam Integer rowsPerPage,
-            @Nullable @RequestParam Boolean isActive) {
+            @Nullable @RequestParam Boolean isDeleted) {
         page = page == null ? 0 : page;
         rowsPerPage = rowsPerPage == null ? 5 : rowsPerPage;
-        isActive = isActive == null || isActive;
+        isDeleted = isDeleted == null ? false : isDeleted;
 
         QSort qSort = new QSort();
         Pageable pageable = new QPageRequest(page, rowsPerPage, qSort);
-        return clientService.findAllPageByActive(isActive, pageable);
+        return clientService.findAllPageByDeleted(isDeleted, pageable);
     }
 
     @PostMapping("/{id}")

@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ClientRepository extends PagingAndSortingRepository<Client, Long>, ClientRepositoryCustom {
-    Page<Client> findByIsActive(boolean isActiveValue, Pageable pageable);
+    Page<Client> findByIsDeleted(boolean isDeletedValue, Pageable pageable);
 }

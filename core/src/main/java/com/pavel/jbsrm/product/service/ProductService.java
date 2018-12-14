@@ -2,6 +2,7 @@ package com.pavel.jbsrm.product.service;
 
 import com.pavel.jbsrm.product.dto.CreateProductDto;
 import com.pavel.jbsrm.product.dto.ProductDto;
+import com.pavel.jbsrm.product.dto.UpdateProductDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
@@ -14,7 +15,7 @@ public interface ProductService {
 
     ProductDto createProduct(@Valid CreateProductDto createProductDto);
 
-    ProductDto updateProduct(long id, @Valid CreateProductDto createProductDto);
+    ProductDto updateProduct(long id, @Valid UpdateProductDto updateProductDto);
 
     void deleteProduct(long id);
 
@@ -22,9 +23,7 @@ public interface ProductService {
 
     ProductDto find(long id);
 
-    List<ProductDto> findAllClients();
-
     List<ProductDto> findAllByPropsMatch(String searchParams);
 
-    Page<ProductDto> findAllPageByActive(boolean isActive, Pageable pageable);
+    Page<ProductDto> findAllPageByDeleted(boolean isDeleted, Pageable pageable);
 }

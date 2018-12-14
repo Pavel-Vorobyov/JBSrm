@@ -19,5 +19,5 @@ public class UpdateClientDto {
 
     private ClientRole clientRole;
 
-    private boolean isActive;
+    private boolean isDeleted;
 }

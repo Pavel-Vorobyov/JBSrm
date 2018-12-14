@@ -10,5 +10,5 @@ public class ClientDto {
     private String email;
     private String phone;
     private ClientRole clientRole;
-    private boolean isActive;
+    private boolean isDeleted;
 }

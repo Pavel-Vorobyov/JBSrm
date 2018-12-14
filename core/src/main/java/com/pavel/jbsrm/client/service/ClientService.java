@@ -26,5 +26,5 @@ public interface ClientService {
 
     List<ClientDto> findAllByPropsMatch(String searchParams);
 
-    Page<ClientDto> findAllPageByActive(boolean isActive, Pageable pageable);
+    Page<ClientDto> findAllPageByDeleted(boolean isDeleted, Pageable pageable);
 }

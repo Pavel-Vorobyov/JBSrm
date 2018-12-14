@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductRepositoryImpl extends QuerydslRepositorySupport implements ProductRepositoryCustom {
     private String queryStart = "select id, title, email, phone, client_role, is_active from client where as_tsvector(title, email, phone) @@ to_tsquery('";
@@ -27,17 +28,8 @@ public class ProductRepositoryImpl extends QuerydslRepositorySupport implements 
     }
 
     private String buildQuery(List<String> searchParams) {
-        StringBuilder resultQuery = new StringBuilder(queryStart);
-
-        for (int i = 0; i < searchParams.size(); i++) {
-            resultQuery.append(searchParams.get(i));
-            resultQuery.append(":*");
-            if (i < searchParams.size() - 1) {
-                resultQuery.append(" & ");
-            }
-        }
-
-        resultQuery.append(queryEnd);
-        return resultQuery.toString();
+        return searchParams.stream()
+                .map(param -> param + ":*")
+                .collect(Collectors.joining(" & ", queryStart, queryEnd));
     }
 }

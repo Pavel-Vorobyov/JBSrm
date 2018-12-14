@@ -2,8 +2,6 @@ package com.pavel.jbsrm.ttn;
 
 import com.pavel.jbsrm.common.hibernate.EnumType;
 import com.pavel.jbsrm.common.hibernate.Enumerated;
-import com.pavel.jbsrm.product.Product;
-import com.pavel.jbsrm.waybill.Waybill;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Data
 @Builder

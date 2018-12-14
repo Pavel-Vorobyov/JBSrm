@@ -27,7 +27,6 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ClientDto createClient(@Valid CreateClientDto createClientDto) {
         Client client = ObjectMapperUtills.mapTo(createClientDto, Client.class);
-        client.setActive(true);
         return ObjectMapperUtills.mapTo(clientRepository.save(client), ClientDto.class);
     }
 
@@ -41,18 +40,18 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void deleteClient(long id) {
-        updateActiveStatus(id, false);
+        updateDeletedStatus(id, true);
     }
 
     @Override
     public void restoreClient(long id) {
-        updateActiveStatus(id, true);
+        updateDeletedStatus(id, false);
     }
 
-    private void updateActiveStatus(long id, boolean isActive) {
+    private void updateDeletedStatus(long id, boolean isDeleted) {
         Optional<Client> client = clientRepository.findById(id);
         client.ifPresent(c -> {
-            c.setActive(isActive);
+            c.setDeleted(isDeleted);
             clientRepository.save(client.get());
         });
     }
@@ -78,7 +77,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Page<ClientDto> findAllPageByActive(boolean isActive, Pageable pageable) {
-        return clientRepository.findByIsActive(isActive, pageable).map(client -> ObjectMapperUtills.mapTo(client, ClientDto.class));
+    public Page<ClientDto> findAllPageByDeleted(boolean isDeleted, Pageable pageable) {
+        return clientRepository.findByIsDeleted(isDeleted, pageable)
+                .map(client -> ObjectMapperUtills.mapTo(client, ClientDto.class));
     }
 }
