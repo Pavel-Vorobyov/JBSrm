@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductRepositoryImpl extends QuerydslRepositorySupport implements ProductRepositoryCustom {
-    private String queryStart = "select id, title, email, phone, client_role, is_active from client where as_tsvector(title, email, phone) @@ to_tsquery('";
+    private String queryStart = "select id, title, required_type, product_state, amount, is_deleted from product " +
+            "where as_tsvector(id, required_type, product_state, title, amount) @@ to_tsquery('";
     private String queryEnd = "') LIMIT (10);";
 
     @PersistenceContext

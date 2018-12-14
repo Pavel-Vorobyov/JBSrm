@@ -12,3 +12,6 @@ CREATE TABLE IF NOT EXISTS product
 	amount INTEGER NOT NULL,
 	is_deleted BOOLEAN NOT NULL
 );
+
+--CREATE INDEX IF NOT EXISTS idx_fts_product ON product
+--  USING gin(as_tsvector(id, title, required_type, product_state, amount, is_deleted));

@@ -36,4 +36,8 @@ public class Transport {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client owner;
+
+    @NotNull
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 }
