@@ -7,8 +7,6 @@ import com.pavel.jbsrm.client.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.querydsl.QPageRequest;
-import org.springframework.data.querydsl.QSort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/clients")
+@RequestMapping("/api/clients")
 public class ClientController {
 
     @Autowired
@@ -33,40 +31,25 @@ public class ClientController {
     }
 
     @GetMapping
-    public Page<ClientDto> findAllClients(
-            @Nullable @RequestParam Integer page,
-            @Nullable @RequestParam Integer rowsPerPage,
-            @Nullable @RequestParam Boolean isDeleted) {
-        page = page == null ? 0 : page;
-        rowsPerPage = rowsPerPage == null ? 5 : rowsPerPage;
-        isDeleted = isDeleted == null ? false : isDeleted;
-
-        QSort qSort = new QSort();
-        Pageable pageable = new QPageRequest(page, rowsPerPage, qSort);
-        return clientService.findAllPageByDeleted(isDeleted, pageable);
+    public Page<ClientDto> findAllClients(@Nullable @RequestParam Boolean deleted, Pageable pageable) {
+        deleted = deleted == null || deleted;
+        return clientService.findAllPageByDeleted(deleted, pageable);
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<String> updateClient(@PathVariable long id, @RequestBody UpdateClientDto updateDto) {//todo
-        clientService.updateClient(id, updateDto);
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@PathVariable long id, @RequestBody UpdateClientDto updateDto) {
+        clientService.update(id, updateDto);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/new-client")
-    public ResponseEntity<ClientDto> createClient(@RequestBody CreateClientDto createClientDto) {
-        ClientDto clientDto = clientService.createClient(createClientDto);
-        return ResponseEntity.ok().body(clientDto);
+    @PostMapping
+    public ClientDto create(@RequestBody CreateClientDto createClientDto) {
+        return clientService.create(createClientDto);
     }
 
-    @PostMapping("/delete/{id}")
-    public ResponseEntity<String> deleteClient(@PathVariable long id) {
-        clientService.deleteClient(id);
-        return ResponseEntity.ok().build();
-    }
-
-    @PostMapping("/restore/{id}")
-    public ResponseEntity<String> restoreClient(@PathVariable long id) {
-        clientService.restoreClient(id);
+    @PutMapping("/{id}/delete")
+    public ResponseEntity<String> updateDelete(@PathVariable long id, Boolean deleted) {
+        clientService.updateDeleted(id, deleted);
         return ResponseEntity.ok().build();
     }
 }

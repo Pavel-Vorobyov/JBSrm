@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS transport
 	body_type transport_type,
 	consumption INTEGER NOT NULL,
 	client_id serial,
-	is_deleted BOOLEAN NOT NULL
+	deleted BOOLEAN NOT NULL
 );
 
 --CREATE INDEX IF NOT EXISTS idx_fts_transport ON transport

@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -25,6 +26,14 @@ public class Ttn {
     @GeneratedValue
     @Column(name = "id")
     private long id;
+
+    @NotNull
+    @Column(name = "create_at")
+    private LocalDate createAt;
+
+//    @NotNull
+//    @JoinColumn(name = "driver_id")
+//    private todo
 
     @OneToOne(mappedBy = "ttn")
     private Waybill waybill;
@@ -42,6 +51,6 @@ public class Ttn {
     private TtnState ttnState;
 
     @NotNull
-    @Column(name = "is_approved")
-    private boolean isApproved;
+    @Column(name = "deleted")
+    private boolean deleted;
 }

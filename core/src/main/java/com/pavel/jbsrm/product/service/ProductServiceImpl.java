@@ -1,5 +1,6 @@
 package com.pavel.jbsrm.product.service;
 
+import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
 import com.pavel.jbsrm.product.Product;
 import com.pavel.jbsrm.product.ProductState;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -27,34 +29,27 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public ProductDto createProduct(@Valid CreateProductDto createProductDto) {
+    public ProductDto create(@Valid CreateProductDto createProductDto) {
         Product product = ObjectMapperUtills.mapTo(createProductDto, Product.class);
         product.setProductState(ProductState.ACCEPTED);
         return ObjectMapperUtills.mapTo(productRepository.save(product), ProductDto.class);
     }
 
     @Override
-    public ProductDto updateProduct(long id, @Valid UpdateProductDto updateProductDto) {
-        Product product = ObjectMapperUtills.mapTo(updateProductDto, Product.class);
-        return ObjectMapperUtills.mapTo(productRepository.save(product), ProductDto.class);
+    public ProductDto update(long id, @Valid UpdateProductDto updateProductDto) {
+        Optional<Product> product = Optional.of(productRepository.getOne(id));
+        product.ifPresent(pr -> ObjectMapperUtills.mapTo(updateProductDto, pr));
+
+        return ObjectMapperUtills.mapTo(
+                product.map(pr -> productRepository.save(pr)).orElseThrow(ResourceNotFoundException::new), ProductDto.class);
     }
 
     @Override
-    public void deleteProduct(long id) {
-        updateDeletedStatus(id, true);
-    }
-
-    @Override
-    public void restoreProduct(long id) {
-        updateDeletedStatus(id, false);
-    }
-
-    private void updateDeletedStatus(long id, boolean isDeleted) {
+    public void updateDeleted(long id, boolean deleted) {
         Optional<Product> product = productRepository.findById(id);
-        product.ifPresent(p -> {
-            p.setDeleted(isDeleted);
-            productRepository.save(product.get());
-        });
+        product.orElseThrow(ResourceNotFoundException::new)
+                .setDeleted(deleted);
+        productRepository.save(product.get());
     }
 
     @Override
@@ -67,9 +62,9 @@ public class ProductServiceImpl implements ProductService {
         List<ProductDto> result = new ArrayList<>();
         if (!StringUtils.isBlank(searchParams)) {
 
-            String[] parsedSearchParams = searchParams.trim().split(" ");
-            List<String> list = new ArrayList<>(Arrays.asList(parsedSearchParams));
-            list.removeAll(Arrays.asList("", null));
+            List<String> list = Arrays.stream(searchParams.trim().split(" "))
+                    .filter(s -> !s.contains(""))
+                    .collect(Collectors.toList());
 
             productRepository.findAllByPropsMatch(list)
                     .forEach(c -> result.add(ObjectMapperUtills.mapTo(c, ProductDto.class)));
@@ -78,8 +73,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<ProductDto> findAllPageByDeleted(boolean isDeleted, Pageable pageable) {
-        return productRepository.findByIsDeleted(isDeleted, pageable)
+    public Page<ProductDto> findAllPageByDeleted(boolean deleted, Pageable pageable) {
+        return productRepository.findBydeleted(deleted, pageable)
                 .map(product -> ObjectMapperUtills.mapTo(product, ProductDto.class));
     }
 }

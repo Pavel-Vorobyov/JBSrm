@@ -8,5 +8,9 @@ CREATE TABLE IF NOT EXISTS transport
 	id serial PRIMARY KEY,
 	body_type transport_type,
 	consumption INTEGER NOT NULL,
-	client_id serial
+	client_id serial,
+	deleted BOOLEAN NOT NULL
 );
+
+--CREATE INDEX IF NOT EXISTS idx_fts_transport ON transport
+--  USING gin(as_tsvector(id, body_type::TEXT, consumption, client_id));

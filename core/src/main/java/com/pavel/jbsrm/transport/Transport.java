@@ -38,6 +38,6 @@ public class Transport {
     private Client owner;
 
     @NotNull
-    @Column(name = "is_deleted")
-    private boolean isDeleted;
+    @Column(name = "deleted")
+    private boolean deleted;
 }

@@ -31,40 +31,32 @@ public class ProductControlle {
     }
 
     @GetMapping
-    public Page<ProductDto> findAllClients(
-            @Nullable @RequestParam Integer page,
-            @Nullable @RequestParam Integer rowsPerPage,
-            @Nullable @RequestParam Boolean isActive) {
-        page = page == null ? 0 : page;
-        rowsPerPage = rowsPerPage == null ? 5 : rowsPerPage;
-        isActive = isActive == null || isActive;
-
-        QSort qSort = new QSort();
-        Pageable pageable = new QPageRequest(page, rowsPerPage, qSort);
-        return productService.findAllPageByDeleted(isActive, pageable);
+    public Page<ProductDto> findAllClients(@Nullable @RequestParam Boolean deleted, Pageable pageable) {
+        deleted = deleted == null || deleted;
+        return productService.findAllPageByDeleted(deleted, pageable);
     }
 
 //    @PostMapping("/{id}")
-//    public ResponseEntity<String> updateClient(@PathVariable long id, @RequestBody UpdateClientDto updateDto) {//todo
-//        productService.updateClient(id, updateDto);
+//    public ResponseEntity<String> update(@PathVariable long id, @RequestBody UpdateClientDto updateDto) {//todo
+//        productService.update(id, updateDto);
 //        return ResponseEntity.ok().build();
 //    }
 //
 //    @PostMapping("/new-client")
-//    public ResponseEntity<ProductDto> createClient(@RequestBody CreateClientDto createClientDto) {
-//        ClientDto clientDto = productService.createClient(createClientDto);
+//    public ResponseEntity<ProductDto> create(@RequestBody CreateClientDto createClientDto) {
+//        ClientDto clientDto = productService.create(createClientDto);
 //        return ResponseEntity.ok().body(clientDto);
 //    }
 //
-//    @PostMapping("/delete/{id}")
-//    public ResponseEntity<String> deleteClient(@PathVariable long id) {
-//        productService.deleteClient(id);
+//    @PostMapping("/updateDeleted/{id}")
+//    public ResponseEntity<String> updateDeleted(@PathVariable long id) {
+//        productService.updateDeleted(id);
 //        return ResponseEntity.ok().build();
 //    }
 //
 //    @PostMapping("/restore/{id}")
-//    public ResponseEntity<String> restoreClient(@PathVariable long id) {
-//        productService.restoreClient(id);
+//    public ResponseEntity<String> restore(@PathVariable long id) {
+//        productService.restore(id);
 //        return ResponseEntity.ok().build();
 //    }
 }

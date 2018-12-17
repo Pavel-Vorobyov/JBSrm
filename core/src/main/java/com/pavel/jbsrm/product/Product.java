@@ -42,6 +42,6 @@ public class Product {
     private int amount;
 
     @NotNull
-    @Column(name = "is_deleted")
-    private boolean isDeleted;
+    @Column(name = "deleted")
+    private boolean deleted;
 }

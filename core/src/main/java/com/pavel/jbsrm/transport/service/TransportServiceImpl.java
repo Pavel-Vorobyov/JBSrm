@@ -1,12 +1,7 @@
 package com.pavel.jbsrm.transport.service;
 
+import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
-import com.pavel.jbsrm.product.Product;
-import com.pavel.jbsrm.product.ProductState;
-import com.pavel.jbsrm.product.dto.CreateProductDto;
-import com.pavel.jbsrm.product.dto.ProductDto;
-import com.pavel.jbsrm.product.dto.UpdateProductDto;
-import com.pavel.jbsrm.product.repository.ProductRepository;
 import com.pavel.jbsrm.transport.Transport;
 import com.pavel.jbsrm.transport.dto.CreateTransportDto;
 import com.pavel.jbsrm.transport.dto.TransportDto;
@@ -23,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TransportServiceImpl implements TransportService {
@@ -32,33 +28,25 @@ public class TransportServiceImpl implements TransportService {
 
 
     @Override
-    public TransportDto createTransport(@Valid CreateTransportDto createTransportDto) {
+    public TransportDto create(@Valid CreateTransportDto createTransportDto) {
         Transport transport = ObjectMapperUtills.mapTo(createTransportDto, Transport.class);
         return ObjectMapperUtills.mapTo(transportRepository.save(transport), TransportDto.class);
     }
 
     @Override
-    public TransportDto updateTransport(long id, @Valid UpdateTransportDto updateTransportDto) {
-        Transport transport = ObjectMapperUtills.mapTo(updateTransportDto, Transport.class);
-        return ObjectMapperUtills.mapTo(transportRepository.save(transport), TransportDto.class);
+    public TransportDto update(long id, @Valid UpdateTransportDto updateTransportDto) {
+        Optional<Transport> transport = Optional.of(transportRepository.getOne(id));
+        transport.ifPresent(tr -> ObjectMapperUtills.mapTo(updateTransportDto, tr));
+        return ObjectMapperUtills.mapTo(transport.map(
+                tr -> transportRepository.save(tr)).orElseThrow(ResourceNotFoundException::new), TransportDto.class);
     }
 
     @Override
-    public void deleteTransport(long id) {
-        updateDeletedStatus(id, true);
-    }
-
-    @Override
-    public void restoreTransport(long id) {
-        updateDeletedStatus(id, false);
-    }
-
-    private void updateDeletedStatus(long id, boolean isDeleted) {
-        Optional<Transport> transport = transportRepository.findById(id);
-        transport.ifPresent(p -> {
-            p.setDeleted(isDeleted);
-            transportRepository.save(transport.get());
-        });
+    public void updateDeleted(long id, boolean deleted) throws ResourceNotFoundException {
+        Optional<Transport> transport = Optional.of(transportRepository.getOne(id));
+        transport.orElseThrow(ResourceNotFoundException::new)
+            .setDeleted(deleted);
+        transportRepository.save(transport.get());
     }
 
     @Override
@@ -71,9 +59,9 @@ public class TransportServiceImpl implements TransportService {
         List<TransportDto> result = new ArrayList<>();
         if (!StringUtils.isBlank(searchParams)) {
 
-            String[] parsedSearchParams = searchParams.trim().split(" ");
-            List<String> list = new ArrayList<>(Arrays.asList(parsedSearchParams));
-            list.removeAll(Arrays.asList("", null));
+            List<String> list  = Arrays.stream(searchParams.trim().split(" "))
+                    .filter(s -> !s.equals(""))
+                    .collect(Collectors.toList());
 
             transportRepository.findAllByPropsMatch(list)
                     .forEach(t -> result.add(ObjectMapperUtills.mapTo(t, TransportDto.class)));
@@ -82,8 +70,8 @@ public class TransportServiceImpl implements TransportService {
     }
 
     @Override
-    public Page<TransportDto> findAllPageByDeleted(boolean isDeleted, Pageable pageable) {
-        return transportRepository.findByIsDeleted(isDeleted, pageable)
+    public Page<TransportDto> findAllPageByDeleted(boolean deleted, Pageable pageable) {
+        return transportRepository.findByDeleted(deleted, pageable)
                 .map(transport -> ObjectMapperUtills.mapTo(transport, TransportDto.class));
     }
 }

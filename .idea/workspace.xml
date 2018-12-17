@@ -2,52 +2,59 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da17673f-668f-4812-9090-69d914a8c53d" name="Default Changelist" comment="client-crud-service">
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/repository/ClientRepositoryCustom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/repository/ClientRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/hibernate/EnumType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/hibernate/EnumUserType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/hibernate/Enumerated.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/hibernate/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/ProductState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/dto/CreateProductDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/dto/ProductDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/dto/UpdateProductDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/repository/ProductRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/repository/ProductRepositoryCustom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/repository/ProductRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/service/ProductService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/service/ProductServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/TtnState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/exception/ResourceNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/Company.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/dto/CompanyDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/dto/CreateCompanyDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/dto/UpdateCompanyDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/repository/CompanyRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/repository/CompanyRepositoryCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/repository/CompanyRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/service/CompanyService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/service/CompanyServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/UserGender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/UserRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/dto/CreateUserDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/dto/UpdateUserDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/dto/UserDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/repository/UserRepositoryCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/repository/UserRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/service/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-user-schema.sql" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/core/target/classes/com/pavel/jbsrm/client/dto/UpdateClientDto.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/target/surefire-reports/TEST-com.pavel.jbsrm.client.repository.ClientRepositoryTest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/target/surefire-reports/com.pavel.jbsrm.client.repository.ClientRepositoryTest.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/product/ProductControlle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webapp/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webapp/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webapp/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/common/RestResponseStatusExceptionResolver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/user/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/dto/CreateClientDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/dto/CreateClientDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/repository/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/repository/ClientRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/service/ClientService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/service/ClientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/service/ClientServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/service/AbstractCrudService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/service/AbstractCrudService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/service/AbstractCrudServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/service/AbstractCrudServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/utill/ObjectMapperUtills.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/utill/ObjectMapperUtills.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/service/AbstractCrudService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/service/AbstractCrudServiceImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/service/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/service/ProductServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/Transport.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/Transport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/dto/CreateTransportDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/dto/CreateTransportDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/dto/TransportDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/dto/TransportDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/dto/UpdateTransportDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/dto/UpdateTransportDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/repository/TransportRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/repository/TransportRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/repository/TransportRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/repository/TransportRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/service/TransportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/service/TransportService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/service/TransportServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/service/TransportServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/Ttn.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/Ttn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/dto/CreateTtnDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/dto/CreateTtnDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/waybill/Waybill.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/waybill/Waybill.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-client-schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-client-schema.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-product-schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-product-schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-transport-schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-transport-schema.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-ttn-schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-ttn-schema.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/v1.0.0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/v1.0.0.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/target/classes/application.yml" beforeDir="false" />
@@ -70,20 +77,18 @@
       <change beforePath="$PROJECT_DIR$/core/target/classes/com/pavel/jbsrm/waybill/Waybill$WaybillBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/target/classes/com/pavel/jbsrm/waybill/Waybill$WaybillBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/target/classes/com/pavel/jbsrm/waybill/Waybill.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/target/classes/com/pavel/jbsrm/waybill/Waybill.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/target/classes/db/changelog/v1.0.0/sql/db-client-schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/target/classes/db/changelog/v1.0.0/sql/db-client-schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/target/classes/db/changelog/v1.0.0/sql/db-product-schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/target/classes/db/changelog/v1.0.0/sql/db-product-schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/target/classes/db/changelog/v1.0.0/sql/db-transport-schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/target/classes/db/changelog/v1.0.0/sql/db-transport-schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/target/classes/db/changelog/v1.0.0/sql/db-ttn-schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/target/classes/db/changelog/v1.0.0/sql/db-ttn-schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/target/classes/db/changelog/v1.0.0/sql/db-waybill-schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/target/classes/db/changelog/v1.0.0/sql/db-waybill-schema.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/target/classes/db/changelog/v1.0.0/v1.0.0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/target/classes/db/changelog/v1.0.0/v1.0.0.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/target/test-classes/com/pavel/jbsrm/client/repository/ClientRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/target/test-classes/com/pavel/jbsrm/client/repository/ClientRepositoryTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/target/test-classes/test/AbstractIntegrationTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/target/test-classes/test/AbstractIntegrationTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/target/test-classes/test/AbstractIntegrationTest1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/core/target/test-classes/test/IntegrationTestConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/target/test-classes/test/IntegrationTestConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-ui" beforeDir="false" afterPath="$PROJECT_DIR$/web-ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-ui/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-ui/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-ui/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-ui/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-ui/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-ui/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/web-ui/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-ui/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/web-ui/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-ui/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/web-ui/src/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/client/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/client/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/product/ProductControlle.java" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/product/ProductControlle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webapp/target/classes/ApplicationRunner.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/webapp/target/classes/application.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/webapp/target/classes/com/pavel/jbsrm/client/ClientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/target/classes/com/pavel/jbsrm/client/ClientController.class" afterDir="false" />
@@ -98,189 +103,44 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/JBSrm$ApplicationRunner.ic" NAME="ApplicationRunner Coverage Results" MODIFIED="1544196371130" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/JBSrm$ApplicationRunner.ic" NAME="ApplicationRunner Coverage Results" MODIFIED="1544902487700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="CoverageViewManager">
-    <option name="myElementSize" value="271" />
+    <option name="myElementSize" value="244" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="126057452">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="1" />
-          <entry key="project.open.time.4" value="2" />
-          <entry key="project.opened" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="class" value="18" />
-          <entry key="java" value="410" />
-          <entry key="js" value="4" />
-          <entry key="json" value="1" />
-          <entry key="pom" value="6" />
-          <entry key="properties" value="8" />
-          <entry key="sql" value="33" />
-          <entry key="xml" value="77" />
-          <entry key="yml" value="27" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="CLASS" value="18" />
-          <entry key="DBN-SQL" value="33" />
-          <entry key="JAVA" value="410" />
-          <entry key="JSON" value="1" />
-          <entry key="JavaScript" value="4" />
-          <entry key="Properties" value="8" />
-          <entry key="XML" value="83" />
-          <entry key="YAML" value="27" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="dummy" value="53" />
-          <entry key="java" value="11375" />
-          <entry key="properties" value="94" />
-          <entry key="sql" value="266" />
-          <entry key="txt" value="30" />
-          <entry key="xml" value="359" />
-          <entry key="yml" value="93" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="DBN-SQL" value="266" />
-          <entry key="JAVA" value="11375" />
-          <entry key="PLAIN_TEXT" value="83" />
-          <entry key="Properties" value="94" />
-          <entry key="XML" value="359" />
-          <entry key="YAML" value="93" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.vcs.git.usages">
-        <counts>
-          <entry key="git.branch.checkout.local" value="3" />
-          <entry key="git.branch.checkout.remote" value="1" />
-          <entry key="git.checkout.as.new.branch" value="1" />
-        </counts>
-      </usages-collector>
-    </session>
+  <component name="DockManager">
+    <window id="2">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/Company.java">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="380">
+                    <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="23" selection-end-column="28" />
+                    <folding>
+                      <element signature="imports" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/repository/ProductRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/repository/ClientRepositoryCustom.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="8" column="57" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="57" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/repository/ProductRepositoryImpl.java">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/repository/ProductRepositoryCustom.java">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/service/AbstractCrudServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="580">
-              <caret line="36" column="23" lean-forward="true" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/product/ProductControlle.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/client/ClientController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="634">
-              <caret line="58" column="5" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1544707479320" expanded="true" signature="1864:1873" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/dto/CreateProductDto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/dto/ProductDto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/service/ClientServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="48" column="37" lean-forward="true" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1575#1576#0" expanded="true" />
-                <element signature="e#1620#1621#0" expanded="true" />
-                <element signature="e#1676#1677#0" expanded="true" />
-                <element signature="e#1720#1721#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit4 Test Class" />
         <option value="FxmlFile" />
-        <option value="SQL Script" />
         <option value="Interface" />
         <option value="Enum" />
+        <option value="SQL Script" />
         <option value="Class" />
       </list>
     </option>
@@ -293,6 +153,11 @@
       <find>blob</find>
       <find>@Blo</find>
       <find>propsMatch</find>
+      <find>PageReque</find>
+      <find>is_deleted</find>
+      <find>isDe</find>
+      <find>ClientDto</find>
+      <find>clie</find>
       <find>Client</find>
     </findStrings>
   </component>
@@ -308,57 +173,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/core/src/test/java/test/IntegrationTestConfig.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/service/CrudService.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/service/CommonCrudService.java" />
-        <option value="$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/ApplicationRunner.java" />
-        <option value="$PROJECT_DIR$/webapp/pom.xml" />
-        <option value="$PROJECT_DIR$/webapp/src/main/resources/application.yml" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/config/PersistenceConfig.java" />
-        <option value="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.1/v1.0.1.xml" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/dto/UpdateClientDto.java" />
-        <option value="$PROJECT_DIR$/core/src/main/resources/db/changelog/liquibase-changelog.xml" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/dto/UpdateTtnDto.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/dto/TtnDto.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/service/TtnService.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/repository/TtnRepository.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/service/TtnServiceImpl.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/repository/ProductService.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/dto/CreateProductDto.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/dto/CreateTtnDto.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/dto/UpdateProductDto.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/hibernate/package-info.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/waybill/Waybill.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/Transport.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/dto/ClientDto.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/utill/ObjectMapperUtills.java" />
-        <option value="$PROJECT_DIR$/core/pom.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/repository/ClietntRepositoryCustomImpl.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/repository/ClietntRepositoryImpl.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/repository/ClientRepositoryCustom.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/repository/ClientRepositoryImpl.java" />
-        <option value="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-client-schema.sql" />
-        <option value="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/v1.0.0.xml" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/dto/CreateClientDto.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/Client.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/repository/ClientRepository.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/ProductState.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/TtnState.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/Ttn.java" />
-        <option value="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-ttn-schema.sql" />
-        <option value="$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/client/ClientController.java" />
-        <option value="$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/product/ProductControlle.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/service/ProductService.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/Product.java" />
         <option value="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-product-schema.sql" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/service/ProductServiceImpl.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/service/ClientService.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/service/ClientServiceImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-transport-schema.sql" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/Product.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/dto/CreateTransportDto.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/dto/TransportDto.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/dto/UpdateTransportDto.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/repository/ProductRepository.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/service/Test.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/service/AbstractCrudService.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/repository/ClientRepositoryCustom.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/repository/ProductRepositoryCustom.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/service/AbstractCrudServiceImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/service/BasicService.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/service/ProductServiceImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/service/ProductService.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/repository/TransportRepository.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/repository/TransportRepositoryImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/service/TransportService.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/service/TransportServiceImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/service/ClientServiceImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-ttn-schema.sql" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/dto/CreateTtnDto.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/ClientRole.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/UserRole.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/UserGender.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/dto/UpdateUserDto.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/dto/CreateUserDto.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/dto/UserDto.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/repository/ClientRepositoryImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/repository/UserRepository.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/repository/UserRepositoryCustom.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/repository/UserRepositoryImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/service/ClientServiceImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/service/UserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/service/UserService.java" />
+        <option value="$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/user/UserController.java" />
+        <option value="$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/client/ClientController.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/Ttn.java" />
+        <option value="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/v1.0.0.xml" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/User.java" />
+        <option value="$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-user-schema.sql" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/repository/ClientRepositoryCustom.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/repository/CompanyRepository.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/repository/CompanyRepositoryCustom.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/repository/CompanyRepositoryImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/Company.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/dto/UpdateCompanyDto.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/dto/CreateCompanyDto.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/dto/CompanyDto.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/service/ClientService.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/service/CompanyService.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/service/CompanyServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -390,10 +255,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1096" />
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="1939" />
+    <option name="height" value="1099" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -462,7 +327,17 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="jbsrm" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="company" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JBSrm" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="jbsrm" type="462c0819:PsiDirectoryNode" />
+              <item name="company" type="462c0819:PsiDirectoryNode" />
               <item name="dto" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -473,93 +348,8 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="jbsrm" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JBSrm" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbsrm" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="company" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JBSrm" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbsrm" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JBSrm" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbsrm" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JBSrm" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbsrm" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JBSrm" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbsrm" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
-              <item name="dto" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JBSrm" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbsrm" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JBSrm" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbsrm" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JBSrm" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbsrm" type="462c0819:PsiDirectoryNode" />
-              <item name="ttn" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
@@ -602,47 +392,6 @@
             <path>
               <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
               <item name="JBSrm" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JBSrm" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JBSrm" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JBSrm" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JBSrm" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JBSrm" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -693,33 +442,25 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="jbsrm" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JBSrm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JBSrm" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544711060441" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545026451795" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../operator-finder" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -728,27 +469,28 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Pavel.Varabyou\Desktop\operator-finder-java11\JBSrm\core\src\main\java\com\pavel\jbsrm\product\repository" />
-      <recent name="C:\Users\Pavel.Varabyou\Desktop\operator-finder-java11\JBSrm\core\src\main\java\com\pavel\jbsrm\common" />
-      <recent name="C:\Users\Pavel.Varabyou\Desktop\operator-finder-java11\JBSrm\webapp\src\main\resources" />
-      <recent name="C:\Users\Pavel.Varabyou\Desktop\operator-finder-java11\JBSrm\core\src\main\resources\db\changelog\v1.0.1" />
-      <recent name="C:\Users\Pavel.Varabyou\Desktop\operator-finder-java11\JBSrm\core\src\main\java\com\pavel\jbsrm\user" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.pavel.jbsrm.client.repository" />
-      <recent name="test" />
-      <recent name="com.pavel.jbsrm" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Pavel.Varabyou\Desktop\operator-finder-java11\JBSrm\webapp\src\main\java" />
       <recent name="C:\Users\Pavel.Varabyou\Desktop\operator-finder-java11\JBSrm\webapp" />
       <recent name="C:\Users\Pavel.Varabyou\Desktop\operator-finder-java11\JBSrm\core\src\test" />
       <recent name="C:\Users\Pavel.Varabyou\Desktop\operator-finder-java11\JBSrm\core\src\main\resources\db" />
       <recent name="C:\Users\Pavel.Varabyou\Desktop\operator-finder-java11\JBSrm\core\src\main\resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.pavel.jbsrm.user" />
+      <recent name="com.pavel.jbsrm.client.repository" />
+      <recent name="test" />
+      <recent name="com.pavel.jbsrm" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Pavel\Desktop\JBSrm\core\src\main\java\com\pavel\jbsrm\company\service" />
+      <recent name="C:\Users\Pavel\Desktop\JBSrm\core\src\main\java\com\pavel\jbsrm\company\repository" />
+      <recent name="C:\Users\Pavel\Desktop\JBSrm\core\src\main\java\com\pavel\jbsrm\company" />
+      <recent name="C:\Users\Pavel\Desktop\JBSrm\core\src\main\java\com\pavel\jbsrm\user\service" />
+      <recent name="C:\Users\Pavel\Desktop\JBSrm\core\src\main\java\com\pavel\jbsrm\user\repository" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -824,8 +566,8 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.ClientRepositoryTest.test" />
       <item itemvalue="Application.ApplicationRunner" />
+      <item itemvalue="JUnit.ClientRepositoryTest.test" />
       <item itemvalue="JUnit.All in core" />
       <item itemvalue="JUnit.AbstractIntegrationTest" />
       <item itemvalue="JUnit.ClientRepositoryTest" />
@@ -872,7 +614,35 @@
       <option name="project" value="LOCAL" />
       <updated>1544202344643</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="client-crud-service">
+      <created>1544711152859</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1544711152859</updated>
+    </task>
+    <task id="LOCAL-00005" summary="product-crud-service">
+      <created>1544778669767</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1544778669767</updated>
+    </task>
+    <task id="LOCAL-00006" summary="transport-crud-service">
+      <created>1544779712306</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1544779712306</updated>
+    </task>
+    <task id="LOCAL-00007" summary="transport-crud-service">
+      <created>1544781231603</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1544781231603</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -907,11 +677,20 @@
       <configuration name="All in core" configurationId="JUnit" />
     </history-entry>
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20362474" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18053691" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -923,30 +702,31 @@
       <window_info id="Job Explorer" order="9" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3290735" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.49627262" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.6432375" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.49597856" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.49731904" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32841823" />
       <window_info anchor="bottom" id="DB Execution Console" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.45844877" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.40681577" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.3290735" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.5093834" />
       <window_info anchor="bottom" id="Console" order="12" />
-      <window_info anchor="bottom" id="Version Control" order="13" weight="0.87119114" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.8711395" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Coverage" order="4" side_tool="true" weight="0.32995737" />
+      <window_info anchor="right" id="Coverage" order="4" side_tool="true" weight="0.3295302" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="right" id="Maven Projects" order="6" weight="0.23720682" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Maven" order="9" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20362474" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -958,27 +738,28 @@
       <window_info id="Job Explorer" order="9" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3290735" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.49627262" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.6432375" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.49597856" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.49731904" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32841823" />
       <window_info anchor="bottom" id="DB Execution Console" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.45844877" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.40681577" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.3290735" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.5093834" />
       <window_info anchor="bottom" id="Console" order="12" />
-      <window_info anchor="bottom" id="Version Control" order="13" weight="0.87119114" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.8711395" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Coverage" order="4" side_tool="true" weight="0.32995737" />
+      <window_info anchor="right" id="Coverage" order="4" side_tool="true" weight="0.3295302" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="right" id="Maven Projects" order="6" weight="0.23720682" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Maven" order="9" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -1006,25 +787,44 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="test fix" />
     <MESSAGE value="client-crud-service" />
-    <option name="LAST_COMMIT_MESSAGE" value="client-crud-service" />
+    <MESSAGE value="product-crud-service" />
+    <MESSAGE value="transport-crud-service" />
+    <option name="LAST_COMMIT_MESSAGE" value="transport-crud-service" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/repository/ClientRepositoryImpl.java</url>
-          <line>24</line>
+          <url>file://$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/product/ProductControlle.java</url>
+          <line>34</line>
           <properties />
-          <option name="timeStamp" value="13" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/user/UserController.java</url>
+          <line>34</line>
+          <properties />
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1036,474 +836,458 @@
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
       <expression>
-        <expression-string>Sort sort = new Sort(Sort.Direction.DESC, &quot;id&quot;);
-clientRepository.findByIsActive(false, new PageRequest(0, 10, sort));</expression-string>
-        <language-id>JAVA</language-id>
-        <custom-info>org.springframework.data.domain.PageRequest,org.springframework.data.domain.Sort</custom-info>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>Sort sort = new Sort(Sort.Direction.DESC, &quot;id&quot;);
-clientRepository.findByIsActive(true, new PageRequest(0, 10, sort));</expression-string>
-        <language-id>JAVA</language-id>
-        <custom-info>org.springframework.data.domain.PageRequest,org.springframework.data.domain.Sort</custom-info>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>clientRepository.findByIsActive(true, new PageRequest(0, 10, Sort.Direction.ASC));</expression-string>
-        <language-id>JAVA</language-id>
-        <custom-info>org.springframework.data.domain.PageRequest,org.springframework.data.domain.Sort</custom-info>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>clientService.fi</expression-string>
+        <expression-string>searchParams.stream()
+        .map(param -&gt; param + &quot;:*&quot;)
+        .collect(Collectors.joining(&quot; &amp; &quot;,queryStart, queryEnd))</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>ObjectMapperUtills.mapTo(clientRepository.save(client), ClientDto.class)</expression-string>
+        <expression-string>searchParams.stream()
+        .map(param -&gt; param + &quot;:*&quot;)
+        .collect(Collectors.joining(&quot; 1 &quot;,&quot; &amp; &quot;, &quot; 2 &quot;))</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>clientRepository.save(client)</expression-string>
+        <expression-string>searchParams.stream()
+                .map(param -&gt; param + &quot;:*&quot;)
+                .collect(Collectors.joining(&quot; 1 &quot;,&quot; &amp; &quot;, &quot; 2 &quot;))</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>client</expression-string>
+        <expression-string>queryStart + searchParams.stream()
+                .map(param -&gt; param + &quot;:*&quot;)
+                .collect(Collectors.joining(&quot; &amp; &quot;)) + queryEnd</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>Sort sort = new Sort(Sort.by() &quot;2&quot;);
-Pageable pageable1 = new PageRequest(0, 5, sort);</expression-string>
+        <expression-string>searchParams.stream()
+                .map(param -&gt; param + &quot;:*&quot;)
+                .collect(Collectors.joining(&quot; &amp; &quot;))</expression-string>
         <language-id>JAVA</language-id>
-        <custom-info>org.springframework.data.domain.PageRequest,org.springframework.data.domain.Sort</custom-info>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>Sort sort = new Sort(Sort.Direction.ASC, &quot;2&quot;);
-Pageable pageable1 = new PageRequest(0, 5, sort);</expression-string>
+        <expression-string>searchParams.stream()
+                .map(param -&gt; param + &quot;:*&quot;)
+                .collect(Collectors.joining(queryStart, &quot; &amp; &quot;, queryEnd))</expression-string>
         <language-id>JAVA</language-id>
-        <custom-info>org.springframework.data.domain.PageRequest,org.springframework.data.domain.Sort</custom-info>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>searchParams.stream()
+        .map(param -&gt; param + &quot;:*&quot;)
+        .collect(Collectors.joining(queryStart, &quot; &amp; &quot;, queryEnd))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>searchParams.stream()
+                .map(param -&gt; param + &quot;:*&quot;)
+                .collect(Collectors.joining(&quot;lol&quot;, &quot;1&quot;, &quot;2&quot;))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>searchParams.stream()
+                .map(param -&gt; param + &quot;:*&quot;)
+                .collect(Collectors.joining(queryStart, &quot;1&quot;, &quot;2&quot;))</expression-string>
+        <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/hibernate/package-info.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/waybill/Waybill.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/dto/CreateTransportDto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="57" selection-start-line="57" selection-start-column="2" selection-end-line="59" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/liquibase-changelog.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="69" selection-start-line="6" selection-start-column="69" selection-end-line="6" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/modelmapper/modelmapper/2.3.2/modelmapper-2.3.2.jar!/org/modelmapper/ModelMapper.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="130" column="17" selection-start-line="130" selection-start-column="17" selection-end-line="130" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/Transport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+        <state relative-caret-position="380">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/utill/ObjectMapperUtills.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/dto/TransportDto.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
-          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#234#235#0" expanded="true" />
-            <element signature="e#285#286#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/java-1.8.0-openjdk-1.8.0.191-1.b12.ojdkbuild.windows.x86_64/src.zip!/java/lang/Iterable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="44" column="17" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="32" column="58" selection-start-line="32" selection-start-column="58" selection-end-line="32" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/utill/PropertiesUtill.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/2.0.10.RELEASE/spring-data-commons-2.0.10.RELEASE.jar!/org/springframework/data/repository/core/support/RepositoryFactorySupport.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="186" selection-start-line="186" selection-end-line="186" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-jpa/2.0.10.RELEASE/spring-data-jpa-2.0.10.RELEASE.jar!/org/springframework/data/jpa/repository/support/QuerydslRepositorySupport.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.34/tomcat-embed-core-8.5.34.jar!/org/apache/catalina/core/ApplicationFilterChain.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="71" selection-start-line="71" selection-end-line="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/v1.0.0.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/2.0.10.RELEASE/spring-data-commons-2.0.10.RELEASE.jar!/org/springframework/data/domain/Page.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="23" column="10" lean-forward="true" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/2.0.10.RELEASE/spring-data-commons-2.0.10.RELEASE.jar!/org/springframework/data/repository/PagingAndSortingRepository.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-ui/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.0.9.RELEASE/spring-web-5.0.9.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="129" selection-start-line="129" selection-end-line="129" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.0.9.RELEASE/spring-webmvc-5.0.9.RELEASE.jar!/org/springframework/web/servlet/mvc/method/annotation/RequestMappingHandlerAdapter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="571" selection-start-line="571" selection-end-line="571" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/test/java/test/IntegrationTestConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/test/java/test/AbstractIntegrationTest.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/repository/TransportRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <caret line="10" column="58" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/Client.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/dto/UpdateTransportDto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+        <state relative-caret-position="380">
+          <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/test/java/com/pavel/jbsrm/client/repository/ClientRepositoryTest.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/repository/TransportRepositoryCustom.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        <state relative-caret-position="160">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/dto/ClientDto.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/repository/TransportRepositoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/service/TransportService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="20" column="48" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/transport/service/TransportServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="940">
+          <caret line="65" column="53" lean-forward="true" selection-start-line="65" selection-start-column="53" selection-end-line="65" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/waybill/CheckPoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/dto/CreateTtnDto.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="12" column="28" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="28" />
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/2.0.10.RELEASE/spring-data-commons-2.0.10.RELEASE.jar!/org/springframework/data/repository/CrudRepository.class">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/UserRole.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="15" column="16" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
+        <state relative-caret-position="100">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web-ui/src/ui/System/Content/UsersContent/Clients/clients.js">
+    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="694">
-          <caret line="90" selection-start-line="90" selection-end-line="90" />
+        <state relative-caret-position="80">
+          <caret line="4" column="28" lean-forward="true" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-client-schema.sql">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/dto/CreateUserDto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" selection-start-line="2" selection-end-line="3" selection-end-column="110" />
+        <state relative-caret-position="560">
+          <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/dto/UpdateUserDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="34" column="30" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="34" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/repository/UserRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="9" column="72" lean-forward="true" selection-start-line="9" selection-start-column="72" selection-end-line="9" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/repository/ClientRepositoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#796#797#0" expanded="true" />
+            <element signature="e#834#835#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/repository/UserRepositoryCustom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-ui/node_modules/@types/react/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="193" column="7" selection-start-line="193" selection-start-column="7" selection-end-line="193" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/service/ClientServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="67" column="52" selection-start-line="67" selection-start-column="52" selection-end-line="67" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/repository/UserRepositoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="14" column="68" selection-start-line="14" selection-start-column="68" selection-end-line="14" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/client/ClientController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-402">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="e#820#821#0" expanded="true" />
+            <element signature="e#865#866#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/Ttn.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        <state relative-caret-position="233">
+          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/ProductState.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/UserGender.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="3" column="39" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="39" />
+          <caret line="3" column="16" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/v1.0.0.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/service/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/dto/UserDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-ttn-schema.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="70" selection-start-line="3" selection-start-column="70" selection-end-line="3" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/ttn/TtnState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="10" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/repository/ClientRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/service/ProductService.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-transport-schema.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="22" column="29" lean-forward="true" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="300">
+          <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-product-schema.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="12" column="31" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
+          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/service/ProductServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-client-schema.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="35" column="23" lean-forward="true" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#766#767#0" expanded="true" />
-            <element signature="e#793#794#0" expanded="true" />
-            <element signature="e#973#974#0" expanded="true" />
-            <element signature="e#1000#1001#0" expanded="true" />
-            <element signature="e#1062#1063#0" expanded="true" />
-            <element signature="e#1089#1090#0" expanded="true" />
-            <element signature="e#1175#1176#0" expanded="true" />
-            <element signature="e#1202#1203#0" expanded="true" />
-            <element signature="e#1304#1305#0" expanded="true" />
-            <element signature="e#1331#1332#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="360">
+          <caret line="47" column="22" lean-forward="true" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/service/AbstractCrudService.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/user/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="598">
+          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/repository/ClientRepositoryImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="24" column="63" selection-start-line="24" selection-start-column="63" selection-end-line="24" selection-end-column="63" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/service/ClientService.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/2.0.10.RELEASE/spring-data-commons-2.0.10.RELEASE.jar!/org/springframework/data/domain/Pageable.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
-          <caret line="16" column="11" lean-forward="true" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+          <caret line="25" column="19" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/user/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/dto/UpdateClientDto.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/v1.0.0/sql/db-user-schema.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        <state relative-caret-position="134">
+          <caret line="38" column="37" lean-forward="true" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/Product.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/dto/ClientDto.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/Client.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/dto/CreateClientDto.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/dto/UpdateClientDto.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/ClientRole.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/repository/CompanyRepositoryCustom.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="120">
+          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/repository/CompanyRepositoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/dto/ClientDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/dto/CreateClientDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="23" lean-forward="true" selection-start-column="23" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/repository/ProductRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/repository/ClientRepositoryCustom.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/dto/UpdateCompanyDto.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
-          <caret line="8" column="57" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="57" />
+          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/repository/ProductRepositoryImpl.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/repository/ProductRepositoryCustom.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/common/service/AbstractCrudServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/dto/CreateCompanyDto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="36" column="23" lean-forward="true" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/product/ProductControlle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+        <state relative-caret-position="300">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/src/main/java/com/pavel/jbsrm/client/ClientController.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/dto/CompanyDto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="634">
-          <caret line="58" column="5" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
+        <state relative-caret-position="240">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/repository/CompanyRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/service/CompanyService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/service/CompanyServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="547">
+          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/company/Company.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="23" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1544707479320" expanded="true" signature="1864:1873" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/dto/CreateProductDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/product/dto/ProductDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/pavel/jbsrm/client/service/ClientServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="48" column="37" lean-forward="true" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1575#1576#0" expanded="true" />
-            <element signature="e#1620#1621#0" expanded="true" />
-            <element signature="e#1676#1677#0" expanded="true" />
-            <element signature="e#1720#1721#0" expanded="true" />
           </folding>
         </state>
       </provider>

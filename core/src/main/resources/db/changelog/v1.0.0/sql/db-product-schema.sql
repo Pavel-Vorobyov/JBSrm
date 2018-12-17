@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS product
     product_state product_state,
 	required_type transport_type,
 	amount INTEGER NOT NULL,
-	is_deleted BOOLEAN NOT NULL
+	deleted BOOLEAN NOT NULL
 );
 
 --CREATE INDEX IF NOT EXISTS idx_fts_product ON product

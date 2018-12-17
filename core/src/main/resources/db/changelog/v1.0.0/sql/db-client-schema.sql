@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS client
     email VARCHAR (80) COLLATE pg_catalog."default" NOT NULL,
 	phone VARCHAR (80) COLLATE pg_catalog."default" NOT NULL,
 	client_role client_role NOT NULL,
-	is_deleted BOOLEAN NOT NULL
+	deleted BOOLEAN NOT NULL
 );
 
 create or replace function as_tsvector(column_names variadic text[])
@@ -30,7 +30,7 @@ create or replace function as_tsvector(column_names variadic text[])
 CREATE INDEX IF NOT EXISTS idx_fts_client ON client
   USING gin(as_tsvector(title, email, phone));
 
-INSERT INTO client (title, email, phone, client_role, is_deleted)
+INSERT INTO client (title, email, phone, client_role, deleted)
 	SELECT
 		'title' || num AS name,
 		'email' || num || '@' || (
@@ -54,5 +54,5 @@ INSERT INTO client (title, email, phone, client_role, is_deleted)
 				WHEN 1 THEN false
 				WHEN 2 THEN true
 			END
-		) AS is_deleted
+		) AS deleted
 	FROM GENERATE_SERIES(1, 300) num;

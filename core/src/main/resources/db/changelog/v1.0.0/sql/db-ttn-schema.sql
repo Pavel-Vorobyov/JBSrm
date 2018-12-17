@@ -8,5 +8,5 @@ CREATE TABLE IF NOT EXISTS ttn
 	id serial PRIMARY KEY,
 	waybill_id serial,
 	ttn_state ttn_state,
-	is_approved BOOLEAN
+	deleted BOOLEAN
 );

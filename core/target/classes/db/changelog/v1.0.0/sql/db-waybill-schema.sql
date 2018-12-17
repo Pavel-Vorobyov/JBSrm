@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS check_point;
 CREATE TABLE IF NOT EXISTS check_point
 (
 	id serial PRIMARY KEY,
+	waybill_id serial NOT NULL,
 	title VARCHAR (255) COLLATE pg_catalog."default" NOT NULL,
 	created_at DATE
 );

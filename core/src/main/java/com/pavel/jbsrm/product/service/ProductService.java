@@ -13,17 +13,15 @@ import java.util.List;
 @Validated
 public interface ProductService {
 
-    ProductDto createProduct(@Valid CreateProductDto createProductDto);
+    ProductDto create(@Valid CreateProductDto createProductDto);
 
-    ProductDto updateProduct(long id, @Valid UpdateProductDto updateProductDto);
+    ProductDto update(long id, @Valid UpdateProductDto updateProductDto);
 
-    void deleteProduct(long id);
-
-    void restoreProduct(long id);
+    void updateDeleted(long id, boolean deleted);
 
     ProductDto find(long id);
 
     List<ProductDto> findAllByPropsMatch(String searchParams);
 
-    Page<ProductDto> findAllPageByDeleted(boolean isDeleted, Pageable pageable);
+    Page<ProductDto> findAllPageByDeleted(boolean deleted, Pageable pageable);
 }
