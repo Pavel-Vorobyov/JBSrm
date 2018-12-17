@@ -48,9 +48,10 @@ public class User {
     @Column(name = "phone")
     private String phone;
 
-//    @NotNull
-//    @JoinColumn(name = "company_id")
-//    private Company company; todo create company management
+    @NotNull
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     @Enumerated(EnumType.POSTGRES)
     private UserRole userRole;

@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long>, ProductRepositoryCustom {
-    Page<Product> findBydeleted(boolean deletedValue, Pageable pageable);
+    Page<Product> findByDeleted(boolean deletedValue, Pageable pageable);
 }

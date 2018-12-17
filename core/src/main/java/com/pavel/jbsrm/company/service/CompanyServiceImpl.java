@@ -1,7 +1,5 @@
 package com.pavel.jbsrm.company.service;
 
-import com.pavel.jbsrm.client.Client;
-import com.pavel.jbsrm.client.dto.ClientDto;
 import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
 import com.pavel.jbsrm.company.Company;

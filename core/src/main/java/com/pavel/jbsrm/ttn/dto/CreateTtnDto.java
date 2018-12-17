@@ -1,13 +1,17 @@
 package com.pavel.jbsrm.ttn.dto;
 
-import com.pavel.jbsrm.product.Product;
-import com.pavel.jbsrm.ttn.TtnState;
+import com.pavel.jbsrm.user.User;
+import com.pavel.jbsrm.waybill.Waybill;
 import lombok.Data;
 
-import java.util.List;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class CreateTtnDto {
 
-    private List<Product> products;
+    @NotNull
+    private User driver;
+
+    @NotNull
+    private Waybill waybill;
 }

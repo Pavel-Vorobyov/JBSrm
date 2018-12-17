@@ -74,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<ProductDto> findAllPageByDeleted(boolean deleted, Pageable pageable) {
-        return productRepository.findBydeleted(deleted, pageable)
+        return productRepository.findByDeleted(deleted, pageable)
                 .map(product -> ObjectMapperUtills.mapTo(product, ProductDto.class));
     }
 }

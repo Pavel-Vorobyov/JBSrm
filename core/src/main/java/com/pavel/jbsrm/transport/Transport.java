@@ -1,8 +1,8 @@
 package com.pavel.jbsrm.transport;
 
-import com.pavel.jbsrm.client.Client;
 import com.pavel.jbsrm.common.hibernate.EnumType;
 import com.pavel.jbsrm.common.hibernate.Enumerated;
+import com.pavel.jbsrm.company.Company;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,8 +34,8 @@ public class Transport {
     private int consumption;
 
     @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client owner;
+    @JoinColumn(name = "company_id")
+    private Company owner;
 
     @NotNull
     @Column(name = "deleted")

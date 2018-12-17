@@ -1,7 +1,6 @@
 package com.pavel.jbsrm.product.repository;
 
-import com.pavel.jbsrm.client.Client;
-import com.pavel.jbsrm.client.dto.ClientDto;
+import com.pavel.jbsrm.product.Product;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 import javax.persistence.EntityManager;
@@ -19,13 +18,13 @@ public class ProductRepositoryImpl extends QuerydslRepositorySupport implements 
     private EntityManager entityManager;
 
     public ProductRepositoryImpl() {
-        super(ClientDto.class);
+        super(Product.class);
     }
 
     @Override
-    public List<Client> findAllByPropsMatch(List<String> searchParams) {
+    public List<Product> findAllByPropsMatch(List<String> searchParams) {
         return searchParams.isEmpty() ? Collections.emptyList()
-                : entityManager.createNativeQuery(buildQuery(searchParams), Client.class).getResultList();
+                : entityManager.createNativeQuery(buildQuery(searchParams), Product.class).getResultList();
     }
 
     private String buildQuery(List<String> searchParams) {

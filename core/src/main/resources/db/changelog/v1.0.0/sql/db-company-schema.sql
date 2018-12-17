@@ -1,15 +1,10 @@
-DROP TABLE IF EXISTS client;
-
-DROP TYPE IF EXISTS client_role CASCADE;
-CREATE TYPE client_role AS ENUM ('SYSTEM_ADMIN', 'ADMIN', 'DISPATCHER', 'MANAGER', 'DRIVER', 'COMPANY_OWNER');
-
-CREATE TABLE IF NOT EXISTS client
+DROP TABLE IF EXISTS company;
+CREATE TABLE IF NOT EXISTS company
 (
 	id serial PRIMARY KEY,
     title VARCHAR (80) COLLATE pg_catalog."default" NOT NULL,
     email VARCHAR (80) COLLATE pg_catalog."default" NOT NULL,
 	phone VARCHAR (80) COLLATE pg_catalog."default" NOT NULL,
-	client_role client_role NOT NULL,
 	deleted BOOLEAN NOT NULL
 );
 
@@ -27,10 +22,10 @@ create or replace function as_tsvector(column_names variadic text[])
 	end
 	$$ language 'plpgsql' immutable;
 
-CREATE INDEX IF NOT EXISTS idx_fts_client ON client
+CREATE INDEX IF NOT EXISTS idx_fts_company ON company
   USING gin(as_tsvector(title, email, phone));
 
-INSERT INTO client (title, email, phone, client_role, deleted)
+INSERT INTO company (title, email, phone, deleted)
 	SELECT
 		'title' || num AS name,
 		'email' || num || '@' || (
@@ -41,13 +36,6 @@ INSERT INTO client (title, email, phone, client_role, deleted)
 			END
 		) AS email,
 		'phone' || num AS phone,
-		(
-			CASE (RANDOM() * 2)::INT
-				WHEN 0 THEN 'SYSTEM_ADMIN'::client_role
-				WHEN 1 THEN 'ADMIN'::client_role
-			 	WHEN 2 THEN 'DISPATCHER'::client_role
-			END
-		) AS client_role,
 		(
 			CASE (RANDOM() * 2)::INT
 				WHEN 0 THEN true

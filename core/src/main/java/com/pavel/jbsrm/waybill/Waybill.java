@@ -28,7 +28,7 @@ public class Waybill {
     @Column(name = "id")
     private long id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ttn_id")
     private Ttn ttn;
 
@@ -55,7 +55,12 @@ public class Waybill {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-//    @OneToMany(cascade = CascadeType.ALL,
-//            fetch = FetchType.LAZY)
-//    private List<CheckPoint> checkPoints = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "check_point")
+    private List<CheckPoint> checkPoints = new ArrayList<>();
+
+    @NotNull
+    @Column(name = "deleted")
+    private boolean deleted;
 }

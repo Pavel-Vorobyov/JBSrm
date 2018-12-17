@@ -1,6 +1,6 @@
 package com.pavel.jbsrm.transport.dto;
 
-import com.pavel.jbsrm.client.Client;
+import com.pavel.jbsrm.company.Company;
 import lombok.Data;
 
 @Data
@@ -8,6 +8,6 @@ public class TransportDto {
 
     private long id;
     private int consumption;
-    private Client owner;
+    private Company owner;
     private boolean deleted;
 }

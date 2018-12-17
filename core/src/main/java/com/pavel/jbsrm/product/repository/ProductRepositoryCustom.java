@@ -1,10 +1,10 @@
 package com.pavel.jbsrm.product.repository;
 
-import com.pavel.jbsrm.client.Client;
+import com.pavel.jbsrm.product.Product;
 
 import java.util.List;
 
 public interface ProductRepositoryCustom {
 
-    List<Client> findAllByPropsMatch(List<String> props);
+    List<Product> findAllByPropsMatch(List<String> props);
 }
