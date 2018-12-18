@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
@@ -19,7 +20,7 @@ import java.time.LocalDate;
 @Builder
 @Entity
 @Table(name = "\"user\"")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +41,10 @@ public class User {
     @Column(name = "age")
     private LocalDate age;
 
+    @OneToOne
+    @JoinColumn(name = "passport_id")
+    private Passport passport;
+
     @NotBlank
     @Column(name = "email")
     private String email;
@@ -49,7 +54,7 @@ public class User {
     private String phone;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "company_id")
     private Company company;
 
@@ -58,7 +63,7 @@ public class User {
 
     @NotNull
     @Column(name = "create_at")
-    private LocalDate createAt;
+    private LocalDate createAt = LocalDate.now();
 
     @NotNull
     @Column(name = "deleted")

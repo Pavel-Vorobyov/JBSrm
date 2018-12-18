@@ -23,10 +23,7 @@ public class Deed {
     private long id;
 
     @NotNull
-    @Column(name = "writing_date")
-    private LocalDate writingDate = LocalDate.now();
-
-    @NotNull
+    @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -37,6 +34,10 @@ public class Deed {
     @NotNull
     @Column(name = "price")
     private long price;
+
+    @NotNull
+    @Column(name = "create_at")
+    private LocalDate createAt = LocalDate.now();
 
     @NotNull
     @Column(name = "deleted")

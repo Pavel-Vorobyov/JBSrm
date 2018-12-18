@@ -51,7 +51,7 @@ public class TransportServiceImpl implements TransportService {
 
     @Override
     public TransportDto find(long id) {
-        return ObjectMapperUtills.mapTo(transportRepository.findById(id), TransportDto.class);
+        return ObjectMapperUtills.mapTo(transportRepository.findById(id).orElse(Transport.builder().build()), TransportDto.class);
     }
 
     @Override

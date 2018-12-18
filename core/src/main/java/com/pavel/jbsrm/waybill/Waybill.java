@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -55,9 +56,8 @@ public class Waybill {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "check_point")
+    @OneToMany(mappedBy = "waybill", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @BatchSize(size = 50)
     private List<CheckPoint> checkPoints = new ArrayList<>();
 
     @NotNull

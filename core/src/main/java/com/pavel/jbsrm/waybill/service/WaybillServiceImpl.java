@@ -2,10 +2,6 @@ package com.pavel.jbsrm.waybill.service;
 
 import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
-import com.pavel.jbsrm.company.Company;
-import com.pavel.jbsrm.company.dto.CompanyDto;
-import com.pavel.jbsrm.company.dto.CreateCompanyDto;
-import com.pavel.jbsrm.company.dto.UpdateCompanyDto;
 import com.pavel.jbsrm.waybill.Waybill;
 import com.pavel.jbsrm.waybill.dto.CreateWaybillDto;
 import com.pavel.jbsrm.waybill.dto.UpdateWaybillDto;
@@ -26,7 +22,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class CompanyServiceImpl implements CompanyService {
+public class WaybillServiceImpl implements WaybillService {
 
     @Autowired
     private WaybillRepository waybillRepository;

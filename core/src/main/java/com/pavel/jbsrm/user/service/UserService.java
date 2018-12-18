@@ -1,6 +1,7 @@
 package com.pavel.jbsrm.user.service;
 
 import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
+import com.pavel.jbsrm.user.UserFilter;
 import com.pavel.jbsrm.user.dto.CreateUserDto;
 import com.pavel.jbsrm.user.dto.UpdateUserDto;
 import com.pavel.jbsrm.user.dto.UserDto;
@@ -24,5 +25,5 @@ public interface UserService {
 
     List<UserDto> findAllByPropsMatch(String searchParams);
 
-    Page<UserDto> findAllPageByDeleted(boolean deleted, Pageable pageable);
+    Page<UserDto> findAllPageByDeleted(UserFilter filter, Pageable pageable);
 }

@@ -1,6 +1,7 @@
 package com.pavel.jbsrm.user.dto;
 
 import com.pavel.jbsrm.company.Company;
+import com.pavel.jbsrm.user.Passport;
 import com.pavel.jbsrm.user.UserGender;
 import com.pavel.jbsrm.user.UserRole;
 import lombok.Data;
@@ -22,6 +23,8 @@ public class UpdateUserDto {
 
     @NotNull
     private LocaleData age;
+
+    private Passport passport;
 
     @NotBlank
     private String email;

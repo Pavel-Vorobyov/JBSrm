@@ -1,6 +1,7 @@
 package com.pavel.jbsrm.user.dto;
 
 import com.pavel.jbsrm.company.Company;
+import com.pavel.jbsrm.user.Passport;
 import com.pavel.jbsrm.user.UserGender;
 import com.pavel.jbsrm.user.UserRole;
 import lombok.Data;
@@ -14,9 +15,11 @@ public class UserDto {
     private String surname;
     private UserGender userGender;
     private LocaleData age;
+    private Passport passport;
     private String email;
     private String phone;
     private Company company;
     private UserRole userRole;
     private LocaleData createAt;
+    private boolean deleted;
 }

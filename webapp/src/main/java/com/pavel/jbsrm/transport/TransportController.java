@@ -1,5 +1,9 @@
-package com.pavel.jbsrm.user;
+package com.pavel.jbsrm.transport;
 
+import com.pavel.jbsrm.transport.dto.CreateTransportDto;
+import com.pavel.jbsrm.transport.dto.TransportDto;
+import com.pavel.jbsrm.transport.dto.UpdateTransportDto;
+import com.pavel.jbsrm.transport.service.TransportService;
 import com.pavel.jbsrm.user.dto.CreateUserDto;
 import com.pavel.jbsrm.user.dto.UpdateUserDto;
 import com.pavel.jbsrm.user.dto.UserDto;
@@ -10,38 +14,40 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
-public class UserController {
+@RequestMapping("/api/transports")
+public class TransportController {
 
     @Autowired
-    private UserService userService;
+    private TransportService userService;
 
     @GetMapping("/{id}")
-    public UserDto getById(@PathVariable long id) {
+    public TransportDto getById(@PathVariable long id) {
         return userService.find(id);
     }
 
     @GetMapping("/quickSearch/{searchParams}")
-    public List<UserDto> findAllByPropMatch(@PathVariable String searchParams) {
+    public List<TransportDto> findAllByPropMatch(@PathVariable String searchParams) {
         return userService.findAllByPropsMatch(searchParams);
     }
 
     @GetMapping
-    public Page<UserDto> findAll(@RequestBody UserFilter filter, Pageable pageable) {
-        return userService.findAllPageByDeleted(filter, pageable); //todo pageable supported supplies
+    public Page<TransportDto> findAll(@Nullable @RequestParam Boolean deleted, Pageable pageable) {
+        deleted = deleted == null ? false : deleted;
+        return userService.findAllPageByDeleted(deleted, pageable);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable long id, @RequestBody UpdateUserDto updateDto) {
+    public ResponseEntity<String> update(@PathVariable long id, @RequestBody UpdateTransportDto updateDto) {
         userService.update(id, updateDto);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping
-    public UserDto create(@RequestBody CreateUserDto createDto) {
+    public TransportDto create(@RequestBody CreateTransportDto createDto) {
         return userService.create(createDto);
     }
 

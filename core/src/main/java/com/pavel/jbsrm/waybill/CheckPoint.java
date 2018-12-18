@@ -24,9 +24,10 @@ public class CheckPoint {
     @Column(name = "id")
     private long id;
 
-//    @NotNull
-//    @JoinColumn(name = "waybill_id")
-//    private Waybill waybill;
+    @NotNull
+    @OneToOne
+    @JoinColumn(name = "waybill_id")
+    private Waybill waybill;
 
     @Size(max = 255)
     @NotBlank

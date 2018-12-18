@@ -33,7 +33,7 @@ public class Ttn {
     private LocalDate createAt;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User driver;
 

@@ -2,6 +2,7 @@ package com.pavel.jbsrm.product;
 
 import com.pavel.jbsrm.common.hibernate.EnumType;
 import com.pavel.jbsrm.common.hibernate.Enumerated;
+import com.pavel.jbsrm.deed.Deed;
 import com.pavel.jbsrm.transport.TransportType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +13,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 @Builder
@@ -22,8 +24,7 @@ import javax.validation.constraints.Size;
 public class Product {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Size(max = 80)
@@ -44,4 +45,7 @@ public class Product {
     @NotNull
     @Column(name = "deleted")
     private boolean deleted;
+
+    @OneToMany(mappedBy = "product")
+    private List<Deed> deeds; //todo
 }

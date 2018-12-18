@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Validated
-public interface CompanyService {
+public interface WaybillService {
 
     WaybillDto create(@Valid CreateWaybillDto createWaybillDto);
 

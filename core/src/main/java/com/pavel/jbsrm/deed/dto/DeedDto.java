@@ -9,8 +9,8 @@ import java.time.LocalDate;
 public class DeedDto {
 
     private long id;
-    private LocalDate writingDate;
     private Product product;
     private int amount;
     private long price;
+    private LocalDate createAt;
 }
