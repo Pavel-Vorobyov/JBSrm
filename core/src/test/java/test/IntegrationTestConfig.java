@@ -1,6 +1,6 @@
 package test;
 
-import com.pavel.jbsrm.common.utill.PropertiesUtill;
+import com.pavel.jbsrm.common.utill.PropertiesUtil;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +22,7 @@ public class IntegrationTestConfig {
     DataSource dataSource(Environment env) {
         HikariConfig config = new HikariConfig();
 
-        config.setDataSourceProperties(PropertiesUtill.getSubProperties("C:\\Users\\Pavel.Varabyou\\Desktop\\operator-finder-java11\\JBSrm\\core\\src\\test\\resources\\test.properties", "datasource.properties."));
+        config.setDataSourceProperties(PropertiesUtil.getSubProperties("C:\\Users\\Pavel.Varabyou\\Desktop\\operator-finder-java11\\JBSrm\\core\\src\\test\\resources\\test.properties", "datasource.properties."));
         config.setDataSourceClassName(env.getProperty("datasource.dataSourceClassName"));
         return new HikariDataSource(config);
     }

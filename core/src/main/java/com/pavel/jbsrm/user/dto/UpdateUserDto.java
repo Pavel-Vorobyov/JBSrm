@@ -5,7 +5,7 @@ import com.pavel.jbsrm.user.Passport;
 import com.pavel.jbsrm.user.UserGender;
 import com.pavel.jbsrm.user.UserRole;
 import lombok.Data;
-import sun.util.resources.LocaleData;
+import java.time.LocalDate;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -22,9 +22,7 @@ public class UpdateUserDto {
     private UserGender userGender;
 
     @NotNull
-    private LocaleData age;
-
-    private Passport passport;
+    private LocalDate birthday;
 
     @NotBlank
     private String email;
@@ -33,7 +31,7 @@ public class UpdateUserDto {
     private String phone;
 
     @NotNull
-    private Company company;
+    private long companyId;
 
     private UserRole userRole;
 }

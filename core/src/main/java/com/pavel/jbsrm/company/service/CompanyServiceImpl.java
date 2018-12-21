@@ -65,7 +65,7 @@ public class CompanyServiceImpl implements CompanyService {
         if (!StringUtils.isBlank(searchParams)) {
 
             List<String> list = Arrays.stream(searchParams.trim().split(" "))
-                    .filter(s -> !s.contains("")) //todo !s.equals("") check
+                    .filter(s -> !s.equals("")) //todo !s.equals("") check
                     .collect(Collectors.toList());
 
             companyRepository.findAllByPropsMatch(list)

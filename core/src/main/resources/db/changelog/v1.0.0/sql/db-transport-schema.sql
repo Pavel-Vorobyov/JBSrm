@@ -12,8 +12,8 @@ CREATE TABLE IF NOT EXISTS transport
 	deleted BOOLEAN NOT NULL
 );
 
---CREATE INDEX IF NOT EXISTS idx_fts_transport ON transport
---  USING gin(as_tsvector(id, body_type::TEXT, consumption, client_id));
+CREATE INDEX IF NOT EXISTS idx_fts_transport ON transport
+  USING gin(as_tsvector(id::TEXT, consumption::TEXT, company_id::TEXT));
 
 INSERT INTO transport (body_type, consumption, company_id, deleted)
 	SELECT

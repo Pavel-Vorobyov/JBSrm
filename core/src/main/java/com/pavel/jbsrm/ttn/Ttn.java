@@ -34,7 +34,7 @@ public class Ttn {
 
     @NotNull
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "driver_id")
     private User driver;
 
     @OneToOne(mappedBy = "ttn")
@@ -51,6 +51,10 @@ public class Ttn {
 
     @Enumerated(EnumType.POSTGRES)
     private TtnState ttnState;
+
+    @OneToOne
+    @JoinColumn(name = "created_by")
+    private User createdBy;
 
     @NotNull
     @Column(name = "deleted")

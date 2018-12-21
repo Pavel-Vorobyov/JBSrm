@@ -8,10 +8,12 @@ DROP TABLE IF EXISTS "user";
 CREATE TABLE IF NOT EXISTS "user"
 (
 	id serial PRIMARY KEY,
+	login VARCHAR (80) UNIQUE NOT NULL,
+	password VARCHAR (300) NOT NULL,
 	name VARCHAR (80) COLLATE pg_catalog."default" NOT NULL,
 	surname VARCHAR (80) COLLATE pg_catalog."default" NOT NULL,
 	user_gender user_gender NOT NULL,
-	age DATE NOT NULL,
+	birthday DATE NOT NULL,
 	passport_id serial NOT NULL,
 	email VARCHAR (80) COLLATE pg_catalog."default" NOT NULL,
 	phone VARCHAR (80) COLLATE pg_catalog."default" NOT NULL,
@@ -30,19 +32,24 @@ CREATE TABLE IF NOT EXISTS passport
 	deleted BOOLEAN NOT NULL
 );
 
-INSERT INTO "user" (name, surname, user_gender, age, email, phone, company_id, user_role, create_at, deleted)
+CREATE INDEX IF NOT EXISTS idx_fts_user ON "user"
+  USING gin(as_tsvector(name, surname, email, phone));
+
+INSERT INTO "user" (login, password, name, surname, user_gender, birthday, email, phone, company_id, user_role, create_at, deleted)
 	SELECT
+	    'login' || num AS login,
+	    'password' AS password,
 		'name' || num AS name,
 		'surname' || num AS surname,
 		(
 			CASE (RANDOM() * 1)::INT
-				WHEN 0 THEN 'MALE'::user_gender
-				WHEN 1 THEN 'FEMALE'::user_gender
+				WHEN 0 THEN 'MALE'
+				WHEN 1 THEN 'FEMALE'
 			END
-		) AS user_gender,
+		)::user_gender AS user_gender,
 		(
 			CURRENT_DATE::DATE
-		) AS age,
+		) AS birthday,
 		'email' || num || '@' || (
 			CASE (RANDOM() * 2)::INT
 				WHEN 0 THEN 'gmail.com'
@@ -53,12 +60,14 @@ INSERT INTO "user" (name, surname, user_gender, age, email, phone, company_id, u
 		'phone' || num AS phone,
 		num AS company_id,
 		(
-			CASE (RANDOM() * 2)::INT
-				WHEN 0 THEN 'SYSTEM_ADMIN'::user_role
-				WHEN 1 THEN 'DRIVER'::user_role
-			 	WHEN 2 THEN 'ADMIN'::user_role
+			CASE (RANDOM() * 4)::INT
+				WHEN 0 THEN 'SYSTEM_ADMIN'
+				WHEN 1 THEN 'ADMIN'
+			 	WHEN 2 THEN 'DISPATCHER'
+			 	WHEN 3 THEN 'MANAGER'
+			 	WHEN 4 THEN 'DRIVER'
 			END
-		) AS user_role,
+		)::user_role AS user_role,
 		(
 			CURRENT_DATE::DATE
 		) AS create_at,

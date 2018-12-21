@@ -31,7 +31,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto create(@Valid CreateProductDto createProductDto) {
         Product product = ObjectMapperUtills.mapTo(createProductDto, Product.class);
-        product.setProductState(ProductState.ACCEPTED);
         return ObjectMapperUtills.mapTo(productRepository.save(product), ProductDto.class);
     }
 

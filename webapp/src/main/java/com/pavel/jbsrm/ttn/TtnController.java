@@ -34,9 +34,8 @@ public class TtnController {
     }
 
     @GetMapping
-    public Page<TtnDto> findAll(@Nullable @RequestParam Boolean deleted, Pageable pageable) {
-        deleted = deleted == null ? false : deleted;
-        return ttnService.findAllPageByDeleted(deleted, pageable);
+    public Page<TtnDto> findAll(TtnFilter ttnFilter, Pageable pageable) {
+        return ttnService.findAllPageByDeleted(ttnFilter, pageable);
     }
 
     @PutMapping("/{id}")

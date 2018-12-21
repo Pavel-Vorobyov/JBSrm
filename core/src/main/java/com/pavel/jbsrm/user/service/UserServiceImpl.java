@@ -43,8 +43,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public UserDto update(long id, @Valid UpdateUserDto updateUserDto) throws ResourceNotFoundException {
-        Optional<User> user = Optional.of(userRepository.getOne(id));
+//        Optional<User> user = Optional.of(userRepository.getOne(id));
+        Optional<User> user = userRepository.findById(id);
         user.ifPresent(cl -> ObjectMapperUtills.mapTo(updateUserDto, cl));
+        user.get().getCompany().setId(updateUserDto.getCompanyId());
 
         return ObjectMapperUtills.mapTo(
                 user.map(cl -> userRepository.save(cl)).orElseThrow(ResourceNotFoundException::new), UserDto.class);
@@ -71,7 +73,7 @@ public class UserServiceImpl implements UserService {
         if (!StringUtils.isBlank(searchParams)) {
 
             List<String> list = Arrays.stream(searchParams.trim().split(" "))
-                    .filter(s -> !s.contains("")) //todo !s.equals("") check
+                    .filter(s -> !s.equals("")) //todo !s.equals("") check
                     .collect(Collectors.toList());
 
             userRepository.findAllByPropsMatch(list)

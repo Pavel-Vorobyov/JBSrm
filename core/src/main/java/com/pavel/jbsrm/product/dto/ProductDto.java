@@ -11,11 +11,7 @@ public class ProductDto {
 
     @NotNull
     private String title;
-
     private TransportType requiredType;
-
-    private ProductState productState;
-
     @NotNull
     private int amount;
 }

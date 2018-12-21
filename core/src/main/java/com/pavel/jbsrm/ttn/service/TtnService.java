@@ -1,6 +1,7 @@
 package com.pavel.jbsrm.ttn.service;
 
 import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
+import com.pavel.jbsrm.ttn.TtnFilter;
 import com.pavel.jbsrm.ttn.dto.CreateTtnDto;
 import com.pavel.jbsrm.ttn.dto.TtnDto;
 import com.pavel.jbsrm.ttn.dto.UpdateTtnDto;
@@ -24,5 +25,5 @@ public interface TtnService {
 
     List<TtnDto> findAllByPropsMatch(String searchParams);
 
-    Page<TtnDto> findAllPageByDeleted(boolean deleted, Pageable pageable);
+    Page<TtnDto> findAllPageByDeleted(TtnFilter filter, Pageable pageable);
 }

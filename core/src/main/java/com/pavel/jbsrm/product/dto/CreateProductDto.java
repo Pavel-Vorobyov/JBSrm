@@ -11,9 +11,7 @@ public class CreateProductDto {
 
     @NotBlank
     private String title;
-
     private TransportType requiredType;
-
     @NotNull
     private int amount;
 }

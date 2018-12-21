@@ -6,11 +6,15 @@ import com.pavel.jbsrm.company.Company;
 import com.pavel.jbsrm.company.dto.CompanyDto;
 import com.pavel.jbsrm.company.dto.CreateCompanyDto;
 import com.pavel.jbsrm.company.dto.UpdateCompanyDto;
+import com.pavel.jbsrm.ttn.QTtn;
 import com.pavel.jbsrm.ttn.Ttn;
+import com.pavel.jbsrm.ttn.TtnFilter;
+import com.pavel.jbsrm.ttn.TtnState;
 import com.pavel.jbsrm.ttn.dto.CreateTtnDto;
 import com.pavel.jbsrm.ttn.dto.TtnDto;
 import com.pavel.jbsrm.ttn.dto.UpdateTtnDto;
 import com.pavel.jbsrm.ttn.repository.TtnRepository;
+import com.querydsl.core.BooleanBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,6 +39,7 @@ public class TtnServiceImpl implements TtnService {
     @Override
     public TtnDto create(@Valid CreateTtnDto createTtnDto) {
         Ttn ttn = ObjectMapperUtills.mapTo(createTtnDto, Ttn.class);
+        ttn.setTtnState(TtnState.ACCEPTED);
         return ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class);
     }
 
@@ -80,8 +85,19 @@ public class TtnServiceImpl implements TtnService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<TtnDto> findAllPageByDeleted(boolean deleted, Pageable pageable) {
-        return ttnRepository.findByDeleted(deleted, pageable)
+    public Page<TtnDto> findAllPageByDeleted(TtnFilter filter, Pageable pageable) {
+        return ttnRepository.findAll(buildFilter(filter), pageable)
                 .map(ttn -> ObjectMapperUtills.mapTo(ttn, TtnDto.class));
+    }
+
+    private BooleanBuilder buildFilter(TtnFilter filter) {
+        BooleanBuilder whereBuilder = new BooleanBuilder();
+
+        if (filter != null) {
+            if (filter.getDeleted() != null) {
+                whereBuilder.and(QTtn.ttn.deleted.eq(filter.getDeleted()));
+            }
+        }
+        return whereBuilder;
     }
 }

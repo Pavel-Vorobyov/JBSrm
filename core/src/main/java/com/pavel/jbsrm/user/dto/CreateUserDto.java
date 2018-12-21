@@ -5,10 +5,10 @@ import com.pavel.jbsrm.user.Passport;
 import com.pavel.jbsrm.user.UserGender;
 import com.pavel.jbsrm.user.UserRole;
 import lombok.Data;
-import sun.util.resources.LocaleData;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Data
 public class CreateUserDto {
@@ -22,7 +22,7 @@ public class CreateUserDto {
     private UserGender userGender;
 
     @NotNull
-    private LocaleData age;
+    private LocalDate birthday;
 
     private Passport passport;
 

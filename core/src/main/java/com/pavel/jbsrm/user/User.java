@@ -27,6 +27,14 @@ public class User implements Serializable {
     private long id;
 
     @NotBlank
+    @Column(name = "login")
+    private String login;
+
+    @NotBlank
+    @Column(name = "password")
+    private String password;
+
+    @NotBlank
     @Column(name = "name")
     private String name;
 
@@ -38,8 +46,8 @@ public class User implements Serializable {
     private UserGender userGender;
 
     @NotNull
-    @Column(name = "age")
-    private LocalDate age;
+    @Column(name = "birthday")
+    private LocalDate birthday;
 
     @OneToOne
     @JoinColumn(name = "passport_id")

@@ -7,6 +7,8 @@ import com.pavel.jbsrm.user.UserRole;
 import lombok.Data;
 import sun.util.resources.LocaleData;
 
+import java.time.LocalDate;
+
 @Data
 public class UserDto {
 
@@ -14,7 +16,7 @@ public class UserDto {
     private String name;
     private String surname;
     private UserGender userGender;
-    private LocaleData age;
+    private LocalDate birthday;
     private Passport passport;
     private String email;
     private String phone;

@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping
-    public Page<UserDto> findAll(@RequestBody UserFilter filter, Pageable pageable) {
+    public Page<UserDto> findAll(UserFilter filter, Pageable pageable) {
         return userService.findAllPageByDeleted(filter, pageable); //todo pageable supported supplies
     }
 

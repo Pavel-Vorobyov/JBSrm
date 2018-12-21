@@ -1,24 +1,39 @@
 DROP TABLE IF EXISTS ttn;
 
 DROP TYPE IF EXISTS ttn_state CASCADE;
-CREATE TYPE ttn_state AS ENUM ('ISSUED', 'CHECK_COMPLETE', 'DELIVERED');
+CREATE TYPE ttn_state AS ENUM ('ACCEPTED', 'CHECK_COMPLETE', 'TRANSPORTATION_STARTED', 'DELIVERED');
 
 CREATE TABLE IF NOT EXISTS ttn
 (
 	id serial PRIMARY KEY,
+	create_at DATE NOT NULL,
+	driver_id serial NOT NULL,
 	ttn_state ttn_state,
+	created_by serial NOT NULL,
 	deleted BOOLEAN
 );
 
-INSERT INTO ttn (ttn_state, deleted)
+INSERT INTO ttn (create_at, driver_id, ttn_state, created_by, deleted)
 	SELECT
+	    (
+	        CURRENT_DATE::DATE
+	    ) AS create_at,
+	    (
+	        CASE (RANDOM() * 2 )::INT
+	            WHEN 0 THEN 2
+	            WHEN 1 THEN 4
+	            WHEN 2 THEN 6
+	        END
+	    ) AS driver_id,
 		(
-			CASE (RANDOM() * 2)::INT
-				WHEN 0 THEN 'ISSUED'::ttn_state
-				WHEN 1 THEN 'CHECK_COMPLETE'::ttn_state
-				WHEN 2 THEN 'DELIVERED'::ttn_state
+			CASE (RANDOM() * 3)::INT
+				WHEN 0 THEN 'ACCEPTED'
+				WHEN 1 THEN 'CHECK_COMPLETE'
+				WHEN 2 THEN 'DELIVERED'
+				WHEN 3 THEN 'TRANSPORTATION_STARTED'
 			END
-		) AS ttn_state,
+		)::ttn_state AS ttn_state,
+		num AS created_by,
 		(
 			CASE (RANDOM() * 2)::INT
 				WHEN 0 THEN true

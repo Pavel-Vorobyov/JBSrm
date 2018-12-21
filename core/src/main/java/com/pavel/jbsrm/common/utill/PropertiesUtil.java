@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class PropertiesUtill {
+public class PropertiesUtil {
 
     public static Map<String, String> getPropertiesMap(String path, String propPrefix) {
         Map<String, String> propertiesMap = new HashMap<>();
