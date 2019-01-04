@@ -2,15 +2,13 @@ DROP TABLE IF EXISTS deed;
 CREATE TABLE IF NOT EXISTS deed
 (
 	id SERIAL PRIMARY KEY,
-	amount INTEGER NOT NULL,
 	price SERIAL NOT NULL,
 	create_at DATE NOT NULL,
 	deleted BOOLEAN NOT NULL
 );
 
-INSERT INTO deed (amount, price, create_at, deleted)
+INSERT INTO deed (price, create_at, deleted)
 	SELECT
-		num AS amount,
 		num AS price,
 		(
 			CURRENT_DATE::DATE

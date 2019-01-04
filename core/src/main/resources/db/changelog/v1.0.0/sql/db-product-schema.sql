@@ -1,39 +1,38 @@
-DROP TABLE IF EXISTS product;
-
 DROP TYPE IF EXISTS product_state CASCADE;
 CREATE TYPE product_state AS ENUM ('ACCEPTED', 'CHECK_COMPLETE', 'DELIVERED', 'LOST');
 
+DROP TABLE IF EXISTS product;
 CREATE TABLE IF NOT EXISTS product
 (
 	id serial PRIMARY KEY,
-    title VARCHAR (80) COLLATE pg_catalog."default" NOT NULL,
-    product_state product_state,
-	required_type transport_type,
-	amount INTEGER NOT NULL,
+    product_details_id serial NOT NULL,
+	amount INTEGER ,
+	product_state product_state,
 	deleted BOOLEAN NOT NULL
 );
 
---CREATE INDEX IF NOT EXISTS idx_fts_product ON product
---  USING gin(as_tsvector(id, title, required_type, product_state, amount, is_deleted));
+CREATE INDEX IF NOT EXISTS idx_fts_product ON product
+  USING gin(as_tsvector(id::TEXT));
 
-INSERT INTO product (title, product_state, required_type, amount, deleted)
+INSERT INTO product (product_details_id, amount, product_state, deleted)
 	SELECT
-		'title' || num AS title,
+		num AS product_details_id,
 		(
-			CASE (RANDOM() * 2)::INT
-				WHEN 0 THEN 'ACCEPTED'::product_state
-				WHEN 1 THEN 'CHECK_COMPLETE'::product_state
-				WHEN 2 THEN 'DELIVERED'::product_state
+			CASE (RANDOM() * 3)::INT
+				WHEN 0 THEN 50
+				WHEN 1 THEN 100
+				WHEN 2 THEN 150
+				WHEN 3 THEN 200
 			END
-		) AS product_state,
+		) AS amount,
 		(
-			CASE (RANDOM() * 2)::INT
-				WHEN 0 THEN 'COVERED_BODY'::transport_type
-				WHEN 1 THEN 'REFRIGERATOR'::transport_type
-				WHEN 2 THEN 'TANK'::transport_type
+			CASE (RANDOM() * 3)::INT
+				WHEN 0 THEN 'ACCEPTED'
+				WHEN 1 THEN 'CHECK_COMPLETE'
+				WHEN 2 THEN 'DELIVERED'
+				WHEN 3 THEN 'LOST'
 			END
-		) AS required_type,
-		num AS amount,
+		)::product_state AS product_state,
 		(
 			CASE (RANDOM() * 2)::INT
 				WHEN 0 THEN true

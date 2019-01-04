@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserRepositoryImpl extends QuerydslRepositorySupport implements UserRepositoryCustom {
-    private String queryStart = "select id, login, password, name, surname, user_gender, passport_id, birthday, email, phone, company_id, user_role, create_at, " +
+    private final String queryStart = "select id, login, password, name, surname, user_gender, passport_id, birthday, email, phone, company_id, user_role, create_at, " +
             "deleted from \"user\" where as_tsvector(name, surname, email, phone) @@ to_tsquery('";
-    private String queryEnd = "') LIMIT (10);"; //todo replace query
+    private final String queryEnd = "') LIMIT (10);"; //todo replace query
 
     @PersistenceContext
     private EntityManager entityManager;

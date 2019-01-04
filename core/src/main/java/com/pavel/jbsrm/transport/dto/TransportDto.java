@@ -8,8 +8,9 @@ import lombok.Data;
 public class TransportDto {
 
     private long id;
+    private String title;
     private int consumption;
-    private TransportType transportType;
+    private TransportType bodyType;
     private Company owner;
     private boolean deleted;
 }

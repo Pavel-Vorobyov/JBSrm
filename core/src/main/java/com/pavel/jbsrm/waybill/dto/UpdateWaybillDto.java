@@ -16,9 +16,6 @@ public class UpdateWaybillDto {
     private Ttn ttn;
 
     @NotNull
-    private Transport transport;
-
-    @NotNull
     private CheckPoint startPoint;
 
     @NotNull

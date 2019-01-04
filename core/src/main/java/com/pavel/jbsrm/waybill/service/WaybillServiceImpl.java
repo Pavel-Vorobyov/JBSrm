@@ -2,10 +2,13 @@ package com.pavel.jbsrm.waybill.service;
 
 import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
+import com.pavel.jbsrm.waybill.CheckPoint;
+import com.pavel.jbsrm.waybill.CheckPointStatus;
 import com.pavel.jbsrm.waybill.Waybill;
 import com.pavel.jbsrm.waybill.dto.CreateWaybillDto;
 import com.pavel.jbsrm.waybill.dto.UpdateWaybillDto;
 import com.pavel.jbsrm.waybill.dto.WaybillDto;
+import com.pavel.jbsrm.waybill.repository.CheckPointRepository;
 import com.pavel.jbsrm.waybill.repository.WaybillRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +27,21 @@ import java.util.stream.Collectors;
 @Service
 public class WaybillServiceImpl implements WaybillService {
 
-    @Autowired
     private WaybillRepository waybillRepository;
+    private CheckPointRepository checkPointRepository;
+
+    public WaybillServiceImpl(WaybillRepository waybillRepository, CheckPointRepository checkPointRepository) {
+        this.waybillRepository = waybillRepository;
+        this.checkPointRepository = checkPointRepository;
+    }
 
     @Transactional
     @Override
     public WaybillDto create(@Valid CreateWaybillDto createWaybillDto) {
         Waybill waybill = ObjectMapperUtills.mapTo(createWaybillDto, Waybill.class);
+
+        waybill.getCheckPoints().forEach(cp -> cp.setCheckPointStatus(CheckPointStatus.NOT_PASSED));
+
         return ObjectMapperUtills.mapTo(waybillRepository.save(waybill), WaybillDto.class);
     }
 
@@ -65,7 +76,7 @@ public class WaybillServiceImpl implements WaybillService {
         if (!StringUtils.isBlank(searchParams)) {
 
             List<String> list = Arrays.stream(searchParams.trim().split(" "))
-                    .filter(s -> !s.contains("")) //todo !s.equals("") check
+                    .filter(s -> !s.equals("")) //todo !s.equals("") check
                     .collect(Collectors.toList());
 
             waybillRepository.findAllByPropsMatch(list)

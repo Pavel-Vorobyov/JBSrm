@@ -31,10 +31,17 @@
         <spring-test.version>5.1.3.RELEASE</spring-test.version>
         <hibernate-types.version>2.3.5</hibernate-types.version>
         <commons.lang3.version>3.7</commons.lang3.version>
+        <jjwt.version>0.10.5</jjwt.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>0.6.0</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>

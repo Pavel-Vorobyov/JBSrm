@@ -13,8 +13,7 @@ public class WaybillDto {
 
     private long id;
     private Ttn ttn;
-    private Transport transport;
-    private LocalDate createAt;
+    private LocalDate createdAt;
     private CheckPoint startPoint;
     private CheckPoint endPoint;
     private LocalDate startDate;

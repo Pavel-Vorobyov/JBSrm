@@ -1,10 +1,10 @@
 package com.pavel.jbsrm.ttn.repository;
 
-import com.pavel.jbsrm.ttn.Ttn;
+import com.pavel.jbsrm.ttn.dto.TtnQuickSearchDto;
 
 import java.util.List;
 
 public interface TtnRepositoryCustom {
 
-    List<Ttn> findAllByPropsMatch(List<String> props);
+    List<TtnQuickSearchDto> findAllByPropsMatch(List<String> props);
 }

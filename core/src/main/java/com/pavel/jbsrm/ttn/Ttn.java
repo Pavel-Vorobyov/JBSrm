@@ -2,7 +2,8 @@ package com.pavel.jbsrm.ttn;
 
 import com.pavel.jbsrm.common.hibernate.EnumType;
 import com.pavel.jbsrm.common.hibernate.Enumerated;
-import com.pavel.jbsrm.product.Product;
+import com.pavel.jbsrm.product.product.Product;
+import com.pavel.jbsrm.transport.Transport;
 import com.pavel.jbsrm.user.User;
 import com.pavel.jbsrm.waybill.Waybill;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ import java.util.List;
 public class Ttn {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 
@@ -37,8 +38,9 @@ public class Ttn {
     @JoinColumn(name = "driver_id")
     private User driver;
 
-    @OneToOne(mappedBy = "ttn")
-    private Waybill waybill;
+    @OneToOne
+    @JoinColumn(name = "transport_id")
+    private Transport transport;
 
     @OneToMany(cascade = {
                     CascadeType.PERSIST,

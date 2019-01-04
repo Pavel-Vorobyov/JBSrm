@@ -1,6 +1,5 @@
 package com.pavel.jbsrm.waybill.repository;
 
-import com.pavel.jbsrm.company.Company;
 import com.pavel.jbsrm.waybill.Waybill;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
@@ -11,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WaybillRepositoryImpl extends QuerydslRepositorySupport implements WaybillRepositoryCustom {
-    private String queryStart = "select id, title, email, phone, client_role, is_deleted from client where as_tsvector(title, email, phone) @@ to_tsquery('";
+    private String queryStart = "select id, ttn_idc, email, phone, client_role, is_deleted from client where as_tsvector(title, email, phone) @@ to_tsquery('";
     private String queryEnd = "') LIMIT (10);"; //todo update select query to Waybill.class
 
     @PersistenceContext

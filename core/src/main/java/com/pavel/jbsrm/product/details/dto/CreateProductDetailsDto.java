@@ -1,4 +1,4 @@
-package com.pavel.jbsrm.product.dto;
+package com.pavel.jbsrm.product.details.dto;
 
 import com.pavel.jbsrm.transport.TransportType;
 import lombok.Data;
@@ -7,11 +7,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class CreateProductDto {
+public class CreateProductDetailsDto {
 
     @NotBlank
     private String title;
-    private TransportType requiredType;
+    @NotBlank
+    private String description;
     @NotNull
-    private int amount;
+    private int price;
+    private TransportType requiredType;
 }

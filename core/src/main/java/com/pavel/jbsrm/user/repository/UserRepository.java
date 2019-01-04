@@ -8,6 +8,6 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long>, QuerydslPredicateExecutor<User>,  UserRepositoryCustom {
+public interface UserRepository extends JpaRepository<User, Long>, QuerydslPredicateExecutor<User>, UserRepositoryCustom {
     Page<User> findByDeleted(boolean deletedValue, Pageable pageable);
 }

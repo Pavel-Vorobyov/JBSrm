@@ -1,6 +1,6 @@
 package com.pavel.jbsrm.deed;
 
-import com.pavel.jbsrm.product.Product;
+import com.pavel.jbsrm.product.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,10 +26,6 @@ public class Deed {
     @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
-
-    @NotNull
-    @Column(name = "amount")
-    private int amount;
 
     @NotNull
     @Column(name = "price")

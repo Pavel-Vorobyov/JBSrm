@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -21,14 +22,18 @@ import javax.validation.constraints.Size;
 public class Transport {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
+
+    @Size(max = 80)
+    @NotBlank
+    @Column(name = "title")
+    private String title;
 
     @Enumerated(EnumType.POSTGRES)
     private TransportType bodyType;
 
-    @Size(max = 200)
     @NotNull
     @Column(name = "consumption")
     private int consumption;

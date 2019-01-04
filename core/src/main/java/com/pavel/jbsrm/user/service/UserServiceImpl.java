@@ -2,7 +2,6 @@ package com.pavel.jbsrm.user.service;
 
 import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
-import com.pavel.jbsrm.company.Company;
 import com.pavel.jbsrm.user.QUser;
 import com.pavel.jbsrm.user.User;
 import com.pavel.jbsrm.user.UserFilter;
@@ -19,13 +18,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -96,8 +93,8 @@ public class UserServiceImpl implements UserService {
             if (filter.getDeleted() != null) {
                 whereBuilder.and(QUser.user.deleted.eq(filter.getDeleted()));
             }
-            if (filter.getAge() != null) {
-                whereBuilder.and(QUser.user.age.eq(filter.getAge()));
+            if (filter.getBirthday() != null) {
+                whereBuilder.and(QUser.user.birthday.eq(filter.getBirthday()));
             }
             if (filter.getCompanyId() != null) {
                 whereBuilder.and(QUser.user.company.id.eq(filter.getCompanyId()));

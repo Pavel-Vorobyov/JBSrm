@@ -1,6 +1,6 @@
 package com.pavel.jbsrm.deed.dto;
 
-import com.pavel.jbsrm.product.Product;
+import com.pavel.jbsrm.product.product.Product;
 import lombok.Data;
 
 import java.time.LocalDate;

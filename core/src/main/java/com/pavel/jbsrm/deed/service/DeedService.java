@@ -1,9 +1,6 @@
 package com.pavel.jbsrm.deed.service;
 
 import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
-import com.pavel.jbsrm.company.dto.CompanyDto;
-import com.pavel.jbsrm.company.dto.CreateCompanyDto;
-import com.pavel.jbsrm.company.dto.UpdateCompanyDto;
 import com.pavel.jbsrm.deed.dto.CreateDeedDto;
 import com.pavel.jbsrm.deed.dto.DeedDto;
 import com.pavel.jbsrm.deed.dto.UpdateDeedDto;

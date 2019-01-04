@@ -3,6 +3,9 @@ spring:
     url: jdbc:postgresql://localhost:5446/jbsrm
     username: admin
     password: 123qwe123
+  resources:
+    chain:
+      enabled: true
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     properties:
@@ -19,5 +22,13 @@ spring:
         show_sql: true
   liquibase.change-log: classpath:/db/changelog/liquibase-changelog.xml
   logging.level.liquibase: INFO
+
+management:
+  security:
+    enabled: true
+
 server:
   port: 8080
+
+jbsrm.app.jwtSecret: jwtSecretKey
+jbsrm.app.jwtExpiration: 86400

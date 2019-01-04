@@ -5,7 +5,6 @@ import com.pavel.jbsrm.user.Passport;
 import com.pavel.jbsrm.user.UserGender;
 import com.pavel.jbsrm.user.UserRole;
 import lombok.Data;
-import sun.util.resources.LocaleData;
 
 import java.time.LocalDate;
 
@@ -22,6 +21,6 @@ public class UserDto {
     private String phone;
     private Company company;
     private UserRole userRole;
-    private LocaleData createAt;
+    private LocalDate createAt;
     private boolean deleted;
 }

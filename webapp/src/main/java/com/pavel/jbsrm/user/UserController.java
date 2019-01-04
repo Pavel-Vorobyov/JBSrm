@@ -50,5 +50,4 @@ public class UserController {
         userService.updateDeleted(id, deleted);
         return ResponseEntity.ok().build();
     }
-
 }

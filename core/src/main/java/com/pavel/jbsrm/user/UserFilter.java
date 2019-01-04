@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class UserFilter {
 
-    private LocalDate age;
+    private LocalDate birthday;
     private Long companyId;
     private UserRole userRole;
     private Boolean deleted;

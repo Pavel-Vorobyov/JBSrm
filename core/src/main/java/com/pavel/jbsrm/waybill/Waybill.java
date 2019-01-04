@@ -25,28 +25,17 @@ import java.util.List;
 public class Waybill {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @NotNull
+    @OneToOne
     @JoinColumn(name = "ttn_id")
     private Ttn ttn;
 
-    @OneToOne
-    @JoinColumn(name = "transport_id")
-    private Transport transport;
-
+    @NotNull
     @Column(name = "created_at")
     private LocalDate createdAt = LocalDate.now();
-
-    @OneToOne
-    @JoinColumn(name = "start_point_id")
-    private CheckPoint startPoint;
-
-    @OneToOne
-    @JoinColumn(name = "end_point_id")
-    private CheckPoint endPoint;
 
     @NotNull
     @Column(name = "start_date")
@@ -56,7 +45,13 @@ public class Waybill {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @OneToMany(mappedBy = "waybill", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "waybill_checkpoints",
+            joinColumns = @JoinColumn(name = "waybill_id"),
+            inverseJoinColumns = @JoinColumn(name = "checkpoint_id"))
     @BatchSize(size = 50)
     private List<CheckPoint> checkPoints = new ArrayList<>();
 

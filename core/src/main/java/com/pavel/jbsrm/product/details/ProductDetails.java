@@ -1,8 +1,7 @@
-package com.pavel.jbsrm.product;
+package com.pavel.jbsrm.product.details;
 
 import com.pavel.jbsrm.common.hibernate.EnumType;
 import com.pavel.jbsrm.common.hibernate.Enumerated;
-import com.pavel.jbsrm.deed.Deed;
 import com.pavel.jbsrm.transport.TransportType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,15 +12,14 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "product")
-public class Product {
+@Table(name = "product_details")
+public class ProductDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,23 +27,22 @@ public class Product {
 
     @Size(max = 80)
     @NotBlank
+    @Column(name = "title")
     private String title;
+
+    @Size(max = 1000)
+    @NotNull
+    @Column(name = "description")
+    private String description;
+
+    @NotNull
+    @Column(name = "price")
+    private long price;
 
     @Enumerated(EnumType.POSTGRES)
     private TransportType requiredType;
 
-    @Enumerated(EnumType.POSTGRES)
-    private ProductState productState;
-
-    @Size(max = 200)
-    @NotNull
-    @Column(name = "amount")
-    private int amount;
-
     @NotNull
     @Column(name = "deleted")
     private boolean deleted;
-
-    @OneToMany(mappedBy = "product")
-    private List<Deed> deeds; //todo
 }

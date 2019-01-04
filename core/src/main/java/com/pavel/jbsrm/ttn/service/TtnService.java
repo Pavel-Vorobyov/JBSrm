@@ -4,6 +4,7 @@ import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
 import com.pavel.jbsrm.ttn.TtnFilter;
 import com.pavel.jbsrm.ttn.dto.CreateTtnDto;
 import com.pavel.jbsrm.ttn.dto.TtnDto;
+import com.pavel.jbsrm.ttn.dto.TtnQuickSearchDto;
 import com.pavel.jbsrm.ttn.dto.UpdateTtnDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +24,7 @@ public interface TtnService {
 
     TtnDto find(long id);
 
-    List<TtnDto> findAllByPropsMatch(String searchParams);
+    List<TtnQuickSearchDto> findAllByPropsMatch(String searchParams);
 
     Page<TtnDto> findAllPageByDeleted(TtnFilter filter, Pageable pageable);
 }
