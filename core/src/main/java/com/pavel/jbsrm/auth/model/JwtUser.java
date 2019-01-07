@@ -1,12 +1,14 @@
-package com.pavel.jbsrm.auth.token.model;
+package com.pavel.jbsrm.auth.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class JwtUser {
 
     private long id;

@@ -1,4 +1,4 @@
-package com.pavel.jbsrm.auth.token.security;
+package com.pavel.jbsrm.auth.security;
 
 
 import org.springframework.security.core.Authentication;

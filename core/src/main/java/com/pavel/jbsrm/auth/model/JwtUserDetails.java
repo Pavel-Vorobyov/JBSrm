@@ -1,4 +1,4 @@
-package com.pavel.jbsrm.auth.token.model;
+package com.pavel.jbsrm.auth.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

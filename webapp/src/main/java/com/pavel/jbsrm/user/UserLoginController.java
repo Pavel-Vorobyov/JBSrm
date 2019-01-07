@@ -1,7 +1,7 @@
 package com.pavel.jbsrm.user;
 
-import com.pavel.jbsrm.auth.token.model.JwtUser;
-import com.pavel.jbsrm.auth.token.security.JwtTokenGenerator;
+import com.pavel.jbsrm.auth.model.JwtUser;
+import com.pavel.jbsrm.auth.security.JwtTokenGenerator;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

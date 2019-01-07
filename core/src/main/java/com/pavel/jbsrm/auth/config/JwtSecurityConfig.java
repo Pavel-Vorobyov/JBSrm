@@ -1,9 +1,9 @@
-package com.pavel.jbsrm.auth.token.config;
+package com.pavel.jbsrm.auth.config;
 
-import com.pavel.jbsrm.auth.token.security.JwtAuthenticationEntryPoint;
-import com.pavel.jbsrm.auth.token.security.JwtAuthenticationProvider;
-import com.pavel.jbsrm.auth.token.security.JwtAuthenticationTokenFilter;
-import com.pavel.jbsrm.auth.token.security.JwtSuccessHandler;
+import com.pavel.jbsrm.auth.security.JwtAuthenticationEntryPoint;
+import com.pavel.jbsrm.auth.security.JwtAuthenticationProvider;
+import com.pavel.jbsrm.auth.security.JwtAuthenticationTokenFilter;
+import com.pavel.jbsrm.auth.security.JwtSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,9 +18,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import java.util.Collections;
 
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-@EnableWebSecurity
 @Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired

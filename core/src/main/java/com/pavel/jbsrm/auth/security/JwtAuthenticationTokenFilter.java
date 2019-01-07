@@ -1,6 +1,6 @@
-package com.pavel.jbsrm.auth.token.security;
+package com.pavel.jbsrm.auth.security;
 
-import com.pavel.jbsrm.auth.token.model.JwtAuthenticationToken;
+import com.pavel.jbsrm.auth.model.JwtAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
@@ -14,7 +14,7 @@ import java.io.IOException;
 public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessingFilter {
 
     public JwtAuthenticationTokenFilter() {
-        super("/rest/**");
+        super("/api/**");
     }
 
     @Override
