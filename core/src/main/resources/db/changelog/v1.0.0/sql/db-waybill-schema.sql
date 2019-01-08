@@ -17,7 +17,6 @@ CREATE TABLE IF NOT EXISTS check_point
 	lat double precision NOT NULL,
 	lng double precision NOT NULL,
 	check_point_status check_point_status NOT NULL,
-	created_at DATE,
 	deleted BOOLEAN NOT NULL
 );
 
@@ -45,15 +44,15 @@ CREATE INDEX IF NOT EXISTS idx_fts_waybill_checkpoints ON waybill_checkpoints
   USING gin(as_tsvector(id::TEXT, waybill_id::TEXT, checkpoint_id::TEXT));
 
 CREATE INDEX IF NOT EXISTS idx_fts_check_point ON check_point
-  USING gin(as_tsvector(as_text(id), as_text(waybill_id), title, as_text(check_point_status), as_text(created_at), as_text(deleted)));
+  USING gin(as_tsvector(as_text(id), as_text(waybill_id), title, as_text(check_point_status), as_text(deleted)));
 
 CREATE INDEX IF NOT EXISTS idx_fts_waybill ON waybill
   USING gin(as_tsvector(as_text(id), as_text(ttn_id),as_text(transport_id),as_text(created_at),as_text(start_date),as_text(end_date),as_text(deleted)));
 
-insert into check_point (title, lat, lng, waybill_id, created_at,check_point_status,deleted)
-	values ('check+point', 19.618997640855298, -83.6948828125, 1, CURRENT_DATE::DATE, 'PASSED', false);
-insert into check_point (title, lat, lng, waybill_id, created_at,check_point_status,deleted)
-	values ('check+point', 20.618997640855298, -84.6948828125, 1, CURRENT_DATE::DATE, 'PASSED', false);
+insert into check_point (title, lat, lng, waybill_id, check_point_status,deleted)
+	values ('check+point', 19.618997640855298, -83.6948828125, 1, 'PASSED', false);
+insert into check_point (title, lat, lng, waybill_id,check_point_status,deleted)
+	values ('check+point', 20.618997640855298, -84.6948828125, 1, 'PASSED', false);
 
 insert into waybill (ttn_id, transport_id, created_at, start_date, end_date, deleted)
 	values (1, 1, CURRENT_DATE::DATE, CURRENT_DATE::DATE, CURRENT_DATE::DATE, false);

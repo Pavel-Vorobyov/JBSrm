@@ -1,6 +1,5 @@
 package com.pavel.jbsrm.deed.service;
 
-import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
 import com.pavel.jbsrm.deed.Deed;
 import com.pavel.jbsrm.deed.dto.CreateDeedDto;
@@ -8,7 +7,6 @@ import com.pavel.jbsrm.deed.dto.DeedDto;
 import com.pavel.jbsrm.deed.dto.UpdateDeedDto;
 import com.pavel.jbsrm.deed.repository.DeedRepository;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -24,38 +22,39 @@ import java.util.stream.Collectors;
 @Service
 public class DeedServiceImpl implements DeedService {
 
-    @Autowired
     private DeedRepository deedRepository;
 
+    public DeedServiceImpl(DeedRepository deedRepository) {
+        this.deedRepository = deedRepository;
+    }
+
     @Transactional
     @Override
-    public DeedDto create(@Valid CreateDeedDto createDeedDto) {
+    public Optional<DeedDto> create(@Valid CreateDeedDto createDeedDto) {
         Deed deed = ObjectMapperUtills.mapTo(createDeedDto, Deed.class);
-        return ObjectMapperUtills.mapTo(deedRepository.save(deed), DeedDto.class);
+        return Optional.of(ObjectMapperUtills.mapTo(deedRepository.save(deed), DeedDto.class));
     }
 
     @Transactional
     @Override
-    public DeedDto update(long id, @Valid UpdateDeedDto updateDeedDto) throws ResourceNotFoundException {
-        Optional<Deed> deed = Optional.of(deedRepository.getOne(id));
-        deed.ifPresent(d -> ObjectMapperUtills.mapTo(updateDeedDto, d));
+    public Optional<DeedDto> update(long id, @Valid UpdateDeedDto updateDeedDto) {
+        Deed deed = deedRepository.getOne(id);
+        ObjectMapperUtills.mapTo(updateDeedDto, deed);
 
-        return ObjectMapperUtills.mapTo(
-                deed.map(d -> deedRepository.save(d)).orElseThrow(ResourceNotFoundException::new), DeedDto.class);
+        return Optional.of(ObjectMapperUtills.mapTo(deedRepository.save(deed), DeedDto.class));
     }
 
     @Override
-    public void updateDeleted(long id, boolean deleted) throws ResourceNotFoundException {
-        Optional<Deed> deed = Optional.of(deedRepository.getOne(id));
-        deed.orElseThrow(ResourceNotFoundException::new)
-                .setDeleted(deleted);
-        deedRepository.save(deed.get());
+    public void updateDeleted(long id, boolean deleted) {
+        Deed deed = deedRepository.getOne(id);
+        deed.setDeleted(deleted);
+        deedRepository.save(deed);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public DeedDto find(long id) {
-        return ObjectMapperUtills.mapTo(deedRepository.findById(id).orElse(Deed.builder().build()), DeedDto.class);
+    public Optional<DeedDto> find(long id) {
+        return Optional.of(ObjectMapperUtills.mapTo(deedRepository.findById(id).orElse(Deed.builder().build()), DeedDto.class));
     }
 
     @Transactional(readOnly = true)
@@ -65,7 +64,7 @@ public class DeedServiceImpl implements DeedService {
         if (!StringUtils.isBlank(searchParams)) {
 
             List<String> list = Arrays.stream(searchParams.trim().split(" "))
-                    .filter(s -> !s.contains("")) //todo !s.equals("") check
+                    .filter(s -> !s.equals(""))
                     .collect(Collectors.toList());
 
             deedRepository.findAllByPropsMatch(list)

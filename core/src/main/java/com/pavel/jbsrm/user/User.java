@@ -49,9 +49,11 @@ public class User implements Serializable {
     @Column(name = "birthday")
     private LocalDate birthday;
 
-    @OneToOne
-    @JoinColumn(name = "passport_id")
-    private Passport passport;
+    @Column(name = "passport_series")
+    private String series;
+
+    @Column(name = "passport_issued_by")
+    private String issuedBy;
 
     @NotBlank
     @Column(name = "email")

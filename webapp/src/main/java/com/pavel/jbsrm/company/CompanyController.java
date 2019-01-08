@@ -4,12 +4,10 @@ import com.pavel.jbsrm.company.dto.CompanyDto;
 import com.pavel.jbsrm.company.dto.CreateCompanyDto;
 import com.pavel.jbsrm.company.dto.UpdateCompanyDto;
 import com.pavel.jbsrm.company.service.CompanyService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,12 +16,17 @@ import java.util.List;
 @RequestMapping("/api/companies")
 public class CompanyController {
 
-    @Autowired
     private CompanyService companyService;
 
+    public CompanyController(CompanyService companyService) {
+        this.companyService = companyService;
+    }
+
     @GetMapping("/{id}")
-    public CompanyDto getById(@PathVariable long id) {
-        return companyService.find(id);
+    public ResponseEntity<CompanyDto> getById(@PathVariable long id) {
+        return companyService.find(id)
+                .map(ResponseEntity.ok()::body)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/quickSearch/{searchParams}")
@@ -44,8 +47,10 @@ public class CompanyController {
     }
 
     @PostMapping
-    public CompanyDto create(@RequestBody CreateCompanyDto createDto) {
-        return companyService.create(createDto);
+    public ResponseEntity<CompanyDto> create(@RequestBody CreateCompanyDto createDto) {
+        return companyService.create(createDto)
+                .map(ResponseEntity.ok()::body)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}/delete")

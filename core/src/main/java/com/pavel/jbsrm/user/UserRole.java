@@ -1,5 +1,5 @@
 package com.pavel.jbsrm.user;
 
 public enum UserRole {
-    SYSTEM_ADMIN, ADMIN, DISPATCHER, MANAGER, DRIVER
+    ROLE_SYSTEM_ADMIN, ROLE_ADMIN, ROLE_DISPATCHER, ROLE_MANAGER, ROLE_DRIVER
 }

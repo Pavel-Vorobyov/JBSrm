@@ -1,6 +1,7 @@
 package com.pavel.jbsrm.auth.security;
 
 import com.pavel.jbsrm.auth.model.JwtUser;
+import com.pavel.jbsrm.user.UserRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +27,7 @@ public class JwtTokenParser {
             jwtUser = Optional.of(JwtUser.builder()
                     .name(body.getSubject())
                     .id(Long.parseLong((String) body.get("userId")))
-                    .role((String) body.get("role"))
+                    .userRole(UserRole.valueOf((String) body.get("role")))
                     .build());
         }
         catch (Exception e) {

@@ -1,6 +1,5 @@
 package com.pavel.jbsrm.user.service;
 
-import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
 import com.pavel.jbsrm.user.QUser;
 import com.pavel.jbsrm.user.User;
@@ -11,7 +10,6 @@ import com.pavel.jbsrm.user.dto.UserDto;
 import com.pavel.jbsrm.user.repository.UserRepository;
 import com.querydsl.core.BooleanBuilder;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,40 +25,41 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserRepository userRepository;
 
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Transactional
     @Override
-    public UserDto create(@Valid CreateUserDto createUserDto) {
+    public Optional<UserDto> create(@Valid CreateUserDto createUserDto) {
         User user = ObjectMapperUtills.mapTo(createUserDto, User.class);
-        return ObjectMapperUtills.mapTo(userRepository.save(user), UserDto.class);
+        return Optional.of(ObjectMapperUtills.mapTo(userRepository.save(user), UserDto.class));
     }
 
     @Transactional
     @Override
-    public UserDto update(long id, @Valid UpdateUserDto updateUserDto) throws ResourceNotFoundException {
-//        Optional<User> user = Optional.of(userRepository.getOne(id));
-        Optional<User> user = userRepository.findById(id);
-        user.ifPresent(cl -> ObjectMapperUtills.mapTo(updateUserDto, cl));
-        user.get().getCompany().setId(updateUserDto.getCompanyId());
+    public Optional<UserDto> update(long id, @Valid UpdateUserDto updateUserDto) {
+        User user = userRepository.getOne(id);
+        ObjectMapperUtills.mapTo(updateUserDto, user);
+        user.getCompany().setId(updateUserDto.getCompanyId());
 
-        return ObjectMapperUtills.mapTo(
-                user.map(cl -> userRepository.save(cl)).orElseThrow(ResourceNotFoundException::new), UserDto.class);
+        return Optional.of(ObjectMapperUtills.mapTo(userRepository.save(user), UserDto.class));
     }
 
     @Override
-    public void updateDeleted(long id, boolean deleted) throws ResourceNotFoundException {
-        Optional<User> user = Optional.of(userRepository.getOne(id));
-        user.orElseThrow(ResourceNotFoundException::new)
-                .setDeleted(deleted);
-        userRepository.save(user.get());
+    public void updateDeleted(long id, boolean deleted) {
+        User user = userRepository.getOne(id);
+        user.setDeleted(deleted);
+        userRepository.save(user);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public UserDto find(long id) {
-        return ObjectMapperUtills.mapTo(userRepository.findById(id).orElse(User.builder().build()), UserDto.class);
+    public Optional<UserDto> find(long id) {
+        return Optional.of(ObjectMapperUtills
+                .mapTo(userRepository.findById(id).orElse(User.builder().build()), UserDto.class));
     }
 
     @Transactional(readOnly = true)
@@ -70,7 +69,7 @@ public class UserServiceImpl implements UserService {
         if (!StringUtils.isBlank(searchParams)) {
 
             List<String> list = Arrays.stream(searchParams.trim().split(" "))
-                    .filter(s -> !s.equals("")) //todo !s.equals("") check
+                    .filter(s -> !s.equals(""))
                     .collect(Collectors.toList());
 
             userRepository.findAllByPropsMatch(list)

@@ -1,6 +1,5 @@
 package com.pavel.jbsrm.common;
 
-import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,7 @@ import javax.persistence.EntityNotFoundException;
 @ControllerAdvice
 public class RestResponseStatusExceptionResolver extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = {ResourceNotFoundException.class, EntityNotFoundException.class})
+    @ExceptionHandler(value = {EntityNotFoundException.class})
     protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
 
         String bodyOfResponse = "This should be application specific";

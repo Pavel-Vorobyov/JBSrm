@@ -1,6 +1,5 @@
 package com.pavel.jbsrm.waybill.service;
 
-import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
 import com.pavel.jbsrm.waybill.dto.CreateWaybillDto;
 import com.pavel.jbsrm.waybill.dto.UpdateWaybillDto;
 import com.pavel.jbsrm.waybill.dto.WaybillDto;
@@ -10,17 +9,18 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Validated
 public interface WaybillService {
 
-    WaybillDto create(@Valid CreateWaybillDto createWaybillDto);
+    Optional<WaybillDto> create(@Valid CreateWaybillDto createWaybillDto);
 
-    WaybillDto update(long id, @Valid UpdateWaybillDto updateWaybillDto) throws ResourceNotFoundException;
+    Optional<WaybillDto> update(long id, @Valid UpdateWaybillDto updateWaybillDto);
 
-    void updateDeleted(long id, boolean deleted) throws ResourceNotFoundException;
+    void updateDeleted(long id, boolean deleted);
 
-    WaybillDto find(long id);
+    Optional<WaybillDto> find(long id);
 
     List<WaybillDto> findAllByPropsMatch(String searchParams);
 

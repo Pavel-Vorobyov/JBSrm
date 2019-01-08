@@ -1,6 +1,5 @@
 package com.pavel.jbsrm.deed.service;
 
-import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
 import com.pavel.jbsrm.deed.dto.CreateDeedDto;
 import com.pavel.jbsrm.deed.dto.DeedDto;
 import com.pavel.jbsrm.deed.dto.UpdateDeedDto;
@@ -10,17 +9,18 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Validated
 public interface DeedService {
 
-    DeedDto create(@Valid CreateDeedDto createDeedDto);
+    Optional<DeedDto> create(@Valid CreateDeedDto createDeedDto);
 
-    DeedDto update(long id, @Valid UpdateDeedDto updateDeedDto) throws ResourceNotFoundException;
+    Optional<DeedDto> update(long id, @Valid UpdateDeedDto updateDeedDto);
 
-    void updateDeleted(long id, boolean deleted) throws ResourceNotFoundException;
+    void updateDeleted(long id, boolean deleted);
 
-    DeedDto find(long id);
+    Optional<DeedDto> find(long id);
 
     List<DeedDto> findAllByPropsMatch(String searchParams);
 

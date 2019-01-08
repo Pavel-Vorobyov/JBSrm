@@ -18,7 +18,7 @@ public class JwtTokenGenerator {
         Claims claims = Jwts.claims()
                 .setSubject(jwtUser.getName());
         claims.put("userId", String.valueOf(jwtUser.getId()));
-        claims.put("role", jwtUser.getRole());
+        claims.put("role", jwtUser.getUserRole());
 
         return Jwts.builder()
                 .setClaims(claims)

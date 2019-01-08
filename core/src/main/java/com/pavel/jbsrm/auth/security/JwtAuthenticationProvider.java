@@ -36,7 +36,7 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
         JwtUser jwtUser = tokenParser.validate(token).orElseThrow(RuntimeException::new);
 
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-                .commaSeparatedStringToAuthorityList(jwtUser.getRole());
+                .commaSeparatedStringToAuthorityList(jwtUser.getUserRole().toString());
         return new JwtUserDetails(jwtUser.getName(), jwtUser.getId(),
                 token,
                 grantedAuthorities);

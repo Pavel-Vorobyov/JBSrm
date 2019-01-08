@@ -1,6 +1,5 @@
 package com.pavel.jbsrm.ttn.service;
 
-import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
 import com.pavel.jbsrm.product.product.repository.ProductRepository;
 import com.pavel.jbsrm.ttn.QTtn;
@@ -14,7 +13,6 @@ import com.pavel.jbsrm.ttn.dto.UpdateTtnDto;
 import com.pavel.jbsrm.ttn.repository.TtnRepository;
 import com.querydsl.core.BooleanBuilder;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -34,7 +32,6 @@ public class TtnServiceImpl implements TtnService {
     private TtnRepository ttnRepository;
     private ProductRepository productRepository;
 
-    @Autowired
     public TtnServiceImpl(TtnRepository ttnRepository, ProductRepository productRepository) {
         this.ttnRepository = ttnRepository;
         this.productRepository = productRepository;
@@ -42,37 +39,36 @@ public class TtnServiceImpl implements TtnService {
 
     @Transactional
     @Override
-    public TtnDto create(@Valid CreateTtnDto createTtnDto) {
+    public Optional<TtnDto> create(@Valid CreateTtnDto createTtnDto) {
         Ttn ttn = ObjectMapperUtills.mapTo(createTtnDto, Ttn.class);
         ttn.setCreateAt(LocalDate.now());
         ttn.setCreatedBy(createTtnDto.getDriver());
         ttn.setTtnState(TtnState.ACCEPTED);
-        return ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class);
+        return Optional.of(ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class));
     }
 
     @Transactional
     @Override
-    public TtnDto update(long id, @Valid UpdateTtnDto updateTtnDto) throws ResourceNotFoundException {
-        Optional<Ttn> ttn = Optional.of(ttnRepository.getOne(id));
-        ttn.ifPresent(t -> ObjectMapperUtills.mapTo(updateTtnDto, t));
+    public Optional<TtnDto> update(long id, @Valid UpdateTtnDto updateTtnDto) {
+        Ttn ttn = ttnRepository.getOne(id);
+        ObjectMapperUtills.mapTo(updateTtnDto, ttn);
 
-        return ObjectMapperUtills.mapTo(
-                ttn.map(t -> ttnRepository.save(t)).orElseThrow(ResourceNotFoundException::new), TtnDto.class);
+        return Optional.of(ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class));
     }
 
     @Transactional
     @Override
-    public void updateDeleted(long id, boolean deleted) throws ResourceNotFoundException {
-        Optional<Ttn> ttn = Optional.of(ttnRepository.getOne(id));
-        ttn.orElseThrow(ResourceNotFoundException::new)
-                .setDeleted(deleted);
-        ttnRepository.save(ttn.get());
+    public void updateDeleted(long id, boolean deleted) {
+        Ttn ttn = ttnRepository.getOne(id);
+        ttn.setDeleted(deleted);
+        ttnRepository.save(ttn);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public TtnDto find(long id) {
-        return ObjectMapperUtills.mapTo(ttnRepository.findById(id).orElse(Ttn.builder().build()), TtnDto.class);
+    public Optional<TtnDto> find(long id) {
+        return Optional.of(ObjectMapperUtills
+                .mapTo(ttnRepository.findById(id).orElse(Ttn.builder().build()), TtnDto.class));
     }
 
     @Transactional(readOnly = true)
@@ -82,7 +78,7 @@ public class TtnServiceImpl implements TtnService {
         if (StringUtils.isNotBlank(searchParams)) {
 
             List<String> list = Arrays.stream(searchParams.trim().split(" "))
-                    .filter(s -> !s.equals("")) //todo !s.equals("") check
+                    .filter(s -> !s.equals(""))
                     .collect(Collectors.toList());
 
             result = ttnRepository.findAllByPropsMatch(list);

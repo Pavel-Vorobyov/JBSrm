@@ -21,13 +21,8 @@ public class WebConfig implements WebMvcConfigurer {
                         "classpath:/static/");
     }
 
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowedOrigins("*")
-                .allowedHeaders("*")
-                .allowCredentials(false);
+        registry.addMapping("/**").allowedOrigins("http://localhost:3000");
     }
 }

@@ -1,6 +1,5 @@
 package com.pavel.jbsrm.ttn.service;
 
-import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
 import com.pavel.jbsrm.ttn.TtnFilter;
 import com.pavel.jbsrm.ttn.dto.CreateTtnDto;
 import com.pavel.jbsrm.ttn.dto.TtnDto;
@@ -12,17 +11,18 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Validated
 public interface TtnService {
 
-    TtnDto create(@Valid CreateTtnDto createTtnDto);
+    Optional<TtnDto> create(@Valid CreateTtnDto createTtnDto);
 
-    TtnDto update(long id, @Valid UpdateTtnDto updateTtnDto) throws ResourceNotFoundException;
+    Optional<TtnDto> update(long id, @Valid UpdateTtnDto updateTtnDto);
 
-    void updateDeleted(long id, boolean deleted) throws ResourceNotFoundException;
+    void updateDeleted(long id, boolean deleted);
 
-    TtnDto find(long id);
+    Optional<TtnDto> find(long id);
 
     List<TtnQuickSearchDto> findAllByPropsMatch(String searchParams);
 

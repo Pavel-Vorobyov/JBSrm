@@ -46,10 +46,9 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
 
     @Override
     public void updateDeleted(long id, boolean deleted) {
-        Optional<ProductDetails> product = Optional.of(productDetailsRepository.getOne(id));
-        product.orElseThrow(EntityNotFoundException::new)
-                .setDeleted(deleted);
-        productDetailsRepository.save(product.get());
+        ProductDetails product = productDetailsRepository.getOne(id);
+        product.setDeleted(deleted);
+        productDetailsRepository.save(product);
     }
 
     @Override

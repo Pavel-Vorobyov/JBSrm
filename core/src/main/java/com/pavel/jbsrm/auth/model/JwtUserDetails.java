@@ -1,11 +1,13 @@
 package com.pavel.jbsrm.auth.model;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
+@Data
 public class JwtUserDetails implements UserDetails {
 
     private String userName;
@@ -18,7 +20,7 @@ public class JwtUserDetails implements UserDetails {
 
         this.userName = userName;
         this.id = id;
-        this.token= token;
+        this.token = token;
         this.authorities = grantedAuthorities;
     }
 
@@ -56,19 +58,4 @@ public class JwtUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
 }

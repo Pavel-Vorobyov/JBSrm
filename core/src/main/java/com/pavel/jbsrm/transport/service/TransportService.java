@@ -1,6 +1,5 @@
 package com.pavel.jbsrm.transport.service;
 
-import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
 import com.pavel.jbsrm.transport.dto.CreateTransportDto;
 import com.pavel.jbsrm.transport.dto.TransportDto;
 import com.pavel.jbsrm.transport.dto.UpdateTransportDto;
@@ -10,17 +9,18 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Validated
 public interface TransportService {
 
-    TransportDto create(@Valid CreateTransportDto createTransportDto);
+    Optional<TransportDto> create(@Valid CreateTransportDto createTransportDto);
 
-    TransportDto update(long id, @Valid UpdateTransportDto updateTransportDto);
+    Optional<TransportDto> update(long id, @Valid UpdateTransportDto updateTransportDto);
 
     void updateDeleted(long id, boolean deleted);
 
-    TransportDto find(long id);
+    Optional<TransportDto> find(long id);
 
     List<TransportDto> findAllByPropsMatch(String searchParams);
 

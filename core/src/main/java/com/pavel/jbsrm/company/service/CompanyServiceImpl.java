@@ -1,6 +1,5 @@
 package com.pavel.jbsrm.company.service;
 
-import com.pavel.jbsrm.common.exception.ResourceNotFoundException;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
 import com.pavel.jbsrm.company.Company;
 import com.pavel.jbsrm.company.dto.CompanyDto;
@@ -8,7 +7,6 @@ import com.pavel.jbsrm.company.dto.CreateCompanyDto;
 import com.pavel.jbsrm.company.dto.UpdateCompanyDto;
 import com.pavel.jbsrm.company.repository.CompanyRepository;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -24,38 +22,40 @@ import java.util.stream.Collectors;
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
-    @Autowired
     private CompanyRepository companyRepository;
 
+    public CompanyServiceImpl(CompanyRepository companyRepository) {
+        this.companyRepository = companyRepository;
+    }
+
     @Transactional
     @Override
-    public CompanyDto create(@Valid CreateCompanyDto createCompanyDto) {
+    public Optional<CompanyDto> create(@Valid CreateCompanyDto createCompanyDto) {
         Company company = ObjectMapperUtills.mapTo(createCompanyDto, Company.class);
-        return ObjectMapperUtills.mapTo(companyRepository.save(company), CompanyDto.class);
+        return Optional.of(ObjectMapperUtills.mapTo(companyRepository.save(company), CompanyDto.class));
     }
 
     @Transactional
     @Override
-    public CompanyDto update(long id, @Valid UpdateCompanyDto updateCompanyDto) throws ResourceNotFoundException {
-        Optional<Company> company = Optional.of(companyRepository.getOne(id));
-        company.ifPresent(cp -> ObjectMapperUtills.mapTo(updateCompanyDto, cp));
+    public Optional<CompanyDto> update(long id, @Valid UpdateCompanyDto updateCompanyDto) {
+        Company company = companyRepository.getOne(id);
+        ObjectMapperUtills.mapTo(updateCompanyDto, company);
 
-        return ObjectMapperUtills.mapTo(
-                company.map(cp -> companyRepository.save(cp)).orElseThrow(ResourceNotFoundException::new), CompanyDto.class);
+        return Optional.of(ObjectMapperUtills.mapTo(companyRepository.save(company), CompanyDto.class));
     }
 
     @Override
-    public void updateDeleted(long id, boolean deleted) throws ResourceNotFoundException {
-        Optional<Company> company = Optional.of(companyRepository.getOne(id));
-        company.orElseThrow(ResourceNotFoundException::new)
-                .setDeleted(deleted);
-        companyRepository.save(company.get());
+    public void updateDeleted(long id, boolean deleted) {
+        Company company = companyRepository.getOne(id);
+        company.setDeleted(deleted);
+        companyRepository.save(company);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public CompanyDto find(long id) {
-        return ObjectMapperUtills.mapTo(companyRepository.findById(id).orElse(Company.builder().build()), CompanyDto.class);
+    public Optional<CompanyDto> find(long id) {
+        return Optional.of(ObjectMapperUtills
+                .mapTo(companyRepository.findById(id).orElse(Company.builder().build()), CompanyDto.class));
     }
 
     @Transactional(readOnly = true)
@@ -65,7 +65,7 @@ public class CompanyServiceImpl implements CompanyService {
         if (!StringUtils.isBlank(searchParams)) {
 
             List<String> list = Arrays.stream(searchParams.trim().split(" "))
-                    .filter(s -> !s.equals("")) //todo !s.equals("") check
+                    .filter(s -> !s.equals(""))
                     .collect(Collectors.toList());
 
             companyRepository.findAllByPropsMatch(list)
