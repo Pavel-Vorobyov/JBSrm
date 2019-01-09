@@ -76,7 +76,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<CompanyDto> findAllPageByDeleted(boolean deleted, Pageable pageable) {
+    public Page<CompanyDto> findAllPageByFilter(boolean deleted, Pageable pageable) {
         return companyRepository.findByDeleted(deleted, pageable)
                 .map(company -> ObjectMapperUtills.mapTo(company, CompanyDto.class));
     }

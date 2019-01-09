@@ -12,6 +12,7 @@ import com.querydsl.core.BooleanBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,15 +27,18 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
+    private JavaMailSender mailSender;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, JavaMailSender mailSender) {
         this.userRepository = userRepository;
+        this.mailSender = mailSender;
     }
 
     @Transactional
     @Override
     public Optional<UserDto> create(@Valid CreateUserDto createUserDto) {
         User user = ObjectMapperUtills.mapTo(createUserDto, User.class);
+
         return Optional.of(ObjectMapperUtills.mapTo(userRepository.save(user), UserDto.class));
     }
 
@@ -80,7 +84,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<UserDto> findAllPageByDeleted(UserFilter filter, Pageable pageable) {
+    public Page<UserDto> findAllPageByFilter(UserFilter filter, Pageable pageable) {
         return userRepository.findAll(buildFilter(filter), pageable)
                 .map(user -> ObjectMapperUtills.mapTo(user, UserDto.class));
     }

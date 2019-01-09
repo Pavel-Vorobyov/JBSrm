@@ -26,7 +26,7 @@ public class Company {
     private String title;
 
     @NotBlank
-    @Column(name = "email")
+    @Column(name = "mail")
     private String email;
 
     @NotBlank

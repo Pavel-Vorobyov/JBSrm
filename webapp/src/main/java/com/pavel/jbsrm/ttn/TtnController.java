@@ -40,7 +40,7 @@ public class TtnController {
     @GetMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('DISPATCHER') or hasRole('MANAGER')")
     public Page<TtnDto> findAll(TtnFilter ttnFilter, Pageable pageable) {
-        return ttnService.findAllPageByDeleted(ttnFilter, pageable);
+        return ttnService.findAllPageByFilter(ttnFilter, pageable);
     }
 
     @PutMapping("/{id}")

@@ -41,7 +41,7 @@ public class DeedController {
     @PreAuthorize("hasRole('ADMIN') or hasRole('DRIVER')")
     public Page<DeedDto> findAll(@Nullable @RequestParam Boolean deleted, Pageable pageable) {
         deleted = deleted == null ? false : deleted;
-        return deedService.findAllPageByDeleted(deleted, pageable);
+        return deedService.findAllPageByFilter(deleted, pageable);
     }
 
     @PutMapping("/{id}")

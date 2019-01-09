@@ -26,5 +26,8 @@ public interface TtnService {
 
     List<TtnQuickSearchDto> findAllByPropsMatch(String searchParams);
 
-    Page<TtnDto> findAllPageByDeleted(TtnFilter filter, Pageable pageable);
+    Page<TtnDto> findAllPageByFilter(TtnFilter filter, Pageable pageable);
+
+
+
 }

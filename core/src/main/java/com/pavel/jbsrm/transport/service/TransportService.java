@@ -24,5 +24,5 @@ public interface TransportService {
 
     List<TransportDto> findAllByPropsMatch(String searchParams);
 
-    Page<TransportDto> findAllPageByDeleted(boolean deleted, Pageable pageable);
+    Page<TransportDto> findAllPageByFilter(boolean deleted, Pageable pageable);
 }

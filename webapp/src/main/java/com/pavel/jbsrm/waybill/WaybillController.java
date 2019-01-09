@@ -41,7 +41,7 @@ public class WaybillController {
     @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
     public Page<WaybillDto> findAll(@Nullable @RequestParam Boolean deleted, Pageable pageable) {
         deleted = deleted == null ? false : deleted;
-        return waybillService.findAllPageByDeleted(deleted, pageable);
+        return waybillService.findAllPageByFilter(deleted, pageable);
     }
 
     @PutMapping("/{id}")

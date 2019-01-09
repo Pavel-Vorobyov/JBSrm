@@ -32,3 +32,8 @@ server:
 
 jbsrm.app.jwtSecret: jwtSecretKey
 jbsrm.app.jwtExpiration: 86400
+
+jbsrm.mail-sender:
+  host: host
+  username: jbsrm.mail@gmail.com
+  password: 123qwe234

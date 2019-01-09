@@ -24,5 +24,5 @@ public interface DeedService {
 
     List<DeedDto> findAllByPropsMatch(String searchParams);
 
-    Page<DeedDto> findAllPageByDeleted(boolean deleted, Pageable pageable);
+    Page<DeedDto> findAllPageByFilter(boolean deleted, Pageable pageable);
 }

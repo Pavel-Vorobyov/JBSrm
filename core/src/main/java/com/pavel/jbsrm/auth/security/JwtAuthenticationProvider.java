@@ -17,8 +17,11 @@ import java.util.List;
 @Component
 public class JwtAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
-    @Autowired
     private JwtTokenParser tokenParser;
+
+    public JwtAuthenticationProvider(JwtTokenParser tokenParser) {
+        this.tokenParser = tokenParser;
+    }
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails,

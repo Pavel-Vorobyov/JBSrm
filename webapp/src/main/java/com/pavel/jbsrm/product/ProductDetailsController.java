@@ -39,7 +39,7 @@ public class ProductDetailsController {
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
     public Page<ProductDetailsDto> findAll(ProductDetailsFilter filter, Pageable pageable) {
-        return productDetailsService.findAllPageByDeleted(filter, pageable);
+        return productDetailsService.findAllPageByFilter(filter, pageable);
     }
 
     @PutMapping("/{id}")

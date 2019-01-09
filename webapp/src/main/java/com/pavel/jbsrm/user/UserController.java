@@ -39,7 +39,7 @@ public class UserController {
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
     public Page<UserDto> findAll(UserFilter filter, Pageable pageable) {
-        return userService.findAllPageByDeleted(filter, pageable); //todo pageable supported supplies
+        return userService.findAllPageByFilter(filter, pageable); //todo pageable supported supplies
     }
 
     @PutMapping("/{id}")

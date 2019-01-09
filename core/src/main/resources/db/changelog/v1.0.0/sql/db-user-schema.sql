@@ -44,7 +44,7 @@ INSERT INTO "user" (login, password, name, surname, user_gender, birthday, passp
 		) AS birthday,
 		'series' || num AS passport_series,
 		'issued_by' || num AS passport_issued_by,
-		'email' || num || '@' || (
+		'mail' || num || '@' || (
 			CASE (RANDOM() * 2)::INT
 				WHEN 0 THEN 'gmail.com'
 				WHEN 1 THEN 'mail.ru'

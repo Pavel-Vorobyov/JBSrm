@@ -69,7 +69,7 @@ public class TransportServiceImpl implements TransportService {
     }
 
     @Override
-    public Page<TransportDto> findAllPageByDeleted(boolean deleted, Pageable pageable) {
+    public Page<TransportDto> findAllPageByFilter(boolean deleted, Pageable pageable) {
         return transportRepository.findByDeleted(deleted, pageable)
                 .map(transport -> ObjectMapperUtills.mapTo(transport, TransportDto.class));
     }

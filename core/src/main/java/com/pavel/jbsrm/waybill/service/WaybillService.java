@@ -24,5 +24,5 @@ public interface WaybillService {
 
     List<WaybillDto> findAllByPropsMatch(String searchParams);
 
-    Page<WaybillDto> findAllPageByDeleted(boolean deleted, Pageable pageable);
+    Page<WaybillDto> findAllPageByFilter(boolean deleted, Pageable pageable);
 }

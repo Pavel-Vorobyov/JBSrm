@@ -24,5 +24,5 @@ public interface CompanyService {
 
     List<CompanyDto> findAllByPropsMatch(String searchParams);
 
-    Page<CompanyDto> findAllPageByDeleted(boolean deleted, Pageable pageable);
+    Page<CompanyDto> findAllPageByFilter(boolean deleted, Pageable pageable);
 }

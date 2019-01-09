@@ -1,7 +1,7 @@
 package com.pavel.jbsrm.ttn.service;
 
+import com.pavel.jbsrm.auth.model.JwtUserDetails;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
-import com.pavel.jbsrm.product.product.repository.ProductRepository;
 import com.pavel.jbsrm.ttn.QTtn;
 import com.pavel.jbsrm.ttn.Ttn;
 import com.pavel.jbsrm.ttn.TtnFilter;
@@ -11,15 +11,16 @@ import com.pavel.jbsrm.ttn.dto.TtnDto;
 import com.pavel.jbsrm.ttn.dto.TtnQuickSearchDto;
 import com.pavel.jbsrm.ttn.dto.UpdateTtnDto;
 import com.pavel.jbsrm.ttn.repository.TtnRepository;
+import com.pavel.jbsrm.user.repository.UserRepository;
 import com.querydsl.core.BooleanBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,19 +31,18 @@ import java.util.stream.Collectors;
 public class TtnServiceImpl implements TtnService {
 
     private TtnRepository ttnRepository;
-    private ProductRepository productRepository;
+    private UserRepository userRepository;
 
-    public TtnServiceImpl(TtnRepository ttnRepository, ProductRepository productRepository) {
+    public TtnServiceImpl(TtnRepository ttnRepository, UserRepository userRepository) {
         this.ttnRepository = ttnRepository;
-        this.productRepository = productRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional
     @Override
     public Optional<TtnDto> create(@Valid CreateTtnDto createTtnDto) {
         Ttn ttn = ObjectMapperUtills.mapTo(createTtnDto, Ttn.class);
-        ttn.setCreateAt(LocalDate.now());
-        ttn.setCreatedBy(createTtnDto.getDriver());
+        ttn.setCreatedBy(userRepository.getOne(((JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
         ttn.setTtnState(TtnState.ACCEPTED);
         return Optional.of(ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class));
     }
@@ -88,7 +88,7 @@ public class TtnServiceImpl implements TtnService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<TtnDto> findAllPageByDeleted(TtnFilter filter, Pageable pageable) {
+    public Page<TtnDto> findAllPageByFilter(TtnFilter filter, Pageable pageable) {
         return ttnRepository.findAll(buildFilter(filter), pageable)
                 .map(ttn -> ObjectMapperUtills.mapTo(ttn, TtnDto.class));
     }

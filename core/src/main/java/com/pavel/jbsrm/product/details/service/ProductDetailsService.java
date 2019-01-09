@@ -25,5 +25,5 @@ public interface ProductDetailsService {
 
     List<ProductDetailsDto> findAllByPropsMatch(String searchParams);
 
-    Page<ProductDetailsDto> findAllPageByDeleted(ProductDetailsFilter filter, Pageable pageable);
+    Page<ProductDetailsDto> findAllPageByFilter(ProductDetailsFilter filter, Pageable pageable);
 }

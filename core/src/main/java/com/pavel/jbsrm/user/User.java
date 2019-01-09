@@ -27,8 +27,8 @@ public class User implements Serializable {
     private long id;
 
     @NotBlank
-    @Column(name = "login")
-    private String login;
+    @Column(name = "mail")
+    private String email;
 
     @NotBlank
     @Column(name = "password")
@@ -54,10 +54,6 @@ public class User implements Serializable {
 
     @Column(name = "passport_issued_by")
     private String issuedBy;
-
-    @NotBlank
-    @Column(name = "email")
-    private String email;
 
     @NotBlank
     @Column(name = "phone")

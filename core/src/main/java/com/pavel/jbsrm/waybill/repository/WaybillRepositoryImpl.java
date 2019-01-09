@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WaybillRepositoryImpl extends QuerydslRepositorySupport implements WaybillRepositoryCustom {
-    private String queryStart = "select id, ttn_idc, email, phone, client_role, is_deleted from client where as_tsvector(title, email, phone) @@ to_tsquery('";
+    private String queryStart = "select id, ttn_idc, mail, phone, client_role, is_deleted from client where as_tsvector(title, mail, phone) @@ to_tsquery('";
     private String queryEnd = "') LIMIT (10);"; //todo update select query to Waybill.class
 
     @PersistenceContext

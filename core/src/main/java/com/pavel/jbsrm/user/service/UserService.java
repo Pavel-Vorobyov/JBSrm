@@ -25,5 +25,5 @@ public interface UserService {
 
     List<UserDto> findAllByPropsMatch(String searchParams);
 
-    Page<UserDto> findAllPageByDeleted(UserFilter filter, Pageable pageable);
+    Page<UserDto> findAllPageByFilter(UserFilter filter, Pageable pageable);
 }

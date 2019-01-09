@@ -41,7 +41,7 @@ public class TransportController {
     @PreAuthorize("hasRole('ADMIN')")
     public Page<TransportDto> findAll(@Nullable @RequestParam Boolean deleted, Pageable pageable) {
         deleted = deleted == null ? false : deleted;
-        return userService.findAllPageByDeleted(deleted, pageable);
+        return userService.findAllPageByFilter(deleted, pageable);
     }
 
     @PutMapping("/{id}")

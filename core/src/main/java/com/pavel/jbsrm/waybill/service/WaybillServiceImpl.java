@@ -86,7 +86,7 @@ public class WaybillServiceImpl implements WaybillService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<WaybillDto> findAllPageByDeleted(boolean deleted, Pageable pageable) {
+    public Page<WaybillDto> findAllPageByFilter(boolean deleted, Pageable pageable) {
         return waybillRepository.findByDeleted(deleted, pageable)
                 .map(waybill -> ObjectMapperUtills.mapTo(waybill, WaybillDto.class));
     }

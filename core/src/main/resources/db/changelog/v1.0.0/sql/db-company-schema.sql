@@ -28,7 +28,7 @@ CREATE INDEX IF NOT EXISTS idx_fts_company ON company
 INSERT INTO company (title, email, phone, deleted)
 	SELECT
 		'title' || num AS name,
-		'email' || num || '@' || (
+		'mail' || num || '@' || (
 			CASE (RANDOM() * 2)::INT
 				WHEN 0 THEN 'gmail.com'
 				WHEN 1 THEN 'mail.ru'

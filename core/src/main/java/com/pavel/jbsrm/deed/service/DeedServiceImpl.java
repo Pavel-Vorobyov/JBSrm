@@ -75,7 +75,7 @@ public class DeedServiceImpl implements DeedService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<DeedDto> findAllPageByDeleted(boolean deleted, Pageable pageable) {
+    public Page<DeedDto> findAllPageByFilter(boolean deleted, Pageable pageable) {
         return deedRepository.findByDeleted(deleted, pageable)
                 .map(deed -> ObjectMapperUtills.mapTo(deed, DeedDto.class));
     }
