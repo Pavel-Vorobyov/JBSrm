@@ -23,7 +23,6 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UserDto> getById(@PathVariable long id) {
         return userService.find(id)
                 .map(ResponseEntity::ok)
@@ -31,19 +30,16 @@ public class UserController {
     }
 
     @GetMapping("/quickSearch/{searchParams}")
-    @PreAuthorize("hasRole('ADMIN')")
     public List<UserDto> findAllByPropMatch(@PathVariable String searchParams) {
         return userService.findAllByPropsMatch(searchParams);
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
     public Page<UserDto> findAll(UserFilter filter, Pageable pageable) {
-        return userService.findAllPageByFilter(filter, pageable); //todo pageable supported supplies
+        return userService.findAllPageByFilter(filter, pageable);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> update(@PathVariable long id, @RequestBody UpdateUserDto updateDto) {
         userService.update(id, updateDto);
         return ResponseEntity.ok().build();
@@ -51,10 +47,8 @@ public class UserController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<UserDto> create(@RequestBody CreateUserDto createDto) {
-        return userService.create(createDto)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public UserDto create(@RequestBody CreateUserDto createDto) {
+        return userService.create(createDto);
     }
 
     @PutMapping("/{id}/delete")

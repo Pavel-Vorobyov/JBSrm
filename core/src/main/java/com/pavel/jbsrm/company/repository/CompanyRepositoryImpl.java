@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class CompanyRepositoryImpl extends QuerydslRepositorySupport implements CompanyRepositoryCustom {
     private String queryStart = "select id, title, mail, phone, deleted from company where as_tsvector(title, mail, phone) @@ to_tsquery('";
-    private String queryEnd = "') LIMIT (10);"; //todo update select query to Company.class
+    private String queryEnd = "') LIMIT (10);";
 
     @PersistenceContext
     private EntityManager entityManager;

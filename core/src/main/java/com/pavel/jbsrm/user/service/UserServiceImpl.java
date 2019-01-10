@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public Optional<UserDto> create(@Valid CreateUserDto createUserDto) {
+    public UserDto create(@Valid CreateUserDto createUserDto) {
         User user = userRepository.save(ObjectMapperUtills.mapTo(createUserDto, User.class));
         linkManager.getLink(user.getId())
                 .ifPresent(link -> mailSender.sendMail(MailTemplate.builder()
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
                         .text(linkManager.getLink(user.getId()).orElse("Something goes bad..."))
                         .build()));
 
-        return Optional.of(ObjectMapperUtills.mapTo(user, UserDto.class));
+        return ObjectMapperUtills.mapTo(user, UserDto.class);
     }
 
     @Transactional

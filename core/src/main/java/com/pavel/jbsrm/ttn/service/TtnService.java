@@ -16,7 +16,7 @@ import java.util.Optional;
 @Validated
 public interface TtnService {
 
-    Optional<TtnDto> create(@Valid CreateTtnDto createTtnDto);
+    TtnDto create(@Valid CreateTtnDto createTtnDto);
 
     Optional<TtnDto> update(long id, @Valid UpdateTtnDto updateTtnDto);
 

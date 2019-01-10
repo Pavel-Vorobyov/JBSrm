@@ -15,7 +15,7 @@ import java.util.Optional;
 @Validated
 public interface UserService {
 
-    Optional<UserDto> create(@Valid CreateUserDto createUserDto);
+    UserDto create(@Valid CreateUserDto createUserDto);
 
     Optional<UserDto> update(long id, @Valid UpdateUserDto updateUserDto);
 

@@ -14,7 +14,7 @@ import java.util.Optional;
 @Validated
 public interface CompanyService {
 
-    Optional<CompanyDto> create(@Valid CreateCompanyDto createCompanyDto);
+    CompanyDto create(@Valid CreateCompanyDto createCompanyDto);
 
     Optional<CompanyDto> update(long id, @Valid UpdateCompanyDto updateCompanyDto);
 

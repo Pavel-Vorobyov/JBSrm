@@ -51,7 +51,7 @@ public class ProductDetailsController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public Optional<ProductDetailsDto> create(@RequestBody CreateProductDetailsDto createDto) {
+    public ProductDetailsDto create(@RequestBody CreateProductDetailsDto createDto) {
         return productDetailsService.create(createDto);
     }
 

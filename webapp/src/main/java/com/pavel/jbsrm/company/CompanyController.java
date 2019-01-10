@@ -47,10 +47,8 @@ public class CompanyController {
     }
 
     @PostMapping
-    public ResponseEntity<CompanyDto> create(@RequestBody CreateCompanyDto createDto) {
-        return companyService.create(createDto)
-                .map(ResponseEntity.ok()::body)
-                .orElse(ResponseEntity.notFound().build());
+    public CompanyDto create(@RequestBody CreateCompanyDto createDto) {
+        return companyService.create(createDto);
     }
 
     @PutMapping("/{id}/delete")

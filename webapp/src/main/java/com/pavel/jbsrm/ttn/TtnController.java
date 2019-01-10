@@ -52,10 +52,8 @@ public class TtnController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('DISPATCHER') or hasRole('MANAGER')")
-    public ResponseEntity<TtnDto> create(@RequestBody CreateTtnDto createDto) {
-        return ttnService.create(createDto)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public TtnDto create(@RequestBody CreateTtnDto createDto) {
+        return ttnService.create(createDto);
     }
 
     @PutMapping("/{id}/delete")

@@ -16,7 +16,7 @@ import java.util.Optional;
 @Validated
 public interface ProductService {
 
-    Optional<ProductDto> create(@Valid CreateProductDto createProductDto);
+    ProductDto create(@Valid CreateProductDto createProductDto);
 
     Optional<ProductDto> update(long id, @Valid UpdateProductDto updateProductDto);
 

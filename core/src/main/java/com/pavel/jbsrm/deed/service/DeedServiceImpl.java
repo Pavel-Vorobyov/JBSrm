@@ -30,9 +30,9 @@ public class DeedServiceImpl implements DeedService {
 
     @Transactional
     @Override
-    public Optional<DeedDto> create(@Valid CreateDeedDto createDeedDto) {
+    public DeedDto create(@Valid CreateDeedDto createDeedDto) {
         Deed deed = ObjectMapperUtills.mapTo(createDeedDto, Deed.class);
-        return Optional.of(ObjectMapperUtills.mapTo(deedRepository.save(deed), DeedDto.class));
+        return ObjectMapperUtills.mapTo(deedRepository.save(deed), DeedDto.class);
     }
 
     @Transactional

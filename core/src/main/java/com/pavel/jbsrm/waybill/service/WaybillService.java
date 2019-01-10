@@ -14,7 +14,7 @@ import java.util.Optional;
 @Validated
 public interface WaybillService {
 
-    Optional<WaybillDto> create(@Valid CreateWaybillDto createWaybillDto);
+    WaybillDto create(@Valid CreateWaybillDto createWaybillDto);
 
     Optional<WaybillDto> update(long id, @Valid UpdateWaybillDto updateWaybillDto);
 

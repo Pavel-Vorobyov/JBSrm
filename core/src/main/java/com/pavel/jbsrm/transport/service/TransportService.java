@@ -14,7 +14,7 @@ import java.util.Optional;
 @Validated
 public interface TransportService {
 
-    Optional<TransportDto> create(@Valid CreateTransportDto createTransportDto);
+    TransportDto create(@Valid CreateTransportDto createTransportDto);
 
     Optional<TransportDto> update(long id, @Valid UpdateTransportDto updateTransportDto);
 

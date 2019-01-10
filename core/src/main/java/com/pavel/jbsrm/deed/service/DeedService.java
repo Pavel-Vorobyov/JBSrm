@@ -14,7 +14,7 @@ import java.util.Optional;
 @Validated
 public interface DeedService {
 
-    Optional<DeedDto> create(@Valid CreateDeedDto createDeedDto);
+    DeedDto create(@Valid CreateDeedDto createDeedDto);
 
     Optional<DeedDto> update(long id, @Valid UpdateDeedDto updateDeedDto);
 

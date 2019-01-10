@@ -53,10 +53,8 @@ public class WaybillController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
-    public ResponseEntity<WaybillDto> create(@RequestBody CreateWaybillDto createDto) {
-        return waybillService.create(createDto)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public WaybillDto create(@RequestBody CreateWaybillDto createDto) {
+        return waybillService.create(createDto);
     }
 
     @PutMapping("/{id}/delete")

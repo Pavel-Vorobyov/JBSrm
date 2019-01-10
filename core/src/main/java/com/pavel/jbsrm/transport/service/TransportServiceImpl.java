@@ -28,9 +28,9 @@ public class TransportServiceImpl implements TransportService {
     }
 
     @Override
-    public Optional<TransportDto> create(@Valid CreateTransportDto createTransportDto) {
+    public TransportDto create(@Valid CreateTransportDto createTransportDto) {
         Transport transport = ObjectMapperUtills.mapTo(createTransportDto, Transport.class);
-        return Optional.of(ObjectMapperUtills.mapTo(transportRepository.save(transport), TransportDto.class));
+        return ObjectMapperUtills.mapTo(transportRepository.save(transport), TransportDto.class);
     }
 
     @Override

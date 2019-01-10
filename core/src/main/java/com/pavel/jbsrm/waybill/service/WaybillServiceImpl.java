@@ -38,12 +38,12 @@ public class WaybillServiceImpl implements WaybillService {
 
     @Transactional
     @Override
-    public Optional<WaybillDto> create(@Valid CreateWaybillDto createWaybillDto) {
+    public WaybillDto create(@Valid CreateWaybillDto createWaybillDto) {
         Waybill waybill = ObjectMapperUtills.mapTo(createWaybillDto, Waybill.class);
         waybill.getCheckPoints().forEach(cp -> cp.setCheckPointStatus(CheckPointStatus.NOT_PASSED));
         waybill.getTtn().setTtnState(TtnState.TRANSPORTATION_STARTED);
 
-        return Optional.of(ObjectMapperUtills.mapTo(waybillRepository.save(waybill), WaybillDto.class));
+        return ObjectMapperUtills.mapTo(waybillRepository.save(waybill), WaybillDto.class);
     }
 
     @Transactional

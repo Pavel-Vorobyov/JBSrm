@@ -40,11 +40,11 @@ public class TtnServiceImpl implements TtnService {
 
     @Transactional
     @Override
-    public Optional<TtnDto> create(@Valid CreateTtnDto createTtnDto) {
+    public TtnDto create(@Valid CreateTtnDto createTtnDto) {
         Ttn ttn = ObjectMapperUtills.mapTo(createTtnDto, Ttn.class);
         ttn.setCreatedBy(userRepository.getOne(((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
         ttn.setTtnState(TtnState.ACCEPTED);
-        return Optional.of(ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class));
+        return ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class);
     }
 
     @Transactional

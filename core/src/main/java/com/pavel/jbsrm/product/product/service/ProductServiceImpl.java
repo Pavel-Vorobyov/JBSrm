@@ -35,10 +35,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<ProductDto> create(@Valid CreateProductDto createProductDto) {
+    public ProductDto create(@Valid CreateProductDto createProductDto) {
         Product product = ObjectMapperUtills.mapTo(createProductDto, Product.class);
         product.setProductState(ProductState.ACCEPTED);
-        return Optional.of(ObjectMapperUtills.mapTo(productRepository.save(product), ProductDto.class));
+        return ObjectMapperUtills.mapTo(productRepository.save(product), ProductDto.class);
     }
 
     @Override

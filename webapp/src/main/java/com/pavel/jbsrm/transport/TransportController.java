@@ -53,10 +53,8 @@ public class TransportController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<TransportDto> create(@RequestBody CreateTransportDto createDto) {
-        return userService.create(createDto)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public TransportDto create(@RequestBody CreateTransportDto createDto) {
+        return userService.create(createDto);
     }
 
     @PutMapping("/{id}/delete")

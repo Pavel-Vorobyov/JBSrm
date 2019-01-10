@@ -30,9 +30,9 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Transactional
     @Override
-    public Optional<CompanyDto> create(@Valid CreateCompanyDto createCompanyDto) {
+    public CompanyDto create(@Valid CreateCompanyDto createCompanyDto) {
         Company company = ObjectMapperUtills.mapTo(createCompanyDto, Company.class);
-        return Optional.of(ObjectMapperUtills.mapTo(companyRepository.save(company), CompanyDto.class));
+        return ObjectMapperUtills.mapTo(companyRepository.save(company), CompanyDto.class);
     }
 
     @Transactional

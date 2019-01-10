@@ -31,9 +31,9 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
 
 
     @Override
-    public Optional<ProductDetailsDto> create(@Valid CreateProductDetailsDto createProductDto) {
+    public ProductDetailsDto create(@Valid CreateProductDetailsDto createProductDto) {
         ProductDetails product = ObjectMapperUtills.mapTo(createProductDto, ProductDetails.class);
-        return Optional.of(ObjectMapperUtills.mapTo(productDetailsRepository.save(product), ProductDetailsDto.class));
+        return ObjectMapperUtills.mapTo(productDetailsRepository.save(product), ProductDetailsDto.class);
     }
 
     @Override
