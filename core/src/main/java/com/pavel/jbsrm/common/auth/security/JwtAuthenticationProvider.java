@@ -1,9 +1,8 @@
-package com.pavel.jbsrm.auth.security;
+package com.pavel.jbsrm.common.auth.security;
 
-import com.pavel.jbsrm.auth.model.JwtAuthenticationToken;
-import com.pavel.jbsrm.auth.model.JwtUser;
-import com.pavel.jbsrm.auth.model.JwtUserDetails;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.pavel.jbsrm.common.auth.model.JwtAuthenticationToken;
+import com.pavel.jbsrm.common.auth.model.JwtUser;
+import com.pavel.jbsrm.common.auth.model.JwtUserDetails;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;

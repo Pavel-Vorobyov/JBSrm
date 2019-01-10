@@ -1,6 +1,6 @@
 package com.pavel.jbsrm.ttn.service;
 
-import com.pavel.jbsrm.auth.model.JwtUserDetails;
+import com.pavel.jbsrm.common.auth.model.JwtUserDetails;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
 import com.pavel.jbsrm.ttn.QTtn;
 import com.pavel.jbsrm.ttn.Ttn;

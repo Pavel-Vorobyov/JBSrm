@@ -1,5 +1,8 @@
 package com.pavel.jbsrm.user.service;
 
+import com.pavel.jbsrm.common.mail.MailSender;
+import com.pavel.jbsrm.common.mail.MailTemplate;
+import com.pavel.jbsrm.common.registration.RegistrationLinkManager;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
 import com.pavel.jbsrm.user.QUser;
 import com.pavel.jbsrm.user.User;
@@ -12,7 +15,6 @@ import com.querydsl.core.BooleanBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,19 +29,27 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
-    private JavaMailSender mailSender;
+    private RegistrationLinkManager linkManager;
+    private MailSender mailSender;
 
-    public UserServiceImpl(UserRepository userRepository, JavaMailSender mailSender) {
+    public UserServiceImpl(UserRepository userRepository, RegistrationLinkManager linkManager, MailSender mailSender) {
         this.userRepository = userRepository;
+        this.linkManager = linkManager;
         this.mailSender = mailSender;
     }
 
     @Transactional
     @Override
     public Optional<UserDto> create(@Valid CreateUserDto createUserDto) {
-        User user = ObjectMapperUtills.mapTo(createUserDto, User.class);
+        User user = userRepository.save(ObjectMapperUtills.mapTo(createUserDto, User.class));
+        linkManager.getLink(user.getId())
+                .ifPresent(link -> mailSender.sendMail(MailTemplate.builder()
+                        .to(createUserDto.getEmail())
+                        .subject("Verification")
+                        .text(linkManager.getLink(user.getId()).orElse("Something goes bad..."))
+                        .build()));
 
-        return Optional.of(ObjectMapperUtills.mapTo(userRepository.save(user), UserDto.class));
+        return Optional.of(ObjectMapperUtills.mapTo(user, UserDto.class));
     }
 
     @Transactional

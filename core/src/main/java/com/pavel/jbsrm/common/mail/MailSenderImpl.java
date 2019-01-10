@@ -1,4 +1,4 @@
-package com.pavel.jbsrm.mail;
+package com.pavel.jbsrm.common.mail;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

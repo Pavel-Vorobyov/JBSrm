@@ -1,6 +1,6 @@
-package com.pavel.jbsrm.auth.security;
+package com.pavel.jbsrm.common.auth.security;
 
-import com.pavel.jbsrm.auth.model.JwtAuthenticationToken;
+import com.pavel.jbsrm.common.auth.model.JwtAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;

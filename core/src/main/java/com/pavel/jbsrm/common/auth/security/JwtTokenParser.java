@@ -1,6 +1,6 @@
-package com.pavel.jbsrm.auth.security;
+package com.pavel.jbsrm.common.auth.security;
 
-import com.pavel.jbsrm.auth.model.JwtUser;
+import com.pavel.jbsrm.common.auth.model.JwtUser;
 import com.pavel.jbsrm.user.UserRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

@@ -1,4 +1,4 @@
-package com.pavel.jbsrm.mail;
+package com.pavel.jbsrm.common.mail;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -11,11 +11,11 @@ import java.util.Properties;
 @Configuration
 public class MailSenderConfig {
 
-    @Value("${jbsrm.mail-sender.host}")
+    @Value("${jbsrm.mail_sender.host}")
     private String host;
-    @Value("${jbsrm.mail-sender.username}")
+    @Value("${jbsrm.mail_sender.username}")
     private String username;
-    @Value("${jbsrm.mail-sender.password}")
+    @Value("${jbsrm.mail_sender.password}")
     private String password;
 
     @Bean

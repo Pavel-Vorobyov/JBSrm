@@ -1,9 +1,9 @@
-package com.pavel.jbsrm.auth.config;
+package com.pavel.jbsrm.common.auth.config;
 
-import com.pavel.jbsrm.auth.security.JwtAuthenticationEntryPoint;
-import com.pavel.jbsrm.auth.security.JwtAuthenticationProvider;
-import com.pavel.jbsrm.auth.security.JwtAuthenticationTokenFilter;
-import com.pavel.jbsrm.auth.security.JwtSuccessHandler;
+import com.pavel.jbsrm.common.auth.security.JwtAuthenticationEntryPoint;
+import com.pavel.jbsrm.common.auth.security.JwtAuthenticationProvider;
+import com.pavel.jbsrm.common.auth.security.JwtAuthenticationTokenFilter;
+import com.pavel.jbsrm.common.auth.security.JwtSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

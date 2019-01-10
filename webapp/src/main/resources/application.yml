@@ -32,8 +32,9 @@ server:
 
 jbsrm.app.jwtSecret: jwtSecretKey
 jbsrm.app.jwtExpiration: 86400
-
-jbsrm.mail-sender:
+jbsrm.app.registration_secret: registrationSecretKey
+jbsrm.app.registration_receiver: http://localhost:8080/user/register/
+jbsrm.mail_sender:
   host: host
   username: jbsrm.mail@gmail.com
   password: 123qwe234

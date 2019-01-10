@@ -1,4 +1,4 @@
-package com.pavel.jbsrm.auth.model;
+package com.pavel.jbsrm.common.auth.model;
 
 import com.pavel.jbsrm.user.UserRole;
 import lombok.AllArgsConstructor;

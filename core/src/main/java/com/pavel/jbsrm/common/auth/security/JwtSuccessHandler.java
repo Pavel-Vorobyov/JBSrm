@@ -1,4 +1,4 @@
-package com.pavel.jbsrm.auth.security;
+package com.pavel.jbsrm.common.auth.security;
 
 
 import org.springframework.security.core.Authentication;
