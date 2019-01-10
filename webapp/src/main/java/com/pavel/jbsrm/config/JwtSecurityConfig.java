@@ -1,9 +1,9 @@
-package com.pavel.jbsrm.common.auth.config;
+package com.pavel.jbsrm.config;
 
-import com.pavel.jbsrm.common.auth.security.JwtAuthenticationEntryPoint;
-import com.pavel.jbsrm.common.auth.security.JwtAuthenticationProvider;
-import com.pavel.jbsrm.common.auth.security.JwtAuthenticationTokenFilter;
-import com.pavel.jbsrm.common.auth.security.JwtSuccessHandler;
+import com.pavel.jbsrm.auth.security.JwtAuthenticationEntryPoint;
+import com.pavel.jbsrm.auth.security.JwtAuthenticationProvider;
+import com.pavel.jbsrm.auth.security.JwtAuthenticationTokenFilter;
+import com.pavel.jbsrm.auth.security.JwtSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,34 +44,6 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setAuthenticationSuccessHandler(new JwtSuccessHandler());
         return filter;
     }
-
-
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        final CorsConfiguration config = new CorsConfiguration();
-//
-//        config.addAllowedOrigin("*");
-//        config.addAllowedHeader("*");
-//        config.addAllowedMethod("GET");
-//        config.addAllowedMethod("PUT");
-//        config.addAllowedMethod("POST");
-//        config.addAllowedMethod("DELETE");
-//        config.setAllowCredentials(true);
-//        source.registerCorsConfiguration("/**", config);
-//
-//        http.csrf().disable()
-//                .authorizeRequests().antMatchers("**/api/**").authenticated()
-//                .and()
-//                .exceptionHandling().authenticationEntryPoint(entryPoint)
-//                .and()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//
-//        http.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-//        http.headers().cacheControl();
-//        http.cors();
-//
-//    }
 
     @Bean
     public JwtAuthenticationTokenFilter authTokenFilter() {

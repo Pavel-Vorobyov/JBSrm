@@ -1,4 +1,4 @@
-package com.pavel.jbsrm.common.registration;
+package com.pavel.jbsrm.user.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

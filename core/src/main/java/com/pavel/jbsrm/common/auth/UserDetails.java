@@ -1,14 +1,13 @@
-package com.pavel.jbsrm.common.auth.model;
+package com.pavel.jbsrm.common.auth;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
 @Data
-public class JwtUserDetails implements UserDetails {
+public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
     private String userName;
     private String token;
@@ -16,7 +15,7 @@ public class JwtUserDetails implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
 
-    public JwtUserDetails(String userName, long id, String token, List<GrantedAuthority> grantedAuthorities) {
+    public UserDetails(String userName, long id, String token, List<GrantedAuthority> grantedAuthorities) {
 
         this.userName = userName;
         this.id = id;

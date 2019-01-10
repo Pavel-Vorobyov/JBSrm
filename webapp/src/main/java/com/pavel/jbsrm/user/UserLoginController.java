@@ -1,7 +1,7 @@
 package com.pavel.jbsrm.user;
 
-import com.pavel.jbsrm.common.auth.model.JwtCredentials;
-import com.pavel.jbsrm.common.auth.security.JwtTokenRealm;
+import com.pavel.jbsrm.auth.model.JwtCredentials;
+import com.pavel.jbsrm.auth.security.JwtTokenRealm;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

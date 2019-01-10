@@ -2,7 +2,6 @@ package com.pavel.jbsrm.user.service;
 
 import com.pavel.jbsrm.common.mail.MailSender;
 import com.pavel.jbsrm.common.mail.MailTemplate;
-import com.pavel.jbsrm.common.registration.RegistrationLinkManager;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
 import com.pavel.jbsrm.user.QUser;
 import com.pavel.jbsrm.user.User;

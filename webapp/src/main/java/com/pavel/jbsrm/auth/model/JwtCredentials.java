@@ -1,4 +1,4 @@
-package com.pavel.jbsrm.common.auth.model;
+package com.pavel.jbsrm.auth.model;
 
 import lombok.Data;
 

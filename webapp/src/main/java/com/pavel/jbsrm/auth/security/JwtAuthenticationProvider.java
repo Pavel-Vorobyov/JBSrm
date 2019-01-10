@@ -1,14 +1,13 @@
-package com.pavel.jbsrm.common.auth.security;
+package com.pavel.jbsrm.auth.security;
 
-import com.pavel.jbsrm.common.auth.model.JwtAuthenticationToken;
-import com.pavel.jbsrm.common.auth.model.JwtUser;
-import com.pavel.jbsrm.common.auth.model.JwtUserDetails;
+import com.pavel.jbsrm.auth.model.JwtAuthenticationToken;
+import com.pavel.jbsrm.auth.model.JwtUser;
+import com.pavel.jbsrm.common.auth.UserDetails;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,14 +22,14 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
     }
 
     @Override
-    protected void additionalAuthenticationChecks(UserDetails userDetails,
+    protected void additionalAuthenticationChecks(org.springframework.security.core.userdetails.UserDetails userDetails,
                                                   UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
 
     }
 
     @Override
-    protected UserDetails retrieveUser(String username,
-                                       UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
+    protected org.springframework.security.core.userdetails.UserDetails retrieveUser(String username,
+                                                                                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
 
         JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) usernamePasswordAuthenticationToken;
         String token = jwtAuthenticationToken.getToken();
@@ -39,7 +38,7 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
 
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList(jwtUser.getUserRole().toString());
-        return new JwtUserDetails(jwtUser.getName(), jwtUser.getId(),
+        return new UserDetails(jwtUser.getName(), jwtUser.getId(),
                 token,
                 grantedAuthorities);
     }

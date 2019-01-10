@@ -1,6 +1,6 @@
 package com.pavel.jbsrm.ttn.service;
 
-import com.pavel.jbsrm.common.auth.model.JwtUserDetails;
+import com.pavel.jbsrm.common.auth.UserDetails;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
 import com.pavel.jbsrm.ttn.QTtn;
 import com.pavel.jbsrm.ttn.Ttn;
@@ -42,7 +42,7 @@ public class TtnServiceImpl implements TtnService {
     @Override
     public Optional<TtnDto> create(@Valid CreateTtnDto createTtnDto) {
         Ttn ttn = ObjectMapperUtills.mapTo(createTtnDto, Ttn.class);
-        ttn.setCreatedBy(userRepository.getOne(((JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
+        ttn.setCreatedBy(userRepository.getOne(((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
         ttn.setTtnState(TtnState.ACCEPTED);
         return Optional.of(ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class));
     }

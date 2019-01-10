@@ -1,4 +1,4 @@
-package com.pavel.jbsrm.common.config;
+package com.pavel.jbsrm.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

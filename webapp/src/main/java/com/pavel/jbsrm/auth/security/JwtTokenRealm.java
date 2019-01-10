@@ -1,7 +1,7 @@
-package com.pavel.jbsrm.common.auth.security;
+package com.pavel.jbsrm.auth.security;
 
-import com.pavel.jbsrm.common.auth.model.JwtCredentials;
-import com.pavel.jbsrm.common.auth.model.JwtUser;
+import com.pavel.jbsrm.auth.model.JwtCredentials;
+import com.pavel.jbsrm.auth.model.JwtUser;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
 import com.pavel.jbsrm.user.repository.UserRepository;
 import org.springframework.stereotype.Component;
