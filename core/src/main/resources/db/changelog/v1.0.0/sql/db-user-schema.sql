@@ -8,28 +8,28 @@ DROP TABLE IF EXISTS "user";
 CREATE TABLE IF NOT EXISTS "user"
 (
 	id serial PRIMARY KEY,
-	login VARCHAR (80) UNIQUE NOT NULL,
-	password VARCHAR (300) NOT NULL,
-	name VARCHAR (80) COLLATE pg_catalog."default" NOT NULL,
-	surname VARCHAR (80) COLLATE pg_catalog."default" NOT NULL,
-	user_gender user_gender NOT NULL,
-	birthday DATE NOT NULL,
+	email VARCHAR (80) COLLATE pg_catalog."default",
+	password VARCHAR (300),
+	name VARCHAR (80) COLLATE pg_catalog."default",
+	surname VARCHAR (80) COLLATE pg_catalog."default",
+	user_gender user_gender,
+	birthday DATE,
 	passport_series VARCHAR (80) COLLATE pg_catalog."default",
 	passport_issued_by VARCHAR (150) COLLATE pg_catalog."default",
-	email VARCHAR (80) COLLATE pg_catalog."default" NOT NULL,
-	phone VARCHAR (80) COLLATE pg_catalog."default" NOT NULL,
-	company_id serial NOT NULL,
-	user_role user_role NOT NULL,
-	create_at DATE NOT NULL,
-	deleted BOOLEAN NOT NULL
+	phone VARCHAR (80) COLLATE pg_catalog."default",
+	company_id serial,
+	user_role user_role,
+	create_at DATE,
+	deleted BOOLEAN
 );
+
+ALTER TABLE "user" ALTER COLUMN company_id DROP NOT NULL;
 
 CREATE INDEX IF NOT EXISTS idx_fts_user ON "user"
   USING gin(as_tsvector(name, surname, email, phone));
 
-INSERT INTO "user" (login, password, name, surname, user_gender, birthday, passport_series, passport_issued_by, email, phone, company_id, user_role, create_at, deleted)
+INSERT INTO "user" (password, name, surname, user_gender, birthday, passport_series, passport_issued_by, email, phone, company_id, user_role, create_at, deleted)
 	SELECT
-	    'login' || num AS login,
 	    'password' AS password,
 		'name' || num AS name,
 		'surname' || num AS surname,
