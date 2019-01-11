@@ -1,5 +1,6 @@
 package com.pavel.jbsrm.user.service;
 
+import com.pavel.jbsrm.common.utill.StringConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -17,33 +18,12 @@ public class RegistrationLinkManager {
     @Value("${jbsrm.app.registration_receiver}")
     private String registrationReceiver;
 
-    public Optional<String> getLink(long id) {
-        String key = "UNDEFINED";
-
-        try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            messageDigest.update((id + registrationSecrete).getBytes());
-
-            key = Arrays.toString(messageDigest.digest());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-
+    Optional<String> getLink(long id) {
+        String key = StringConverter.getHash(id + registrationSecrete);
         return Optional.of(registrationReceiver + "?id=" + id + "&key=" + key);
     }
 
     public boolean verify(long id, String key) {
-        boolean flag = false;
-
-        try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            messageDigest.update((id + registrationSecrete).getBytes());
-
-            flag = MessageDigest.isEqual(messageDigest.digest(), key.getBytes());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-
-        return flag;
+        return key.equals(StringConverter.getHash(id + registrationSecrete));
     }
 }

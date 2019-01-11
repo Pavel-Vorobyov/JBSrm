@@ -3,6 +3,7 @@ package com.pavel.jbsrm.auth.security;
 import com.pavel.jbsrm.auth.model.JwtCredentials;
 import com.pavel.jbsrm.auth.model.JwtUser;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
+import com.pavel.jbsrm.common.utill.StringConverter;
 import com.pavel.jbsrm.user.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
@@ -19,12 +20,10 @@ public class JwtTokenRealm {
         this.tokenGenerator = tokenGenerator;
     }
 
-    public Optional<JwtUser> authenticate(JwtCredentials credentials) {
-        return userRepository.findByEmailAndPassword(credentials.getEmail(), credentials.getPassword())
-                .map(user -> {
-                    JwtUser jwtUser = ObjectMapperUtills.mapTo(user, JwtUser.class);
-                    jwtUser.setToken(tokenGenerator.getToken(jwtUser));
-                    return jwtUser;
-                });
+    public Optional<String> authenticate(JwtCredentials credentials) {
+        return userRepository.findByEmail(credentials.getEmail())
+                .map(user -> user.getPassword().equals(StringConverter.getHash(credentials.getPassword()))
+                        ? tokenGenerator.getToken(ObjectMapperUtills.mapTo(user, JwtUser.class))
+                        : null );
     }
 }

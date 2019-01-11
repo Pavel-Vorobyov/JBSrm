@@ -1,4 +1,4 @@
-package com.pavel.jbsrm.common.mail;
+package com.pavel.jbsrm.common.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +13,8 @@ public class MailSenderConfig {
 
     @Value("${jbsrm.mail_sender.host}")
     private String host;
+    @Value("${jbsrm.mail_sender.port}")
+    private Integer port;
     @Value("${jbsrm.mail_sender.username}")
     private String username;
     @Value("${jbsrm.mail_sender.password}")
@@ -23,7 +25,7 @@ public class MailSenderConfig {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
         mailSender.setHost(host);
-        mailSender.setPort(587);
+        mailSender.setPort(port);
 
         mailSender.setUsername(username);
         mailSender.setPassword(password);

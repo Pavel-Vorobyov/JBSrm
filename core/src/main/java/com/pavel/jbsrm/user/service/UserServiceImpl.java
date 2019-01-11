@@ -3,6 +3,7 @@ package com.pavel.jbsrm.user.service;
 import com.pavel.jbsrm.common.mail.MailSender;
 import com.pavel.jbsrm.common.mail.MailTemplate;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
+import com.pavel.jbsrm.common.utill.StringConverter;
 import com.pavel.jbsrm.user.QUser;
 import com.pavel.jbsrm.user.User;
 import com.pavel.jbsrm.user.UserFilter;
@@ -40,6 +41,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public UserDto create(@Valid CreateUserDto createUserDto) {
+        createUserDto.setPassword(StringConverter.getHash(createUserDto.getPassword()));
         User user = userRepository.save(ObjectMapperUtills.mapTo(createUserDto, User.class));
         linkManager.getLink(user.getId())
                 .ifPresent(link -> mailSender.sendMail(MailTemplate.builder()
@@ -72,7 +74,7 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public Optional<UserDto> find(long id) {
         return Optional.of(ObjectMapperUtills
-                .mapTo(userRepository.findById(id).orElse(User.builder().build()), UserDto.class));
+                .mapTo(userRepository.findById(id), UserDto.class));
     }
 
     @Transactional(readOnly = true)

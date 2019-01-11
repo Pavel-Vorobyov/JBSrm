@@ -69,8 +69,10 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         config.setAllowCredentials(true);
         source.registerCorsConfiguration("/**", config);
         http.csrf().disable()
-                .authorizeRequests().antMatchers("**/**").authenticated()
-                .and().cors().configurationSource(source).and()
+                .authorizeRequests().antMatchers("**/api/**").authenticated()
+                .and()
+                .cors().configurationSource(source)
+                .and()
                 .exceptionHandling().authenticationEntryPoint(entryPoint)
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

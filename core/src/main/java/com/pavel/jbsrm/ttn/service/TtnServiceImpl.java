@@ -42,7 +42,7 @@ public class TtnServiceImpl implements TtnService {
     @Override
     public TtnDto create(@Valid CreateTtnDto createTtnDto) {
         Ttn ttn = ObjectMapperUtills.mapTo(createTtnDto, Ttn.class);
-        ttn.setCreatedBy(userRepository.getOne(((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
+        ttn.setCreatedBy(userRepository.findById(((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()).get());
         ttn.setTtnState(TtnState.ACCEPTED);
         return ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class);
     }

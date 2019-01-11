@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TtnRepositoryImpl extends QuerydslRepositorySupport implements TtnRepositoryCustom {
-    private String queryStart = "select ttn.id, \"user\".name as driver_name, \"user\".surname as driver_surname, ttn.ttn_state, \n" +
-            "\t(select \"user\".name from \"user\" where \"user\".id = ttn.created_by) as created_by_name,\n" +
-            "\t(select \"user\".surname from \"user\" where \"user\".id = ttn.created_by) as created_by_surname,\n" +
+    private String queryStart = "select ttn.id, users.name as driver_name, users.surname as driver_surname, ttn.ttn_state, \n" +
+            "\t(select users.name from users where users.id = ttn.created_by) as created_by_name,\n" +
+            "\t(select users.surname from users where users.id = ttn.created_by) as created_by_surname,\n" +
             "\tttn.create_at \n" +
-            "\tfrom ttn left join \"user\" on ttn.driver_id = \"user\".id where as_tsvector(as_text(ttn.ttn_state), \n" +
-            "\t(select \"user\".name from \"user\" where \"user\".id = ttn.created_by),\n" +
-            "\t(select \"user\".surname from \"user\" where \"user\".id = ttn.created_by),\n" +
-            "\t\"user\".name, \"user\".surname) @@ to_tsquery('";
+            "\tfrom ttn left join users on ttn.driver_id = users.id where as_tsvector(as_text(ttn.ttn_state), \n" +
+            "\t(select users.name from users where users.id = ttn.created_by),\n" +
+            "\t(select users.surname from users where users.id = ttn.created_by),\n" +
+            "\tusers.name, users.surname) @@ to_tsquery('";
     private String queryEnd = "') limit (10);";
 
     @PersistenceContext
