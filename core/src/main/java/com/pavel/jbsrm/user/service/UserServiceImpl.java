@@ -41,6 +41,11 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public UserDto create(@Valid CreateUserDto createUserDto) {
+
+        if (userRepository.findByEmail(createUserDto.getEmail()).isPresent()) {
+            throw new RuntimeException("Such email is present!");
+        }
+
         createUserDto.setPassword(StringConverter.getHash(createUserDto.getPassword()));
         User user = userRepository.save(ObjectMapperUtills.mapTo(createUserDto, User.class));
         linkManager.getLink(user.getId())
