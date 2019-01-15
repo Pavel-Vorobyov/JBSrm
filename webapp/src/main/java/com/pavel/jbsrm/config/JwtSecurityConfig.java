@@ -71,6 +71,8 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests().antMatchers("**/api/**").authenticated()
                 .and()
+                .authorizeRequests().antMatchers("**/profile/**").authenticated()
+                .and()
                 .cors().configurationSource(source)
                 .and()
                 .exceptionHandling().authenticationEntryPoint(entryPoint)

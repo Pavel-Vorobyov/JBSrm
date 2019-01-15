@@ -1,5 +1,6 @@
 package com.pavel.jbsrm.company;
 
+import com.pavel.jbsrm.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,19 +22,15 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank
     @Column(name = "title")
     private String title;
 
-    @NotBlank
     @Column(name = "email")
     private String email;
 
-    @NotBlank
     @Column(name = "phone")
     private String phone;
 
-    @NotNull
     @Column(name = "deleted")
     private boolean deleted;
 }

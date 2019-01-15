@@ -14,16 +14,16 @@ CREATE TABLE IF NOT EXISTS transport
 (
 	id serial PRIMARY KEY,
 	title VARCHAR (80) COLLATE pg_catalog."default" NOT NULL,
-	body_type transport_type,
+	bodytype transport_type,
 	consumption INTEGER NOT NULL,
 	company_id serial,
 	deleted BOOLEAN NOT NULL
 );
 
 CREATE INDEX IF NOT EXISTS idx_fts_transport ON transport
-  USING gin(as_tsvector(id::TEXT, title, as_text(body_type), consumption::TEXT, company_id::TEXT));
+  USING gin(as_tsvector(id::TEXT, title, as_text(bodytype), consumption::TEXT, company_id::TEXT));
 
-INSERT INTO transport (title, body_type, consumption, company_id, deleted)
+INSERT INTO transport (title, bodytype, consumption, company_id, deleted)
 	SELECT
 	    'title' || num AS title,
 		(
@@ -32,7 +32,7 @@ INSERT INTO transport (title, body_type, consumption, company_id, deleted)
 				WHEN 1 THEN 'REFRIGERATOR'::transport_type
 				WHEN 2 THEN 'TANK'::transport_type
 			END
-		) AS body_type,
+		) AS bodytype,
 		(
 			CASE (RANDOM() * 2)::INT
 				WHEN 0 THEN 50

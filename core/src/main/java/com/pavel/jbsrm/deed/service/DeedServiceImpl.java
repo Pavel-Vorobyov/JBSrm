@@ -6,6 +6,9 @@ import com.pavel.jbsrm.deed.dto.CreateDeedDto;
 import com.pavel.jbsrm.deed.dto.DeedDto;
 import com.pavel.jbsrm.deed.dto.UpdateDeedDto;
 import com.pavel.jbsrm.deed.repository.DeedRepository;
+import com.pavel.jbsrm.product.details.repository.ProductDetailsRepository;
+import com.pavel.jbsrm.product.product.Product;
+import com.pavel.jbsrm.product.product.repository.ProductRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,15 +26,24 @@ import java.util.stream.Collectors;
 public class DeedServiceImpl implements DeedService {
 
     private DeedRepository deedRepository;
+    private ProductRepository productRepository;
+    private ProductDetailsRepository productDetailsRepository;
 
-    public DeedServiceImpl(DeedRepository deedRepository) {
+    public DeedServiceImpl(DeedRepository deedRepository, ProductRepository productRepository, ProductDetailsRepository productDetailsRepository) {
         this.deedRepository = deedRepository;
+        this.productRepository = productRepository;
+        this.productDetailsRepository = productDetailsRepository;
     }
 
     @Transactional
     @Override
     public DeedDto create(@Valid CreateDeedDto createDeedDto) {
         Deed deed = ObjectMapperUtills.mapTo(createDeedDto, Deed.class);
+        Product product = new Product();
+        product.setProductDetails(productDetailsRepository.getOne(createDeedDto.getProductDetailsId()));
+        product.setAmount(createDeedDto.getAmount());
+        deed.setProduct(productRepository.save(product));
+        deed.setId(0L);
         return ObjectMapperUtills.mapTo(deedRepository.save(deed), DeedDto.class);
     }
 
@@ -40,6 +52,9 @@ public class DeedServiceImpl implements DeedService {
     public Optional<DeedDto> update(long id, @Valid UpdateDeedDto updateDeedDto) {
         Deed deed = deedRepository.getOne(id);
         ObjectMapperUtills.mapTo(updateDeedDto, deed);
+        Product product = productRepository.getOne(updateDeedDto.getProductId());
+        product.setAmount(updateDeedDto.getAmount());
+        deed.setProduct(product);
 
         return Optional.of(ObjectMapperUtills.mapTo(deedRepository.save(deed), DeedDto.class));
     }

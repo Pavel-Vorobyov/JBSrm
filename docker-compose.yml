@@ -9,3 +9,17 @@ services:
       POSTGRES_PASSWORD: 123qwe123
       POSTGRES_USER: admin
       POSTGRES_DB: jbsrm
+
+  jbsrb-static-server:
+    image: "pashaby/jbsrm:static-server"
+    container_name: jbsrm-server
+    ports:
+      - "50051:3000"
+
+  jbsrb-rest-server:
+    image: "pashaby/jbsrm:rest-server"
+    container_name: jbsrm-rest-server
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"

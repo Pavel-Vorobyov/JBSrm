@@ -1,7 +1,6 @@
 package com.pavel.jbsrm.waybill.dto;
 
-import com.pavel.jbsrm.transport.Transport;
-import com.pavel.jbsrm.ttn.Ttn;
+import com.pavel.jbsrm.ttn.TtnState;
 import com.pavel.jbsrm.waybill.CheckPoint;
 import lombok.Data;
 
@@ -13,13 +12,8 @@ import java.util.List;
 public class UpdateWaybillDto {
 
     @NotNull
-    private Ttn ttn;
-
-    @NotNull
-    private CheckPoint startPoint;
-
-    @NotNull
-    private CheckPoint endPoint;
+    private long ttnId;
+    private TtnState ttnState;
 
     @NotNull
     private LocalDate startDate;

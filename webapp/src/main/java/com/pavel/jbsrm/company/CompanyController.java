@@ -6,10 +6,12 @@ import com.pavel.jbsrm.company.dto.UpdateCompanyDto;
 import com.pavel.jbsrm.company.service.CompanyService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityExistsException;
 import java.util.List;
 
 @RestController
@@ -47,8 +49,16 @@ public class CompanyController {
     }
 
     @PostMapping
-    public CompanyDto create(@RequestBody CreateCompanyDto createDto) {
-        return companyService.create(createDto);
+    public ResponseEntity<CompanyDto> create(@RequestBody CreateCompanyDto createDto) {
+        ResponseEntity<CompanyDto> companyDto;
+        try {
+            companyDto = ResponseEntity.ok().body(companyService.create(createDto));
+        } catch (EntityExistsException e) {
+            companyDto = ResponseEntity.status(HttpStatus.CONFLICT).build();
+        } catch (RuntimeException e) {
+            companyDto = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return companyDto;
     }
 
     @PutMapping("/{id}/delete")

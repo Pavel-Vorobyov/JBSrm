@@ -22,20 +22,16 @@ public class Deed {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
     @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @NotNull
     @Column(name = "price")
     private long price;
 
-    @NotNull
     @Column(name = "create_at")
     private LocalDate createAt = LocalDate.now();
 
-    @NotNull
     @Column(name = "deleted")
     private boolean deleted;
 }

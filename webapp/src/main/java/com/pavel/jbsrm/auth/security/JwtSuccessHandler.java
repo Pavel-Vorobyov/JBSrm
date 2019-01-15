@@ -15,6 +15,6 @@ public class JwtSuccessHandler implements AuthenticationSuccessHandler {
                                         HttpServletResponse httpServletResponse,
                                         Authentication authentication) throws IOException, ServletException {
 
-        System.out.println("Successfully Authentication");
+//        System.out.println("Successfully Authentication");
     }
 }

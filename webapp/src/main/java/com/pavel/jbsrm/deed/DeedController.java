@@ -53,8 +53,9 @@ public class DeedController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('DRIVER')")
-    public DeedDto create(@RequestBody CreateDeedDto createDto) {
-        return deedService.create(createDto);
+    public ResponseEntity<String> create(@RequestBody CreateDeedDto createDto) {
+        deedService.create(createDto);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}/delete")

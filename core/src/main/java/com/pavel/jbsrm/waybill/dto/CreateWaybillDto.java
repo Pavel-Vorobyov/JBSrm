@@ -1,6 +1,5 @@
 package com.pavel.jbsrm.waybill.dto;
 
-import com.pavel.jbsrm.ttn.Ttn;
 import com.pavel.jbsrm.waybill.CheckPoint;
 import lombok.Data;
 
@@ -12,7 +11,7 @@ import java.util.List;
 public class CreateWaybillDto {
 
     @NotNull
-    private Ttn ttn;
+    private long ttnId;
 
     @NotNull
     private LocalDate startDate;
@@ -21,5 +20,5 @@ public class CreateWaybillDto {
     private LocalDate endDate;
 
     @NotNull
-    private List<CreateCheckPointDto> checkPoints;
+    private List<CheckPoint> checkPoints;
 }

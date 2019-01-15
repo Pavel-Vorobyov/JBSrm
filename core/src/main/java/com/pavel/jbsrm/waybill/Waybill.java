@@ -1,5 +1,6 @@
 package com.pavel.jbsrm.waybill;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pavel.jbsrm.ttn.Ttn;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,7 +27,7 @@ public class Waybill {
     private long id;
 
     @NotNull
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ttn_id")
     private Ttn ttn;
 

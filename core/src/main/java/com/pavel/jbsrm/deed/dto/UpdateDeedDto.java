@@ -1,6 +1,5 @@
 package com.pavel.jbsrm.deed.dto;
 
-import com.pavel.jbsrm.product.product.Product;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -9,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class UpdateDeedDto {
 
     @NotNull
-    private Product product;
+    private long productId;
 
     @NotNull
     private int amount;

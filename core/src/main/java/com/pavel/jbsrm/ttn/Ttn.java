@@ -29,11 +29,9 @@ public class Ttn {
     @Column(name = "id")
     private long id;
 
-    @NotNull
     @Column(name = "create_at")
     private LocalDate createAt = LocalDate.now();
 
-    @NotNull
     @OneToOne
     @JoinColumn(name = "driver_id")
     private User driver;
@@ -58,7 +56,6 @@ public class Ttn {
     @JoinColumn(name = "created_by")
     private User createdBy;
 
-    @NotNull
     @Column(name = "deleted")
     private boolean deleted;
 }

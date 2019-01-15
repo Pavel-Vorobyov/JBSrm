@@ -2,6 +2,8 @@ package com.pavel.jbsrm.ttn.service;
 
 import com.pavel.jbsrm.common.auth.UserDetails;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
+import com.pavel.jbsrm.company.dto.UpdateCompanyDto;
+import com.pavel.jbsrm.transport.repository.TransportRepository;
 import com.pavel.jbsrm.ttn.QTtn;
 import com.pavel.jbsrm.ttn.Ttn;
 import com.pavel.jbsrm.ttn.TtnFilter;
@@ -31,10 +33,12 @@ import java.util.stream.Collectors;
 public class TtnServiceImpl implements TtnService {
 
     private TtnRepository ttnRepository;
+    private TransportRepository transportRepository;
     private UserRepository userRepository;
 
-    public TtnServiceImpl(TtnRepository ttnRepository, UserRepository userRepository) {
+    public TtnServiceImpl(TtnRepository ttnRepository, TransportRepository transportRepository, UserRepository userRepository) {
         this.ttnRepository = ttnRepository;
+        this.transportRepository = transportRepository;
         this.userRepository = userRepository;
     }
 
@@ -43,7 +47,12 @@ public class TtnServiceImpl implements TtnService {
     public TtnDto create(@Valid CreateTtnDto createTtnDto) {
         Ttn ttn = ObjectMapperUtills.mapTo(createTtnDto, Ttn.class);
         ttn.setCreatedBy(userRepository.findById(((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()).get());
+        ttn.setDriver(userRepository.findById(createTtnDto.getDriverId()).get());
+        ttn.setTransport(transportRepository.findById(createTtnDto.getTransportId()).get());
         ttn.setTtnState(TtnState.ACCEPTED);
+        ttn.getCreatedBy().setId(((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        ttn.getDriver().setId(createTtnDto.getDriverId());
+        ttn.getTransport().setId(createTtnDto.getTransportId());
         return ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class);
     }
 
@@ -52,6 +61,11 @@ public class TtnServiceImpl implements TtnService {
     public Optional<TtnDto> update(long id, @Valid UpdateTtnDto updateTtnDto) {
         Ttn ttn = ttnRepository.getOne(id);
         ObjectMapperUtills.mapTo(updateTtnDto, ttn);
+        ttn.setId(id);
+        ttn.setDriver(userRepository.getOne(updateTtnDto.getDriverId()));
+        ttn.setTransport(transportRepository.getOne(updateTtnDto.getTransportId()));
+        ttn.getDriver().setId(updateTtnDto.getDriverId());//todo user.id from 4 to 0
+        ttn.getTransport().setId(updateTtnDto.getTransportId());
 
         return Optional.of(ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class));
     }

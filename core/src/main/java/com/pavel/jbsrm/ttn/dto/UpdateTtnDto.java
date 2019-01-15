@@ -1,22 +1,25 @@
 package com.pavel.jbsrm.ttn.dto;
 
 import com.pavel.jbsrm.product.product.Product;
-import com.pavel.jbsrm.transport.Transport;
 import com.pavel.jbsrm.ttn.TtnState;
-import com.pavel.jbsrm.user.User;
-import com.pavel.jbsrm.waybill.Waybill;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UpdateTtnDto {
 
     @NotNull
-    private User driver;
+    private long driverId;
     @NotNull
-    private Transport transport;
+    private long transportId;
     @NotNull
     private List<Product> products;
     @NotNull

@@ -10,7 +10,6 @@ public class DeedDto {
 
     private long id;
     private Product product;
-    private int amount;
     private long price;
     private LocalDate createAt;
 }

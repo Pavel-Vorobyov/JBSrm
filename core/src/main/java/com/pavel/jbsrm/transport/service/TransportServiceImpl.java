@@ -1,11 +1,13 @@
 package com.pavel.jbsrm.transport.service;
 
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
+import com.pavel.jbsrm.company.repository.CompanyRepository;
 import com.pavel.jbsrm.transport.Transport;
 import com.pavel.jbsrm.transport.dto.CreateTransportDto;
 import com.pavel.jbsrm.transport.dto.TransportDto;
 import com.pavel.jbsrm.transport.dto.UpdateTransportDto;
 import com.pavel.jbsrm.transport.repository.TransportRepository;
+import com.pavel.jbsrm.user.repository.UserRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,21 +24,28 @@ import java.util.stream.Collectors;
 public class TransportServiceImpl implements TransportService {
 
     private TransportRepository transportRepository;
+    private CompanyRepository companyRepository;
 
-    public TransportServiceImpl(TransportRepository transportRepository) {
+    public TransportServiceImpl(TransportRepository transportRepository, CompanyRepository companyRepository) {
         this.transportRepository = transportRepository;
+        this.companyRepository = companyRepository;
     }
 
     @Override
     public TransportDto create(@Valid CreateTransportDto createTransportDto) {
-        Transport transport = ObjectMapperUtills.mapTo(createTransportDto, Transport.class);
-        return ObjectMapperUtills.mapTo(transportRepository.save(transport), TransportDto.class);
+        Transport transportToCreate = ObjectMapperUtills.mapTo(createTransportDto, Transport.class);
+        transportToCreate.setOwner(companyRepository.findById(createTransportDto.getOwnerId()).get());
+        transportToCreate.getOwner().setId(createTransportDto.getOwnerId());
+        return ObjectMapperUtills.mapTo(transportRepository.save(transportToCreate), TransportDto.class);
     }
 
     @Override
     public Optional<TransportDto> update(long id, @Valid UpdateTransportDto updateTransportDto) {
         Transport transport = transportRepository.getOne(id);
         ObjectMapperUtills.mapTo(updateTransportDto, transport);
+//        transport.setId(id);
+        transport.setOwner(companyRepository.getOne(updateTransportDto.getOwnerId())); //todo company.id from 3 to 0
+//        transport.getOwner().setId(updateTransportDto.getOwnerId());
         return Optional.of(ObjectMapperUtills.mapTo(transportRepository.save(transport), TransportDto.class));
     }
 

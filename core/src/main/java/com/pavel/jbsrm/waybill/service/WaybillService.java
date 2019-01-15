@@ -1,5 +1,6 @@
 package com.pavel.jbsrm.waybill.service;
 
+import com.pavel.jbsrm.waybill.WaybillFilter;
 import com.pavel.jbsrm.waybill.dto.CreateWaybillDto;
 import com.pavel.jbsrm.waybill.dto.UpdateWaybillDto;
 import com.pavel.jbsrm.waybill.dto.WaybillDto;
@@ -24,5 +25,5 @@ public interface WaybillService {
 
     List<WaybillDto> findAllByPropsMatch(String searchParams);
 
-    Page<WaybillDto> findAllPageByFilter(boolean deleted, Pageable pageable);
+    Page<WaybillDto> findAllPageByFilter(WaybillFilter filter, Pageable pageable);
 }

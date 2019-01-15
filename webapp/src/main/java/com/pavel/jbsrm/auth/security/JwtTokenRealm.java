@@ -1,5 +1,6 @@
 package com.pavel.jbsrm.auth.security;
 
+import com.pavel.jbsrm.auth.model.AuthUserDetails;
 import com.pavel.jbsrm.auth.model.JwtCredentials;
 import com.pavel.jbsrm.auth.model.JwtUser;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
@@ -20,10 +21,10 @@ public class JwtTokenRealm {
         this.tokenGenerator = tokenGenerator;
     }
 
-    public Optional<String> authenticate(JwtCredentials credentials) {
+    public Optional<AuthUserDetails> authenticate(JwtCredentials credentials) {
         return userRepository.findByEmail(credentials.getEmail())
                 .map(user -> user.getPassword().equals(StringConverter.getHash(credentials.getPassword()))
-                        ? tokenGenerator.getToken(ObjectMapperUtills.mapTo(user, JwtUser.class))
+                        ? new AuthUserDetails(user.getId(), tokenGenerator.getToken(ObjectMapperUtills.mapTo(user, JwtUser.class)), user.getUserRole())
                         : null );
     }
 }

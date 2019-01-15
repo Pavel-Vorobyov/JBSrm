@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DeedRepositoryImpl extends QuerydslRepositorySupport implements DeedRepositoryCustom {
-    private String queryStart = "select id, title, mail, phone, client_role, is_deleted from client where as_tsvector(title, mail, phone) @@ to_tsquery('";
+    private String queryStart = "select id, product_id, price, create_at, deleted from deed " +
+            "where as_tsvector(as_text(id), as_text(product_id), as_text(price), " +
+            "as_text(create_at), as_text(deleted)) @@ to_tsquery('";
     private String queryEnd = "') LIMIT (10);"; //todo update select query to Deed.class
 
     @PersistenceContext

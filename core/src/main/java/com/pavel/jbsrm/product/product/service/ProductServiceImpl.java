@@ -1,6 +1,7 @@
 package com.pavel.jbsrm.product.product.service;
 
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
+import com.pavel.jbsrm.product.details.repository.ProductDetailsRepository;
 import com.pavel.jbsrm.product.product.Product;
 import com.pavel.jbsrm.product.product.ProductFilter;
 import com.pavel.jbsrm.product.product.ProductState;
@@ -28,15 +29,18 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService {
 
     private ProductRepository productRepository;
+    private ProductDetailsRepository productDetailsRepository;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, ProductDetailsRepository productDetailsRepository) {
         this.productRepository = productRepository;
+        this.productDetailsRepository = productDetailsRepository;
     }
 
     @Override
     public ProductDto create(@Valid CreateProductDto createProductDto) {
         Product product = ObjectMapperUtills.mapTo(createProductDto, Product.class);
+        product.setProductDetails(productDetailsRepository.getOne(createProductDto.getProductDetailsId()));
         product.setProductState(ProductState.ACCEPTED);
         return ObjectMapperUtills.mapTo(productRepository.save(product), ProductDto.class);
     }
@@ -45,6 +49,7 @@ public class ProductServiceImpl implements ProductService {
     public Optional<ProductDto> update(long id, @Valid UpdateProductDto updateProductDto) {
         Product product = productRepository.getOne(id);
         ObjectMapperUtills.mapTo(updateProductDto, product);
+        product.setProductDetails(productDetailsRepository.getOne(updateProductDto.getProductDetailsId()));
 
         return Optional.of(ObjectMapperUtills.mapTo(productRepository.save(product), ProductDto.class));
     }

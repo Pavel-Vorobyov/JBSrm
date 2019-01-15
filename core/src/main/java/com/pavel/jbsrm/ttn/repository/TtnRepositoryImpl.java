@@ -14,11 +14,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TtnRepositoryImpl extends QuerydslRepositorySupport implements TtnRepositoryCustom {
-    private String queryStart = "select ttn.id, users.name as driver_name, users.surname as driver_surname, ttn.ttn_state, \n" +
+    private String queryStart = "select ttn.id, users.name as driver_name, users.surname as driver_surname, ttn.ttnstate, \n" +
             "\t(select users.name from users where users.id = ttn.created_by) as created_by_name,\n" +
             "\t(select users.surname from users where users.id = ttn.created_by) as created_by_surname,\n" +
             "\tttn.create_at \n" +
-            "\tfrom ttn left join users on ttn.driver_id = users.id where as_tsvector(as_text(ttn.ttn_state), \n" +
+            "\tfrom ttn left join users on ttn.driver_id = users.id where as_tsvector(as_text(ttn.ttnstate), \n" +
             "\t(select users.name from users where users.id = ttn.created_by),\n" +
             "\t(select users.surname from users where users.id = ttn.created_by),\n" +
             "\tusers.name, users.surname) @@ to_tsquery('";

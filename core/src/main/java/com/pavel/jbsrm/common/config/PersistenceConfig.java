@@ -2,14 +2,19 @@ package com.pavel.jbsrm.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.support.TransactionTemplate;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+@Configuration
+@EnableTransactionManagement
 public class PersistenceConfig {
 
     @Bean
@@ -20,8 +25,8 @@ public class PersistenceConfig {
 
         JpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(adapter);
-        em.setJpaProperties(additionalProperties());
 
+        em.setJpaProperties(additionalProperties());
         return em;
     }
 
@@ -31,5 +36,15 @@ public class PersistenceConfig {
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL94Dialect");
 
         return properties;
+    }
+
+    @Bean
+    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory);
+    }
+
+    @Bean
+    public TransactionTemplate transactionTemplate(JpaTransactionManager transactionManager) {
+        return new TransactionTemplate(transactionManager);
     }
 }

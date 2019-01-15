@@ -9,4 +9,6 @@ public class CompanyDto {
     private String title;
     private String email;
     private String phone;
+    private long adminId;
+    private String systemAdminEmail;
 }

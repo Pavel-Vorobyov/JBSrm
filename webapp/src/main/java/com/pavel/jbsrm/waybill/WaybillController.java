@@ -24,7 +24,7 @@ public class WaybillController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER') or hasRole('DRIVER')")
     public ResponseEntity<WaybillDto> getById(@PathVariable long id) {
         return waybillService.find(id)
                 .map(ResponseEntity::ok)
@@ -32,20 +32,19 @@ public class WaybillController {
     }
 
     @GetMapping("/quickSearch/{searchParams}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER') or hasRole('DRIVER')")
     public List<WaybillDto> findAllByPropMatch(@PathVariable String searchParams) {
         return waybillService.findAllByPropsMatch(searchParams);
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
-    public Page<WaybillDto> findAll(@Nullable @RequestParam Boolean deleted, Pageable pageable) {
-        deleted = deleted == null ? false : deleted;
-        return waybillService.findAllPageByFilter(deleted, pageable);
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER') or hasRole('DRIVER')")
+    public Page<WaybillDto> findAll(WaybillFilter filter, Pageable pageable) {
+        return waybillService.findAllPageByFilter(filter, pageable);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER') or hasRole('DRIVER')")
     public ResponseEntity<String> update(@PathVariable long id, @RequestBody UpdateWaybillDto updateDto) {
         waybillService.update(id, updateDto);
         return ResponseEntity.ok().build();

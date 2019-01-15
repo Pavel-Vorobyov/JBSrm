@@ -1,9 +1,11 @@
 package com.pavel.jbsrm.user.service;
 
+import com.pavel.jbsrm.common.auth.UserDetails;
 import com.pavel.jbsrm.common.mail.MailSender;
 import com.pavel.jbsrm.common.mail.MailTemplate;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
 import com.pavel.jbsrm.common.utill.StringConverter;
+import com.pavel.jbsrm.company.repository.CompanyRepository;
 import com.pavel.jbsrm.user.QUser;
 import com.pavel.jbsrm.user.User;
 import com.pavel.jbsrm.user.UserFilter;
@@ -15,9 +17,11 @@ import com.querydsl.core.BooleanBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityExistsException;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,11 +33,13 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
+    private CompanyRepository companyRepository;
     private RegistrationLinkManager linkManager;
     private MailSender mailSender;
 
-    public UserServiceImpl(UserRepository userRepository, RegistrationLinkManager linkManager, MailSender mailSender) {
+    public UserServiceImpl(UserRepository userRepository, CompanyRepository companyRepository, RegistrationLinkManager linkManager, MailSender mailSender) {
         this.userRepository = userRepository;
+        this.companyRepository = companyRepository;
         this.linkManager = linkManager;
         this.mailSender = mailSender;
     }
@@ -41,13 +47,17 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public UserDto create(@Valid CreateUserDto createUserDto) {
-
         if (userRepository.findByEmail(createUserDto.getEmail()).isPresent()) {
-            throw new RuntimeException("Such email is present!");
+            throw new EntityExistsException("Such email is present!");
         }
 
         createUserDto.setPassword(StringConverter.getHash(createUserDto.getPassword()));
-        User user = userRepository.save(ObjectMapperUtills.mapTo(createUserDto, User.class));
+        User userToCreate = ObjectMapperUtills.mapTo(createUserDto, User.class);
+
+        User systemAdmin = userRepository.getOne(((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        userToCreate.setCompany(companyRepository.getOne(systemAdmin.getCompany().getId()));
+        User user = userRepository.save(userToCreate);
+
         linkManager.getLink(user.getId())
                 .ifPresent(link -> mailSender.sendMail(MailTemplate.builder()
                         .to(createUserDto.getEmail())
@@ -61,9 +71,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public Optional<UserDto> update(long id, @Valid UpdateUserDto updateUserDto) {
-        User user = userRepository.getOne(id);
+        User user = userRepository.getOne(id); //todo from new created users returns invalid id, always 1
+        user.setId(id);
         ObjectMapperUtills.mapTo(updateUserDto, user);
-        user.getCompany().setId(updateUserDto.getCompanyId());
+        user.setCompany(companyRepository.getOne(updateUserDto.getCompanyId()));
 
         return Optional.of(ObjectMapperUtills.mapTo(userRepository.save(user), UserDto.class));
     }
@@ -78,8 +89,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public Optional<UserDto> find(long id) {
-        return Optional.of(ObjectMapperUtills
-                .mapTo(userRepository.findById(id), UserDto.class));
+        return userRepository.findById(id)
+                .map(user -> ObjectMapperUtills.mapTo(user, UserDto.class));
     }
 
     @Transactional(readOnly = true)

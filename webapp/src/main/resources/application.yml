@@ -1,6 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5446/jbsrm
+    url: jdbc:postgresql://db:5432/jbsrm
+#    url: jdbc:postgresql://localhost:5446/jbsrm
     username: admin
     password: 123qwe123
   resources:
@@ -20,8 +21,8 @@ spring:
         order_inserts: true
         batch_fetch_style: DYNAMIC
         show_sql: true
-  liquibase.change-log: classpath:/db/changelog/liquibase-changelog.xml
-  logging.level.liquibase: INFO
+#  liquibase.change-log: classpath:/db/changelog/liquibase-changelog.xml
+#  logging.level.liquibase: INFO
 
 management:
   security:

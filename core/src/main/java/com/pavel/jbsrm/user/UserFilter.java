@@ -17,13 +17,4 @@ public class UserFilter {
     private Long companyId;
     private UserRole userRole;
     private Boolean deleted;
-
-    /*
-        {
-            "age": "2018-12-17",
-            "companyId": 2,
-            "userRole": "ADMIN",
-            "deleted": false
-        }
-     */
 }

@@ -3,13 +3,13 @@ package com.pavel.jbsrm.waybill.service;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
 import com.pavel.jbsrm.ttn.TtnState;
 import com.pavel.jbsrm.ttn.repository.TtnRepository;
-import com.pavel.jbsrm.waybill.CheckPointStatus;
-import com.pavel.jbsrm.waybill.Waybill;
+import com.pavel.jbsrm.waybill.*;
 import com.pavel.jbsrm.waybill.dto.CreateWaybillDto;
 import com.pavel.jbsrm.waybill.dto.UpdateWaybillDto;
 import com.pavel.jbsrm.waybill.dto.WaybillDto;
 import com.pavel.jbsrm.waybill.repository.CheckPointRepository;
 import com.pavel.jbsrm.waybill.repository.WaybillRepository;
+import com.querydsl.core.BooleanBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,6 +40,7 @@ public class WaybillServiceImpl implements WaybillService {
     @Override
     public WaybillDto create(@Valid CreateWaybillDto createWaybillDto) {
         Waybill waybill = ObjectMapperUtills.mapTo(createWaybillDto, Waybill.class);
+        waybill.setTtn(ttnRepository.getOne(createWaybillDto.getTtnId()));
         waybill.getCheckPoints().forEach(cp -> cp.setCheckPointStatus(CheckPointStatus.NOT_PASSED));
         waybill.getTtn().setTtnState(TtnState.TRANSPORTATION_STARTED);
 
@@ -51,6 +52,16 @@ public class WaybillServiceImpl implements WaybillService {
     public Optional<WaybillDto> update(long id, @Valid UpdateWaybillDto updateWaybillDto) {
         Waybill waybill = waybillRepository.getOne(id);
         ObjectMapperUtills.mapTo(updateWaybillDto, waybill);
+        waybill.setTtn(ttnRepository.getOne(updateWaybillDto.getTtnId()));
+        waybill.setId(id);
+        List<CheckPoint> checkPoints =waybill.getCheckPoints().stream()
+                .map(point -> {
+                    if (point.getCheckPointStatus() == null) {
+                        point.setCheckPointStatus(CheckPointStatus.NOT_PASSED);
+                    }
+                    return point;
+                }).collect(Collectors.toList());
+        waybill.setCheckPoints(checkPoints);
 
         return Optional.of(ObjectMapperUtills.mapTo(waybillRepository.save(waybill), WaybillDto.class));
     }
@@ -86,8 +97,22 @@ public class WaybillServiceImpl implements WaybillService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<WaybillDto> findAllPageByFilter(boolean deleted, Pageable pageable) {
-        return waybillRepository.findByDeleted(deleted, pageable)
+    public Page<WaybillDto> findAllPageByFilter(WaybillFilter filter, Pageable pageable) {
+        return waybillRepository.findAll(buildFilter(filter), pageable)
                 .map(waybill -> ObjectMapperUtills.mapTo(waybill, WaybillDto.class));
+    }
+
+    private BooleanBuilder buildFilter(WaybillFilter filter) {
+        BooleanBuilder whereBuilder = new BooleanBuilder();
+
+        if (filter != null) {
+            if (filter.getDeleted() != null) {
+                whereBuilder.and(QWaybill.waybill.deleted.eq(filter.getDeleted()));
+            }
+            if (filter.getTtnState() != null) {
+                whereBuilder.and(QWaybill.waybill.ttn.ttnState.eq(filter.getTtnState()));
+            }
+        }
+        return whereBuilder;
     }
 }

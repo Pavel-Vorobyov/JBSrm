@@ -2,13 +2,19 @@ package com.pavel.jbsrm.user.dto;
 
 import com.pavel.jbsrm.user.UserGender;
 import com.pavel.jbsrm.user.UserRole;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UpdateUserDto {
 
     @NotBlank

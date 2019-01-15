@@ -1,15 +1,19 @@
 package com.pavel.jbsrm.user;
 
+import com.pavel.jbsrm.common.auth.UserDetails;
 import com.pavel.jbsrm.user.dto.CreateUserDto;
 import com.pavel.jbsrm.user.dto.UpdateUserDto;
 import com.pavel.jbsrm.user.dto.UserDto;
 import com.pavel.jbsrm.user.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityExistsException;
 import java.util.List;
 
 @RestController
@@ -47,8 +51,16 @@ public class UserController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public UserDto create(@RequestBody CreateUserDto createDto) {
-        return userService.create(createDto);
+    public ResponseEntity<UserDto> create(@RequestBody CreateUserDto createDto) {
+        ResponseEntity<UserDto> userDto;
+        try {
+            userDto = ResponseEntity.ok().body(userService.create(createDto));
+        } catch (EntityExistsException e) {
+            userDto = ResponseEntity.status(HttpStatus.CONFLICT).build();
+        } catch (RuntimeException e) {
+            userDto = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return userDto;
     }
 
     @PutMapping("/{id}/delete")
@@ -56,5 +68,13 @@ public class UserController {
     public ResponseEntity<String> updateDeleted(@PathVariable long id, Boolean deleted) {
         userService.updateDeleted(id, deleted);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<?> profile() {
+        long currentUserId = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        return userService.find(currentUserId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 }

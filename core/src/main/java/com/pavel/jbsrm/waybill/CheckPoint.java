@@ -25,22 +25,18 @@ public class CheckPoint {
     private long id;
 
     @Size(max = 255)
-    @NotBlank
     @Column(name = "title")
     private String title;
 
-    @NotNull
     @Column(name = "lat")
     private double lat;
 
-    @NotNull
     @Column(name = "lng")
     private double lng;
 
     @Enumerated(EnumType.POSTGRES)
     private CheckPointStatus checkPointStatus;
 
-    @NotNull
     @Column(name = "deleted")
     private boolean deleted = false;
 }
