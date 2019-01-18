@@ -11,15 +11,13 @@ services:
       POSTGRES_DB: jbsrm
 
 #  jbsrb-static-server:
-#    image: "pashaby/jbsrm:jbsrm-static-server"
+#    image: "jbsrm-static-server:latest"
 #    container_name: jbsrm-server
 #    ports:
 #      - "50031:80"
-#    links:
-#      - jbsrb-rest-server
 #
 #  jbsrb-rest-server:
-#    image: "pashaby/jbsrm:jbsrm-rest-server"
+#    image: "jbsrm-rest-server:latest"
 #    container_name: jbsrm-rest-server
 #    depends_on:
 #      - db

@@ -62,8 +62,8 @@ public class CompanyController {
     }
 
     @PutMapping("/{id}/delete")
-    public ResponseEntity<String> updateDeleted(@PathVariable long id, Boolean deleted) {
-        companyService.updateDeleted(id, deleted);
+    public ResponseEntity<String> delete(@PathVariable long id) {
+        companyService.updateDeleted(id, true);
         return ResponseEntity.ok().build();
     }
 }

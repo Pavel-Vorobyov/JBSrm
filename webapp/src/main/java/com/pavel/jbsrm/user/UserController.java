@@ -65,8 +65,8 @@ public class UserController {
 
     @PutMapping("/{id}/delete")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<String> updateDeleted(@PathVariable long id, Boolean deleted) {
-        userService.updateDeleted(id, deleted);
+    public ResponseEntity<String> updateDeleted(@PathVariable long id) {
+        userService.updateDeleted(id, true);
         return ResponseEntity.ok().build();
     }
 
