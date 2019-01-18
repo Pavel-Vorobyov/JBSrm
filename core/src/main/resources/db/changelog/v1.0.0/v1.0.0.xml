@@ -5,15 +5,27 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="0001" author="pavel" runOnChange="true">
-        <sqlFile path="sql/db-company-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
-        <sqlFile path="sql/db-deed-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
-        <sqlFile path="sql/db-product-details-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
-        <sqlFile path="sql/db-product-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
-        <sqlFile path="sql/db-transport-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
-        <sqlFile path="sql/db-ttn-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
-        <sqlFile path="sql/db-ttn-products-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
-        <sqlFile path="sql/db-user-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
-        <sqlFile path="sql/db-waybill-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/schema/db-company-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/schema/db-deed-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/schema/db-product-details-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/schema/db-product-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/schema/db-transport-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/schema/db-ttn-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/schema/db-ttn-products-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/schema/db-user-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/schema/db-waybill-schema.sql" relativeToChangelogFile="true" splitStatements="false"/>
+    </changeSet>
+
+    <changeSet id="0001" author="pavel" runOnChange="true" context="dev">
+        <sqlFile path="sql/content/company.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/content/deed.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/content/product-details.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/content/product.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/content/transport.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/content/ttn.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/content/ttn-products.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/content/user.sql" relativeToChangelogFile="true" splitStatements="false"/>
+        <sqlFile path="sql/content/waybill.sql" relativeToChangelogFile="true" splitStatements="false"/>
     </changeSet>
 
 </databaseChangeLog>
