@@ -1,35 +1,42 @@
 package com.pavel.jbsrm.user;
 
 import com.pavel.jbsrm.auth.model.JwtCredentials;
-import com.pavel.jbsrm.auth.security.JwtTokenRealm;
-import com.pavel.jbsrm.common.auth.UserDetails;
-import com.pavel.jbsrm.user.repository.UserRepository;
+import com.pavel.jbsrm.auth.security.JwtProvider;
 import com.pavel.jbsrm.user.service.RegistrationLinkManager;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/account")
+@RequestMapping("api/auth")
 public class UserAccountController {
 
-    private UserRepository userRepository;
-    private JwtTokenRealm jwtTokenRealm;
+    private JwtProvider jwtProvider;
     private RegistrationLinkManager registrationLinkManager;
+    private AuthenticationManager authenticationManager;
 
-    public UserAccountController(UserRepository userRepository, JwtTokenRealm jwtTokenRealm, RegistrationLinkManager registrationLinkManager) {
-        this.userRepository = userRepository;
-        this.jwtTokenRealm = jwtTokenRealm;
+    public UserAccountController(JwtProvider jwtProvider, RegistrationLinkManager registrationLinkManager, AuthenticationManager authenticationManager) {
+        this.jwtProvider = jwtProvider;
         this.registrationLinkManager = registrationLinkManager;
+        this.authenticationManager = authenticationManager;
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody JwtCredentials credentials) {
-        return jwtTokenRealm.authenticate(credentials)
-                .map(ResponseEntity.ok()::body)
-                .orElse(ResponseEntity.status(HttpStatus.FORBIDDEN).build());
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        credentials.getEmail(),
+                        credentials.getPassword()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        return ResponseEntity.ok(jwtProvider.generateJwtToken(authentication));
     }
 
     @PostMapping("/register")

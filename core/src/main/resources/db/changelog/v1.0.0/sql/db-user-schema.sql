@@ -31,7 +31,7 @@ CREATE INDEX IF NOT EXISTS idx_fts_user ON users
 
 INSERT INTO users (password, name, surname, usergender, birthday, passport_series, passport_issued_by, email, phone, company_id, userrole, create_at, deleted)
 	SELECT
-	    '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8' AS password,
+	    '$2a$10$UTLE.wVGcZbTPp6i1UbuJeKMu35hQyUsRxTd7tt6KaWrSQCPCN0.6' AS password,
 		'name' || num AS name,
 		'surname' || num AS surname,
 		(
