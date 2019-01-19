@@ -1,5 +1,6 @@
 package com.pavel.jbsrm.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pavel.jbsrm.common.hibernate.EnumType;
 import com.pavel.jbsrm.common.hibernate.Enumerated;
 import com.pavel.jbsrm.company.Company;
@@ -24,6 +25,7 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
 
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 
