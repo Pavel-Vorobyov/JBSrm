@@ -1,6 +1,6 @@
 package com.pavel.jbsrm.user.service;
 
-import com.pavel.jbsrm.common.auth.UserDetails;
+import com.pavel.jbsrm.common.auth.UserPrinciple;
 import com.pavel.jbsrm.common.mail.MailSender;
 import com.pavel.jbsrm.common.mail.MailTemplate;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
         createUserDto.setPassword(StringConverter.getHash(createUserDto.getPassword()));
         User userToCreate = ObjectMapperUtills.mapTo(createUserDto, User.class);
 
-        User systemAdmin = userRepository.getOne(((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        User systemAdmin = userRepository.getOne(((UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
         userToCreate.setCompany(companyRepository.getOne(systemAdmin.getCompany().getId()));
         User user = userRepository.save(userToCreate);
 

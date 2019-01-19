@@ -1,6 +1,6 @@
 package com.pavel.jbsrm.auth.security;
 
-import com.pavel.jbsrm.auth.model.UserPrinciple;
+import com.pavel.jbsrm.common.auth.UserPrinciple;
 import com.pavel.jbsrm.user.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

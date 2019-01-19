@@ -1,8 +1,7 @@
 package com.pavel.jbsrm.ttn.service;
 
-import com.pavel.jbsrm.common.auth.UserDetails;
+import com.pavel.jbsrm.common.auth.UserPrinciple;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
-import com.pavel.jbsrm.company.dto.UpdateCompanyDto;
 import com.pavel.jbsrm.transport.repository.TransportRepository;
 import com.pavel.jbsrm.ttn.QTtn;
 import com.pavel.jbsrm.ttn.Ttn;
@@ -46,11 +45,11 @@ public class TtnServiceImpl implements TtnService {
     @Override
     public TtnDto create(@Valid CreateTtnDto createTtnDto) {
         Ttn ttn = ObjectMapperUtills.mapTo(createTtnDto, Ttn.class);
-        ttn.setCreatedBy(userRepository.findById(((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()).get());
+        ttn.setCreatedBy(userRepository.findById(((UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()).get());
         ttn.setDriver(userRepository.findById(createTtnDto.getDriverId()).get());
         ttn.setTransport(transportRepository.findById(createTtnDto.getTransportId()).get());
         ttn.setTtnState(TtnState.ACCEPTED);
-        ttn.getCreatedBy().setId(((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        ttn.getCreatedBy().setId(((UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
         ttn.getDriver().setId(createTtnDto.getDriverId());
         ttn.getTransport().setId(createTtnDto.getTransportId());
         return ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class);
