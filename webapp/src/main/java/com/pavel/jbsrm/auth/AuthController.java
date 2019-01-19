@@ -1,26 +1,26 @@
-package com.pavel.jbsrm.user;
+package com.pavel.jbsrm.auth;
 
 import com.pavel.jbsrm.auth.model.JwtCredentials;
 import com.pavel.jbsrm.auth.security.JwtProvider;
-import com.pavel.jbsrm.user.service.RegistrationLinkManager;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/auth")
-public class UserAccountController {
+public class AuthController {
 
     private JwtProvider jwtProvider;
-    private RegistrationLinkManager registrationLinkManager;
     private AuthenticationManager authenticationManager;
 
-    public UserAccountController(JwtProvider jwtProvider, RegistrationLinkManager registrationLinkManager, AuthenticationManager authenticationManager) {
+    public AuthController(JwtProvider jwtProvider, AuthenticationManager authenticationManager) {
         this.jwtProvider = jwtProvider;
-        this.registrationLinkManager = registrationLinkManager;
         this.authenticationManager = authenticationManager;
     }
 
@@ -37,10 +37,5 @@ public class UserAccountController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         return ResponseEntity.ok(jwtProvider.generateJwtToken(authentication));
-    }
-
-    @PostMapping("/register")
-    public boolean register(long id, String key) {
-        return registrationLinkManager.verify(id, key);
     }
 }
