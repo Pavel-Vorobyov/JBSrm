@@ -1,7 +1,10 @@
 package com.pavel.jbsrm.auth;
 
+import com.pavel.jbsrm.auth.model.AuthUser;
 import com.pavel.jbsrm.auth.model.JwtCredentials;
 import com.pavel.jbsrm.auth.security.JwtProvider;
+import com.pavel.jbsrm.common.auth.UserPrinciple;
+import com.pavel.jbsrm.user.UserRole;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,7 +38,13 @@ public class AuthController {
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = jwtProvider.generateJwtToken(authentication);
+        UserRole userRole = ((UserPrinciple) authentication.getPrincipal()).getUserRole();
 
-        return ResponseEntity.ok(jwtProvider.generateJwtToken(authentication));
+        return ResponseEntity.ok(AuthUser.builder()
+                .token(token)
+                .tokenType("Bearer")
+                .userRole(userRole)
+                .build());
     }
 }

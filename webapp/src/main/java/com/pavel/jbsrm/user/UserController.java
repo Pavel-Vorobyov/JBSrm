@@ -1,6 +1,6 @@
 package com.pavel.jbsrm.user;
 
-import com.pavel.jbsrm.common.auth.UserDetails;
+import com.pavel.jbsrm.common.auth.UserPrinciple;
 import com.pavel.jbsrm.user.dto.CreateUserDto;
 import com.pavel.jbsrm.user.dto.UpdateUserDto;
 import com.pavel.jbsrm.user.dto.UserDto;
@@ -72,7 +72,7 @@ public class UserController {
 
     @GetMapping("/profile")
     public ResponseEntity<?> profile() {
-        long currentUserId = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        long currentUserId = ((UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         return userService.find(currentUserId)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());

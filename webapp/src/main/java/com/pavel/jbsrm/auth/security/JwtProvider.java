@@ -1,6 +1,6 @@
 package com.pavel.jbsrm.auth.security;
 
-import com.pavel.jbsrm.auth.model.UserPrinciple;
+import com.pavel.jbsrm.common.auth.UserPrinciple;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
