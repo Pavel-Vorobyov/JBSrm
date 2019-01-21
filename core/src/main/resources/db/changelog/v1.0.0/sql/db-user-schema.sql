@@ -4,8 +4,7 @@ CREATE TYPE user_gender AS ENUM ('MALE', 'FEMALE');
 DROP TYPE IF EXISTS user_role CASCADE;
 CREATE TYPE user_role AS ENUM ('ROLE_SYSTEM_ADMIN', 'ROLE_ADMIN', 'ROLE_DISPATCHER', 'ROLE_MANAGER', 'ROLE_DRIVER');
 
-DROP TABLE IF EXISTS "user";
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE IF NOT EXISTS users
 (
 	id serial PRIMARY KEY,
@@ -76,6 +75,6 @@ INSERT INTO users (password, name, surname, usergender, birthday, passport_serie
 	FROM GENERATE_SERIES(1, 300) num;
 
 INSERT INTO users (password, email, userrole, deleted)
-    values ('5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'admin@gmail.com', 'ROLE_ADMIN', false);
+    values ('$2a$10$UTLE.wVGcZbTPp6i1UbuJeKMu35hQyUsRxTd7tt6KaWrSQCPCN0.6', 'admin@gmail.com', 'ROLE_ADMIN', false);
 INSERT INTO users (password, email, userrole, deleted)
-    values ('5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'driver@gmail.com', 'ROLE_DRIVER', false);
+    values ('$2a$10$UTLE.wVGcZbTPp6i1UbuJeKMu35hQyUsRxTd7tt6KaWrSQCPCN0.6', 'driver@gmail.com', 'ROLE_DRIVER', false);
