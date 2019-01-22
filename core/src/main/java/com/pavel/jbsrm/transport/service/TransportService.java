@@ -2,6 +2,7 @@ package com.pavel.jbsrm.transport.service;
 
 import com.pavel.jbsrm.transport.dto.CreateTransportDto;
 import com.pavel.jbsrm.transport.dto.TransportDto;
+import com.pavel.jbsrm.transport.TransportFilter;
 import com.pavel.jbsrm.transport.dto.UpdateTransportDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,5 +25,5 @@ public interface TransportService {
 
     List<TransportDto> findAllByPropsMatch(String searchParams);
 
-    Page<TransportDto> findAllPageByFilter(boolean deleted, Pageable pageable);
+    Page<TransportDto> findAllPageByFilter(TransportFilter filter, Pageable pageable);
 }

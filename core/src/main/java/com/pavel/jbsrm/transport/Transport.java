@@ -42,6 +42,9 @@ public class Transport {
     @JoinColumn(name = "company_id")
     private Company owner;
 
+    @Enumerated(EnumType.POSTGRES)
+    private TransportState transportState;
+
     @NotNull
     @Column(name = "deleted")
     private boolean deleted;

@@ -14,6 +14,7 @@ public class UpdateProductDto {
     private ProductState productState;
     @NotNull
     private int amount;
+    private int deed;
     @NotNull
     private boolean deleted;
 }

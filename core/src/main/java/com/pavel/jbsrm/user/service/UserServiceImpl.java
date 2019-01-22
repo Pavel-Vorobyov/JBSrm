@@ -17,6 +17,8 @@ import com.querydsl.core.BooleanBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +32,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@EnableAsync
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
@@ -58,14 +61,20 @@ public class UserServiceImpl implements UserService {
         userToCreate.setCompany(companyRepository.getOne(systemAdmin.getCompany().getId()));
         User user = userRepository.save(userToCreate);
 
-        linkManager.getLink(user.getId())
-                .ifPresent(link -> mailSender.sendMail(MailTemplate.builder()
-                        .to(createUserDto.getEmail())
-                        .subject("Verification")
-                        .text(linkManager.getLink(user.getId()).orElse("Something goes bad..."))
-                        .build()));
+        sendMail(user.getId(),
+                MailTemplate.builder()
+                .to(createUserDto.getEmail())
+                .subject("Verification")
+                .text(linkManager.getLink(user.getId()).orElse("Something goes bad..."))
+                .build());
 
         return ObjectMapperUtills.mapTo(user, UserDto.class);
+    }
+
+    @Async
+    private void sendMail(long userId, MailTemplate mail) {
+        linkManager.getLink(userId)
+                .ifPresent(link -> mailSender.sendMail(mail));
     }
 
     @Transactional

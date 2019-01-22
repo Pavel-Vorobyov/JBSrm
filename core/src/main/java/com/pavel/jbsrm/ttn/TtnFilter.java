@@ -6,4 +6,5 @@ import lombok.Data;
 public class TtnFilter {
 
     private Boolean deleted;
+    private TtnState ttnState;
 }

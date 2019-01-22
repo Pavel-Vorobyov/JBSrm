@@ -1,5 +1,6 @@
 package com.pavel.jbsrm.transport.dto;
 
+import com.pavel.jbsrm.transport.TransportState;
 import com.pavel.jbsrm.transport.TransportType;
 import lombok.Data;
 
@@ -16,5 +17,6 @@ public class UpdateTransportDto {
     private int consumption;
     @NotNull
     private long ownerId;
+    private TransportState transportState;
     private boolean deleted;
 }

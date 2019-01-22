@@ -3,7 +3,17 @@ DROP TABLE IF EXISTS transport;
 DROP TYPE IF EXISTS transport_type CASCADE;
 CREATE TYPE transport_type AS ENUM ('COVERED_BODY', 'REFRIGERATOR', 'TANK');
 
+DROP TYPE IF EXISTS transport_state CASCADE;
+CREATE TYPE transport_state AS ENUM ('FREE', 'BUSY');
+
 create or replace function as_text(i transport_type)
+returns text as $$
+begin
+		return i::text;
+end;
+$$ language 'plpgsql' immutable;
+
+create or replace function as_text(i transport_state)
 returns text as $$
 begin
 		return i::text;
@@ -17,22 +27,23 @@ CREATE TABLE IF NOT EXISTS transport
 	bodytype transport_type,
 	consumption INTEGER NOT NULL,
 	company_id serial,
+	transportstate transport_state,
 	deleted BOOLEAN NOT NULL
 );
 
 CREATE INDEX IF NOT EXISTS idx_fts_transport ON transport
-  USING gin(as_tsvector(id::TEXT, title, as_text(bodytype), consumption::TEXT, company_id::TEXT));
+  USING gin(as_tsvector(id::TEXT, title, as_text(bodytype), consumption::TEXT, company_id::TEXT, as_text(transportstate)));
 
-INSERT INTO transport (title, bodytype, consumption, company_id, deleted)
+INSERT INTO transport (title, bodytype, consumption, company_id, transportstate, deleted)
 	SELECT
 	    'title' || num AS title,
 		(
 			CASE (RANDOM() * 2)::INT
-				WHEN 0 THEN 'COVERED_BODY'::transport_type
-				WHEN 1 THEN 'REFRIGERATOR'::transport_type
-				WHEN 2 THEN 'TANK'::transport_type
+				WHEN 0 THEN 'COVERED_BODY'
+				WHEN 1 THEN 'REFRIGERATOR'
+				WHEN 2 THEN 'TANK'
 			END
-		) AS bodytype,
+		)::transport_type AS bodytype,
 		(
 			CASE (RANDOM() * 2)::INT
 				WHEN 0 THEN 50
@@ -41,6 +52,13 @@ INSERT INTO transport (title, bodytype, consumption, company_id, deleted)
 			END
 		) AS consumption,
 		num AS company_id,
+																										 (
+			CASE (RANDOM() * 2)::INT
+				WHEN 0 THEN 'FREE'
+				WHEN 1 THEN 'FREE'
+				WHEN 2 THEN 'BUSY'
+			END
+		)::transport_state AS transportstate,
 		(
 			CASE (RANDOM() * 2)::INT
 				WHEN 0 THEN true
@@ -48,4 +66,5 @@ INSERT INTO transport (title, bodytype, consumption, company_id, deleted)
 				WHEN 2 THEN true
 			END
 		) AS deleted
+
 	FROM GENERATE_SERIES(1, 300) num;

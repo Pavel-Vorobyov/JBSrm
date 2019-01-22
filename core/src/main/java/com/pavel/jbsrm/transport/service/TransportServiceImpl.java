@@ -2,12 +2,14 @@ package com.pavel.jbsrm.transport.service;
 
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
 import com.pavel.jbsrm.company.repository.CompanyRepository;
+import com.pavel.jbsrm.transport.QTransport;
 import com.pavel.jbsrm.transport.Transport;
 import com.pavel.jbsrm.transport.dto.CreateTransportDto;
 import com.pavel.jbsrm.transport.dto.TransportDto;
+import com.pavel.jbsrm.transport.TransportFilter;
 import com.pavel.jbsrm.transport.dto.UpdateTransportDto;
 import com.pavel.jbsrm.transport.repository.TransportRepository;
-import com.pavel.jbsrm.user.repository.UserRepository;
+import com.querydsl.core.BooleanBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -78,8 +80,22 @@ public class TransportServiceImpl implements TransportService {
     }
 
     @Override
-    public Page<TransportDto> findAllPageByFilter(boolean deleted, Pageable pageable) {
-        return transportRepository.findByDeleted(deleted, pageable)
+    public Page<TransportDto> findAllPageByFilter(TransportFilter filter, Pageable pageable) {
+        return transportRepository.findAll(buildFilter(filter), pageable)
                 .map(transport -> ObjectMapperUtills.mapTo(transport, TransportDto.class));
+    }
+
+    private BooleanBuilder buildFilter(TransportFilter filter) {
+        BooleanBuilder whereBuilder = new BooleanBuilder();
+
+        if (filter != null) {
+            if (filter.getDeleted() != null) {
+                whereBuilder.and(QTransport.transport.deleted.eq(filter.getDeleted()));
+            }
+            if (filter.getTransportState() != null) {
+                whereBuilder.and(QTransport.transport.transportState.eq(filter.getTransportState()));
+            }
+        }
+        return whereBuilder;
     }
 }

@@ -13,10 +13,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WaybillRepositoryImpl extends QuerydslRepositorySupport implements WaybillRepositoryCustom {
-    private String queryStart = "select w.id, w.created_at, w.start_date, w.end_date, t.ttnstate " +
-            "\tfrom waybill as w \n" +
+    private String queryStart = "select w.id, w.created_at, w.start_date, w.end_date, t.ttnstate \tfrom waybill as w \n" +
             "\tleft join ttn as t on t.id = w.ttn_id\n" +
-            "\twhere as_tsvector(as_text(w.id)) @@ to_tsquery('";
+            "\tleft join transport as tr on tr.id = w.transport_id\n" +
+            "\tleft join users as u on u.id = t.driver_id\n" +
+            "\twhere as_tsvector(as_text(w.id), tr.title, as_text(tr.consumption), u.\"name\", u.surname) @@ to_tsquery('";
     private String queryEnd = "') LIMIT (10);";
 
     @PersistenceContext

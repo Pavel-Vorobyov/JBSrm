@@ -10,8 +10,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductDetailsRepositoryImpl extends QuerydslRepositorySupport implements ProductDetailsRepositoryCustom {
-    private String queryStart = "select id, title, description, price, requiredtype, deleted from product_details " +
-            "where as_tsvector(as_text(id), as_text(requiredtype), title, as_text(deleted)) @@ to_tsquery('";
+    private String queryStart = "select pd.id, pd.title, pd.description, pd.price, pd.requiredtype, pd.deleted \n" +
+            "\tfrom product_details as pd\n" +
+            "\twhere as_tsvector(as_text(pd.id), as_text(pd.requiredtype), pd.title, as_text(pd.deleted), as_text(pd.price)) @@ to_tsquery('";
     private String queryEnd = "') LIMIT (10);";
 
     @PersistenceContext

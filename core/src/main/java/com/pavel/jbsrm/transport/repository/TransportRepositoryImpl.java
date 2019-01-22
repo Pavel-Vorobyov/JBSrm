@@ -11,9 +11,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TransportRepositoryImpl extends QuerydslRepositorySupport implements TransportRepositoryCustom {
-    private String queryStart = "select id, title, bodytype, consumption, company_id, deleted from transport " +
-            "where as_tsvector(as_text(id), title, as_text(bodytype), as_text(consumption), as_text(company_id)) @@ to_tsquery('";
-    private String queryEnd = "') LIMIT (10);";//todo body_type
+    private String queryStart = "select t.id, t.title, t.bodytype, t.consumption, t.company_id, t.transportstate, t.deleted \n" +
+            "\tfrom transport as t\n" +
+            "\twhere as_tsvector(as_text(t.id), t.title, as_text(t.bodytype), as_text(t.consumption), as_text(t.company_id), as_text(t.transportstate)) @@ to_tsquery('";
+    private String queryEnd = "') LIMIT (10);";
 
     @PersistenceContext
     private EntityManager entityManager;
