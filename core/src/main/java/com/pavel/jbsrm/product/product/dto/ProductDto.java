@@ -10,6 +10,7 @@ public class ProductDto {
     private long id;
     private ProductDetails productDetails;
     private int amount;
+    private int deed;
     private ProductState productState;
     private boolean deleted;
 }

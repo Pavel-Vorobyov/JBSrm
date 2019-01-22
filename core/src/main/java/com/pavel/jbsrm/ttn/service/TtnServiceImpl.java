@@ -2,6 +2,7 @@ package com.pavel.jbsrm.ttn.service;
 
 import com.pavel.jbsrm.common.auth.UserPrinciple;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
+import com.pavel.jbsrm.transport.TransportState;
 import com.pavel.jbsrm.transport.repository.TransportRepository;
 import com.pavel.jbsrm.ttn.QTtn;
 import com.pavel.jbsrm.ttn.Ttn;
@@ -52,6 +53,7 @@ public class TtnServiceImpl implements TtnService {
         ttn.getCreatedBy().setId(((UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
         ttn.getDriver().setId(createTtnDto.getDriverId());
         ttn.getTransport().setId(createTtnDto.getTransportId());
+        ttn.getTransport().setTransportState(TransportState.BUSY);
         return ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class);
     }
 
@@ -112,6 +114,9 @@ public class TtnServiceImpl implements TtnService {
         if (filter != null) {
             if (filter.getDeleted() != null) {
                 whereBuilder.and(QTtn.ttn.deleted.eq(filter.getDeleted()));
+            }
+            if (filter.getTtnState() != null) {
+                whereBuilder.and(QTtn.ttn.ttnState.eq(filter.getTtnState()));
             }
         }
         return whereBuilder;

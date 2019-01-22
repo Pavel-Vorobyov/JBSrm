@@ -1,6 +1,7 @@
 package com.pavel.jbsrm.waybill.service;
 
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
+import com.pavel.jbsrm.transport.TransportState;
 import com.pavel.jbsrm.ttn.TtnState;
 import com.pavel.jbsrm.ttn.repository.TtnRepository;
 import com.pavel.jbsrm.waybill.*;
@@ -54,14 +55,18 @@ public class WaybillServiceImpl implements WaybillService {
         ObjectMapperUtills.mapTo(updateWaybillDto, waybill);
         waybill.setTtn(ttnRepository.getOne(updateWaybillDto.getTtnId()));
         waybill.setId(id);
+        waybill.getTtn().setId(updateWaybillDto.getTtnId());
         List<CheckPoint> checkPoints =waybill.getCheckPoints().stream()
-                .map(point -> {
+                .peek(point -> {
                     if (point.getCheckPointStatus() == null) {
                         point.setCheckPointStatus(CheckPointStatus.NOT_PASSED);
                     }
-                    return point;
                 }).collect(Collectors.toList());
         waybill.setCheckPoints(checkPoints);
+
+        if (updateWaybillDto.getTtnState().equals(TtnState.DELIVERED)) {
+            waybill.getTtn().getTransport().setTransportState(TransportState.FREE);
+        }
 
         return Optional.of(ObjectMapperUtills.mapTo(waybillRepository.save(waybill), WaybillDto.class));
     }
@@ -86,7 +91,7 @@ public class WaybillServiceImpl implements WaybillService {
         if (!StringUtils.isBlank(searchParams)) {
 
             List<String> list = Arrays.stream(searchParams.trim().split(" "))
-                    .filter(s -> !s.equals("")) //todo !s.equals("") check
+                    .filter(s -> !s.equals(""))
                     .collect(Collectors.toList());
 
             waybillRepository.findAllByPropsMatch(list)

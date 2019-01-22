@@ -66,7 +66,7 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
                     .collect(Collectors.toList());
 
             productDetailsRepository.findAllByPropsMatch(list)
-                    .forEach(c -> result.add(ObjectMapperUtills.mapTo(c, ProductDetailsDto.class)));
+                    .forEach(product -> result.add(ObjectMapperUtills.mapTo(product, ProductDetailsDto.class)));
         }
         return result;
     }

@@ -23,19 +23,19 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "product_details_id")
     private ProductDetails productDetails;
 
-    @NotNull
     @Column(name = "amount")
     private int amount;
+
+    @Column(name = "deed")
+    private int deed;
 
     @Enumerated(EnumType.POSTGRES)
     private ProductState productState;
 
-    @NotNull
     @Column(name = "deleted")
     private boolean deleted;
 }

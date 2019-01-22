@@ -1,6 +1,5 @@
 package com.pavel.jbsrm.waybill;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pavel.jbsrm.ttn.Ttn;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

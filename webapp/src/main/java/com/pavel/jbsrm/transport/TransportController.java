@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 @RestController
@@ -39,9 +38,8 @@ public class TransportController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public Page<TransportDto> findAll(@Nullable @RequestParam Boolean deleted, Pageable pageable) {
-        deleted = deleted == null ? false : deleted;
-        return userService.findAllPageByFilter(deleted, pageable);
+    public Page<TransportDto> findAll(TransportFilter filter, Pageable pageable) {
+        return userService.findAllPageByFilter(filter, pageable);
     }
 
     @PutMapping("/{id}")

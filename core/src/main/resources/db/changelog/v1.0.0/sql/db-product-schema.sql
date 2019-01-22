@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS product
 (
 	id serial PRIMARY KEY,
     product_details_id serial NOT NULL,
-	amount INTEGER ,
+	amount INTEGER,
+	deed INTEGER,
 	productstate product_state,
 	deleted BOOLEAN NOT NULL
 );
@@ -14,7 +15,7 @@ CREATE TABLE IF NOT EXISTS product
 CREATE INDEX IF NOT EXISTS idx_fts_product ON product
   USING gin(as_tsvector(id::TEXT));
 
-INSERT INTO product (product_details_id, amount, productstate, deleted)
+INSERT INTO product (product_details_id, amount, deed, productstate, deleted)
 	SELECT
 		num AS product_details_id,
 		(
@@ -25,6 +26,14 @@ INSERT INTO product (product_details_id, amount, productstate, deleted)
 				WHEN 3 THEN 200
 			END
 		) AS amount,
+		(
+			CASE (RANDOM() * 3)::INT
+				WHEN 0 THEN 5
+				WHEN 1 THEN 10
+				WHEN 2 THEN 15
+				WHEN 3 THEN 20
+			END
+		) AS deed,
 		(
 			CASE (RANDOM() * 3)::INT
 				WHEN 0 THEN 'ACCEPTED'
