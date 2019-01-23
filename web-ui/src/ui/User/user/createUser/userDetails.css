@@ -1,0 +1,15 @@
+.create-user-conteiner {
+    margin: auto;
+    max-width: 360px;
+    margin-top: 50px;
+    padding: 20px;
+    height: 211px;
+}
+
+.TextField {
+
+}
+
+.TextFieldSelect {
+    width: 200px;
+}

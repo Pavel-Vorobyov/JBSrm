@@ -1,0 +1,15 @@
+.product-details {
+    margin: auto;
+    max-width: 400px;
+    margin-top: 50px;
+    padding: 20px;
+    height: 422px;
+}
+
+.TextField {
+
+}
+
+.TextFieldSelect {
+    width: 200px;
+}

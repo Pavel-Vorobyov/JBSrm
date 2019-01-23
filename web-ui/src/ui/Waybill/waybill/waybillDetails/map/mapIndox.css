@@ -1,0 +1,54 @@
+.MapInboxWrapper {
+    position: fixed;
+    right: 0;
+    top: 20%;
+    margin-right: 40px;
+}
+
+.MapInbox {
+    background-color: white;
+    border-radius: 8px;
+    text-align: left;
+    padding: 10px;
+    margin-top: 10px;
+    box-shadow: 4px 4px 5px rgba(0,0,0,0.2);
+    overflow: auto;
+}
+
+.MarkInbox {
+    padding: 10px;
+    margin: 0;
+    display: inline-block;
+    width: 180px;
+}
+
+.delete-button {
+    float: right;
+    margin-right: 12px;
+}
+
+.mark-wrapper:hover {
+    background-color: rgba(0, 0, 0, 0.07)
+} 
+
+.TtnDetails {
+    margin: auto;
+    max-width: 400px;
+    margin-top: 50px;
+    padding: 20px;
+    height: 525px;
+    margin-right: 40px;
+}
+
+.text-field {
+    width: 260px;
+    text-align: left;
+    padding: 5px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.closeButton {
+    float: right;
+    text-decoration: none;
+}

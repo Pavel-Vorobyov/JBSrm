@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+  /* background-color: #f9f9f9; */
+  /* min-height: 1080px; */
+}
+
+.background-video {
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  position: fixed;
+}
+
+.fullscreen-bg {
+  overflow: hidden;
+  z-index: -100;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+.fullscreen-bg__video {
+  position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
