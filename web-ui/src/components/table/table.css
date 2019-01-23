@@ -1,0 +1,9 @@
+.item-link {
+    text-decoration: none;
+    color: black;
+}
+
+.item-link:hover {
+    color: black;
+    cursor: default;
+}

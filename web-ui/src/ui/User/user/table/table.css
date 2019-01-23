@@ -1,0 +1,22 @@
+.item-link {
+    text-decoration: none;
+    color: black;
+}
+
+.item-link:hover {
+    color: black;
+    cursor: default;
+}
+
+.prop-menu {
+    width: 250px
+}
+
+.prop-option {
+    font-size: 20px;
+    cursor: default;
+}
+
+.prop-option {
+    
+}

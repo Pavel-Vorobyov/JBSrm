@@ -1,0 +1,38 @@
+.deed-details {
+    margin: auto;
+    width: 379px;
+    margin-top: 50px;
+    padding: 20px;
+    height: 415px;
+}
+
+.TtnProducts {
+    margin: auto;
+    max-width: 1200px;
+    min-width: 812px;
+    margin-top: 50px;
+    padding: 20px;
+    height: 525px;
+    float: right;
+    margin-right: 40px;
+}
+
+.TextField {
+    width: 212px;
+    text-align: left;
+    padding: 5px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.TextFieldSelect {
+    width: 200px;
+}
+
+.DriverDetails {
+    margin-top: 45px;
+    text-align: left;
+    padding: 5px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.7);
+}

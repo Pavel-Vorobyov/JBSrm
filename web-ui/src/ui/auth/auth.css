@@ -1,0 +1,29 @@
+.main-conteiner {
+    position: absolute;
+    /* background-color: #82b1ff; */
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100vw;
+    height: 100vh;
+    padding-top: 12%;
+}
+
+.auth-conteiner {
+    background-color: rgb(250, 250, 250);
+    height: 249px;
+    width: 350px;
+    margin: auto;
+    box-shadow: 0 0 15px grey;
+    padding-left: 50px;
+    border-radius: 15px;
+}
+
+.login-title{
+    font-size: 27px;
+    font-weight: 600;
+    color: rgba(47, 63, 89, 0.9);
+    text-align: center;
+    width: 248px;
+    padding: 10px;
+    background-color: #bcd5ff;
+    border-radius: 0 0 15px 15px;
+}

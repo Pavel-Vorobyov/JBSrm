@@ -1,0 +1,33 @@
+.analytics-content {
+}
+
+.total {
+    width: 1200px;
+    min-height: 100px;
+    text-align: left;
+    padding: 20px;
+    margin: auto;
+    margin-top: 150px;
+}
+
+.switch-buttons {
+    height: 50px;
+    width: 100%;
+    margin-top: 100px;
+    text-align: left;
+}
+
+.switch-button {
+    margin-left: 20px;
+}
+
+.graphic {
+    width: 580px;
+    height: 420px;
+    
+    display: inline-block;
+}
+
+.default-wrapper {
+    width: 100%;
+}

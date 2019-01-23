@@ -1,0 +1,30 @@
+.Auth {
+    width: 250px;
+    height: 100px;
+    background-color: salmon;
+    margin: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    border-radius: 10px;
+}
+
+.Auth input {
+    margin-left: 7px;
+    margin-right: 6px;
+    margin-top: 32px;
+    display: inline-block;
+}
+
+.Auth button {
+    display: inline-block;
+}
+
+.Auth p {
+    margin: 0;
+    padding: 0;
+    font: lighter;
+    font-size: 20px;
+    background-color: whitesmoke;
+    border-radius: 10px 10px 0 0;
+    padding-left: 57px;
+}

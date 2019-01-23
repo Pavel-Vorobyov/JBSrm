@@ -1,0 +1,50 @@
+.TransportDetails {
+    margin: auto;
+    max-width: 400px;
+    margin-top: 50px;
+    padding: 20px;
+    height: 364px;
+}
+
+.TextField {
+
+}
+
+.TextFieldSelect {
+    width: 200px;
+}
+
+.transport-owner {
+    text-align: left;
+    margin: 10px;
+    margin-left: 28px;
+    width: 303px;
+}
+
+.transport-owner-name {
+    width: 223px;
+    display: inline-block;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0,0,0,0.4);
+}
+
+.owner-picker {
+    display: inline-block;
+    float: right;
+    text-decoration: none;
+    padding: 5px;
+    cursor: default;
+    background-color: rgba(0, 0, 0, 0.1)
+}
+
+.owner-picker:hover {
+    background-color: rgba(0, 0, 0, 0.4)
+}
+
+.modal-select-owner {
+    width: 300px;
+    top: 32%;
+    position: relative;
+    left: 45%;
+    padding: 10px;
+}
