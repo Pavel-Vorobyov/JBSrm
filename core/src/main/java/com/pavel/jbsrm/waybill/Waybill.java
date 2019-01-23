@@ -48,7 +48,7 @@ public class Waybill {
     })
     @JoinTable(name = "waybill_checkpoints",
             joinColumns = @JoinColumn(name = "waybill_id"),
-            inverseJoinColumns = @JoinColumn(name = "checkpoint_id"))
+            inverseJoinColumns = @JoinColumn(name = "check_point_id"))
     @BatchSize(size = 50)
     private List<CheckPoint> checkPoints = new ArrayList<>();
 

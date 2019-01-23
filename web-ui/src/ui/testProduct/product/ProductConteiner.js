@@ -56,6 +56,7 @@ class TestTable extends Component {
                 </Grid>
                 <Grid item xs style={{marginLeft: '10px'}}>
                     <QuickSearch 
+                        placeholder="Search by title, price or required type..."
                         searchQuery={'/api/product-details/quickSearch/'} 
                         handleClick={this.handleDetailsClick}
                         objectMappingResult={{

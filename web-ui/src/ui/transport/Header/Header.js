@@ -55,6 +55,10 @@ class Header extends React.Component {
     this.setState({ anchorEl: event.currentTarget });
   };
 
+  handleClose = event => {
+    this.setState({ anchorEl: null })
+  }
+
   handleLogout() {
       localStorage.removeItem('token');
       localStorage.removeItem('userRole');

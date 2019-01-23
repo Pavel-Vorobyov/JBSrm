@@ -171,7 +171,7 @@ class NavigationWrapper extends Component {
             { id: 'Ttn', icon: <DescriptionIcon />, to: '/ttn' },
             { id: 'Transport', icon: <PermMediaOutlinedIcon />, to: '/transport' },
             { id: 'Waybill', icon: <PermMediaOutlinedIcon />, to: '/waybill' },
-            { id: 'Deed', icon: <PermMediaOutlinedIcon />, to: '/deed' }
+            // { id: 'Deed', icon: <PermMediaOutlinedIcon />, to: '/deed' }
           ],
         },
         {
@@ -192,7 +192,7 @@ class NavigationWrapper extends Component {
         id: 'Driver',
         children: [
           { id: 'Waybill', icon: <PermMediaOutlinedIcon />, to: '/waybill', active: true  },
-          { id: 'Deed', icon: <PermMediaOutlinedIcon />, to: '/deed'}
+          // { id: 'Deed', icon: <PermMediaOutlinedIcon />, to: '/deed'}
         ],
       },
     ];
@@ -224,7 +224,7 @@ class NavigationWrapper extends Component {
               { id: 'Ttn', icon: <DescriptionIcon />, to: '/ttn' },
               { id: 'Transport', icon: <PermMediaOutlinedIcon />, to: '/transport' },
               { id: 'Waybill', icon: <PermMediaOutlinedIcon />, to: '/waybill' },
-              { id: 'Deed', icon: <PermMediaOutlinedIcon />, to: '/deed' }
+              // { id: 'Deed', icon: <PermMediaOutlinedIcon />, to: '/deed' }
             ],
           },
           {
@@ -255,7 +255,7 @@ class NavigationWrapper extends Component {
                 { id: 'Ttn', icon: <DescriptionIcon />, to: '/ttn' },
                 { id: 'Transport', icon: <PermMediaOutlinedIcon />, to: '/transport' },
                 { id: 'Waybill', icon: <PermMediaOutlinedIcon />, to: '/waybill' },
-                { id: 'Deed', icon: <PermMediaOutlinedIcon />, to: '/deed' }
+                // { id: 'Deed', icon: <PermMediaOutlinedIcon />, to: '/deed' }
               ],
             },
             {
@@ -278,7 +278,7 @@ class NavigationWrapper extends Component {
               id: 'Driver',
               children: [
                 { id: 'Waybill', icon: <PermMediaOutlinedIcon />, to: '/waybill' },
-                { id: 'Deed', icon: <PermMediaOutlinedIcon />, to: '/deed' }
+                // { id: 'Deed', icon: <PermMediaOutlinedIcon />, to: '/deed' }
               ],
             },
           ];

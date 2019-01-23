@@ -203,7 +203,7 @@ let EnhancedTableToolbar = props => {
               id="standard-select-currency-native"
               select
               style={{marginRight: '20px'}}
-              label="Transport state"
+              label="Ttn state"
               value={propsValue.ttnState}
               className='table-search-props'
               onChange={(event) => props.handlePropChange('ttnState', event)}
@@ -414,7 +414,7 @@ class EnhancedTable extends React.Component {
                         Object.keys(this.props.rowColums).map( (name, index) => {
                           if (name !== 'id') {
                             if (index === 0) {
-                              return (<TableCell component="th" scope="row" padding="none">
+                              return (<TableCell component="th" scope="row"  padding="none">
                                         <a className='item-link' onClick={() => this.props.rowOnClick(n.id)}>{n[name]}</a>
                                       </TableCell>)
                             } else {

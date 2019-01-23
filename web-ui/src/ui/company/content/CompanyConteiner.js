@@ -10,7 +10,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 
 import '../../common/contentTable.css';
 
-import Table from '../../../components/table/table';
+import Table from './table/table';
 import QuickSearch from '../../../components/quickSearch/QuickSearch';
 
 class TestTable extends Component {
@@ -56,8 +56,9 @@ class TestTable extends Component {
                 </Grid>
                 <Grid item xs style={{marginLeft: '10px'}}>
                     <QuickSearch 
+                        placeholder="Search by title, email address or phone number..."
                         searchQuery={'/api/companies/quickSearch/'} 
-                        handleClick={this.handleDetailsClick}
+                        handleClick={(id) => this.handleDetailsClick(id)}
                         objectMappingResult={{
                             title: 'Title:',
                             email:'Email:',
@@ -67,6 +68,11 @@ class TestTable extends Component {
             </Toolbar>
         </div>
     )
+
+    handleDetailsClick = id => {
+        let currentPath = this.props.history.location.pathname;
+        this.props.history.push(currentPath + '/update/' + id);
+    }
 
     componentWillMount() {
         console.log(window.origin)
@@ -136,12 +142,24 @@ class TestTable extends Component {
 
     };
 
+    handlePropChange = (name, event) => {
+        let companyFilter = this.state.companyFilter;
+        companyFilter[name] = event.target.value;
+        this.setState({
+            companyFilter: companyFilter,
+          });
+        this.updatePage(0, null);
+    }
+
     render() {
 
         return (
             <div className="test-table">
                 <Table 
+                    handlePropChange={(name, event) => this.handlePropChange(name, event)}
+                    propsValue={this.state.companyFilter}
                     rows={this.rows}
+                    filters={this.filters}
                     pageParams={this.state.pageParams}
                     newClicked={() => this.handleNewButtonClicked()}
                     rowOnClick={(id) => this.handleRowClicked(id)}

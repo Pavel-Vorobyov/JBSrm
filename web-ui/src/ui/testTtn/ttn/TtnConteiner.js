@@ -8,7 +8,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 
 import '../../common/contentTable.css';
 
-import Table from '../../../components/table/table';
+import Table from './table/table';
 import QuickSearch from '../../../components/quickSearch/QuickSearch';
 
 class TestTable extends Component {
@@ -24,8 +24,9 @@ class TestTable extends Component {
             rowsPerPage: null,
             count: null,
         },
-        companyFilter: {
+        ttnFilter: {
             deleted: false,
+            ttnState: 'NONE',
             page: 0,
             size: 20,
         },
@@ -54,17 +55,26 @@ class TestTable extends Component {
                 </Grid>
                 <Grid item xs style={{marginLeft: '10px'}}>
                     <QuickSearch 
-                        searchQuery={'/api/companies/quickSearch/'} 
-                        handleClick={this.handleDetailsClick}
+                        placeholder="Search by driver, create by or ttn state..."
+                        searchQuery={'/api/ttns/quickSearch/'} 
+                        handleClick={(id) => this.handleDetailsClick(id)}
                         objectMappingResult={{
-                            title: 'Title:',
-                            email:'Email:',
-                            phone: 'Phone:',
+                            driverName: 'Driver',
+                            driverSurname:'',
+                            ttnState: 'Ttn state',
+                            createdByName: 'Created by',
+                            createdBySurname:'',
+                            createdAt: 'Created at',
                         }}/>
                 </Grid>
             </Toolbar>
         </div>
     )
+
+    handleDetailsClick = id => {
+        let currentPath = this.props.history.location.pathname;
+        this.props.history.push(currentPath + '/update/' + id);
+    }
 
     componentWillMount() {
         this.updatePage(0, 10, false);
@@ -74,11 +84,24 @@ class TestTable extends Component {
         let pageContent = this.state.page;
         let page = currentPage; 
         let size = rowsPerPage && rowsPerPage !== 0 ? rowsPerPage : this.state.pageParams.rowsPerPage;
-        let deleted = currentDeleted ? currentDeleted : this.state.companyFilter.deleted;
+        let deleted = currentDeleted ? currentDeleted : this.state.ttnFilter.deleted;
+        let ttnState = this.state.ttnFilter.ttnState;
         
-        axios.get('/api/ttns/?page=' + page + '&size=' + size + '&deleted=' + deleted)
+        let url = ttnState === 'NONE'
+            ? '/api/ttns/?page=' + page + '&size=' + size + '&deleted=' + deleted
+            : '/api/ttns/?page=' + page + '&size=' + size + '&deleted=' + deleted + '&ttnState=' + ttnState
+
+        axios.get(url)
         .then ( response => {
             pageContent = response.data;
+
+            let page = this.state.page;
+            page.content = [];
+            this.setState({
+                ...this.state,
+                page: page,
+            });
+
             this.setState({
                 ...this.state, 
                 page: pageContent,
@@ -117,7 +140,7 @@ class TestTable extends Component {
     handleChangeRowsPerPage = event => {
         let currentPage = this.state.page.number;
         let currentRowsPerPage = event.target.value ? event.target.value : this.state.page.rowsPerPage;
-        axios.get('/api/ttns/?page=' + currentPage + '&size=' + currentRowsPerPage + '&deleted=' + this.state.companyFilter.deleted)
+        axios.get('/api/ttns/?page=' + currentPage + '&size=' + currentRowsPerPage + '&deleted=' + this.state.ttnFilter.deleted)
         .then ( response => {
             let pageParams = this.state.pageParams;
             pageParams.rowsPerPage = event.target.value;
@@ -134,12 +157,21 @@ class TestTable extends Component {
     updateData(data) {
         if (data.length !== 0 && this.state.page) {
             data.forEach(element => {
-                element['driverName'] = this.state.page.content.find(c => c.id = element.id).driver.name + ' ' + this.state.page.content.find(c => c.id = element.id).driver.surname;
-                element['createdBy'] = this.state.page.content.find(c => c.id = element.id).createdBy.name + ' ' + this.state.page.content.find(c => c.id = element.id).createdBy.surname;
-                element['createAt'] = this.state.page.content.find(c => c.id = element.id).createAt;
+                element['driverName'] = this.state.page.content.find(c => c.id === element.id).driver.name + ' ' + this.state.page.content.find(c => c.id === element.id).driver.surname;
+                element['createdBy'] = this.state.page.content.find(c => c.id === element.id).createdBy.name + ' ' + this.state.page.content.find(c => c.id === element.id).createdBy.surname;
+                element['createAt'] = this.state.page.content.find(c => c.id === element.id).createAt;
             });
         }
         return data;
+    }
+
+    handlePropChange = (name, event) => {
+        let ttnFilter = this.state.ttnFilter;
+        ttnFilter[name] = event.target.value;
+        this.setState({
+            ttnFilter: ttnFilter,
+          });
+        this.updatePage(0, null);
     }
 
     render() {
@@ -147,7 +179,10 @@ class TestTable extends Component {
         return (
             <div className="test-table">
                 <Table 
+                    handlePropChange={(name, event) => this.handlePropChange(name, event)}
+                    propsValue={this.state.ttnFilter}
                     rows={this.rows}
+                    filters={this.filters}
                     pageParams={this.state.pageParams}
                     newClicked={() => this.handleNewButtonClicked()}
                     rowOnClick={(id) => this.handleRowClicked(id)}

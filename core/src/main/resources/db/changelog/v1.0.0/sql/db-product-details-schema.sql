@@ -16,14 +16,14 @@ CREATE TABLE IF NOT EXISTS product_details
     title VARCHAR (80) COLLATE pg_catalog."default" NOT NULL,
     description VARCHAR (1000) COLLATE pg_catalog."default" NOT NULL,
     price serial NOT NULL,
-	requiredtype required_type,
+	required_type required_type,
 	deleted BOOLEAN NOT NULL
 );
 
 CREATE INDEX IF NOT EXISTS idx_fts_product_details ON product_details
   USING gin(as_tsvector(id::TEXT, title::TEXT, deleted::TEXT));
 
-INSERT INTO product_details (title, description, price, requiredtype, deleted)
+INSERT INTO product_details (title, description, price, required_type, deleted)
 	SELECT
 		'title' || num AS title,
 		'Description....' AS description,
@@ -42,7 +42,7 @@ INSERT INTO product_details (title, description, price, requiredtype, deleted)
 				WHEN 1 THEN 'REFRIGERATOR'
 				WHEN 2 THEN 'TANK'
 			END
-		)::required_type AS requiredtype,
+		)::required_type AS required_type,
 		(
 			CASE (RANDOM() * 2)::INT
 				WHEN 0 THEN true

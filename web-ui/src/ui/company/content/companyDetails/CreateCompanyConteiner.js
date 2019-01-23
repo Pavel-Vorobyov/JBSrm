@@ -131,7 +131,7 @@ class CreateCompanyConteiner extends Component {
         const { classes } = this.props;
 
         return (
-            <Paper className='company-details'>
+            <Paper className='create-company-details'>
                 <TextField
                     id="standard-title"
                     label="Title"

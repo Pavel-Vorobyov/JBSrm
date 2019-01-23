@@ -8,14 +8,14 @@ CREATE TABLE IF NOT EXISTS product
     product_details_id serial NOT NULL,
 	amount INTEGER,
 	deed INTEGER,
-	productstate product_state,
+	product_state product_state,
 	deleted BOOLEAN NOT NULL
 );
 
 CREATE INDEX IF NOT EXISTS idx_fts_product ON product
   USING gin(as_tsvector(id::TEXT));
 
-INSERT INTO product (product_details_id, amount, deed, productstate, deleted)
+INSERT INTO product (product_details_id, amount, deed, product_state, deleted)
 	SELECT
 		num AS product_details_id,
 		(
@@ -41,7 +41,7 @@ INSERT INTO product (product_details_id, amount, deed, productstate, deleted)
 				WHEN 2 THEN 'DELIVERED'
 				WHEN 3 THEN 'LOST'
 			END
-		)::product_state AS productstate,
+		)::product_state AS product_state,
 		(
 			CASE (RANDOM() * 2)::INT
 				WHEN 0 THEN true
