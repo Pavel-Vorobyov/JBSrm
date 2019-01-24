@@ -18,6 +18,9 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = {"com.pavel.jbsrm"})
 public class IntegrationTestConfig {
 
+//    @Bean
+
+
     @Bean(destroyMethod = "shutdown")
     DataSource dataSource(Environment env) {
         HikariConfig config = new HikariConfig();

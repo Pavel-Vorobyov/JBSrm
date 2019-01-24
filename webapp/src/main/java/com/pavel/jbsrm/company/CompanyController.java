@@ -37,9 +37,8 @@ public class CompanyController {
     }
 
     @GetMapping
-    public Page<CompanyDto> findAll(@Nullable @RequestParam Boolean deleted, Pageable pageable) {
-        deleted = deleted == null ? false : deleted;
-        return companyService.findAllPageByFilter(deleted, pageable);
+    public Page<CompanyDto> findAll(CompanyFilter filter, Pageable pageable) {
+        return companyService.findAllPageByFilter(filter, pageable);
     }
 
     @PutMapping("/{id}")

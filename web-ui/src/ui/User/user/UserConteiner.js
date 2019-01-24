@@ -76,12 +76,15 @@ class TestTable extends Component {
                 </Grid>
                 <Grid item xs style={{marginLeft: '10px'}}>
                     <QuickSearch 
+                        placeholder="Search by email address, phone number, or user UID..."
                         searchQuery={'/api/users/quickSearch/'} 
                         handleClick={(id) => this.handleDetailsClick(id)}
                         objectMappingResult={{
-                            title: 'Title:',
-                            email:'Email:',
-                            phone: 'Phone:',
+                            name: 'Name',
+                            surname:'Surname',
+                            email:'Email',
+                            phone: 'Phone',
+                            userRole: 'User role',
                         }}/>
                 </Grid>
             </Toolbar>
@@ -115,7 +118,7 @@ class TestTable extends Component {
             this.setState({
                 ...this.state,
                 page: page,
-            })
+            });
 
             this.setState({
                 ...this.state, 
@@ -132,7 +135,7 @@ class TestTable extends Component {
     updateData(data) {
         if (data.length !== 0 && this.state.page) {
             data.forEach(element => {
-                element['companyTitle'] = this.state.page.content.find(c => c.id = element.id).company.title;
+                element['companyTitle'] = this.state.page.content.find(c => c.id === element.id).company.title;
             });
         }
         return data;
@@ -189,7 +192,6 @@ class TestTable extends Component {
                     handlePropChange={(name, event) => this.handlePropChange(name, event)}
                     propsValue={this.state.userFilter}
                     rows={this.rows}
-                    filters={this.filters}
                     pageParams={this.state.pageParams}
                     newClicked={() => this.handleNewButtonClicked()}
                     rowOnClick={(id) => this.handleRowClicked(id)}

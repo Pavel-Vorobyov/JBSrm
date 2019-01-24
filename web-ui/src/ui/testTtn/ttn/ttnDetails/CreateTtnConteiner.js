@@ -11,6 +11,8 @@ import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Menu from '@material-ui/core/Menu';
 import CloseIcon from '@material-ui/icons/Close';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 
 import './ttnDetails.css';
 import * as messageActions from '../../../../store/MessageAction';
@@ -84,6 +86,8 @@ class UpdateTtnConteiner extends Component {
             color: 'rgba(0, 0, 0, 0.87)',
             fontWeight: '400',
             overflow: 'hidden',
+            paddingRight: '10px',
+            paddingLeft: '9px',
         },
         TableHeaderCell: {
             fontSize: '18px',
@@ -93,7 +97,7 @@ class UpdateTtnConteiner extends Component {
             padding: '18px',
         },
         TableButton: {
-            padding: '4px',
+            padding: '0',
         },
         TableInputStyle: {
             width: '50px',
@@ -155,13 +159,26 @@ class UpdateTtnConteiner extends Component {
 
     handleChange = id => event => {
         let ttnDto = this.state.ttnDto;
+        let amountExtension = ttnDto.products[id].amount - Number(event.target.value);
         ttnDto.products[id].amount = Number(event.target.value);
+        ttnDto.products[id].deed = ttnDto.products[id].deed + amountExtension;
         
         this.setState({
         ...this.state,
         ttnDto: ttnDto
         })
       }
+    handleDeedChange = id => event => {
+        let ttnDto = this.state.ttnDto;
+        let deedExtension = ttnDto.products[id].deed - Number(event.target.value);
+        ttnDto.products[id].deed = Number(event.target.value);
+        ttnDto.products[id].amount = ttnDto.products[id].amount + deedExtension;
+        
+        this.setState({
+            ...this.state,
+            ttnDto: ttnDto
+        })
+    }
 
     config = {
         headers: {
@@ -171,15 +188,40 @@ class UpdateTtnConteiner extends Component {
         }
 
     handleSaveButton() {
-        axios.post('/api/ttns/', {
-            driverId: this.state.ttnDto.driver.id,
-            products: this.state.ttnDto.products,
-            transportId: this.state.ttnDto.transport.id,
-        })
-        .then(response => {
-            this.props.showMessage('User has been created successfully!');
-            window.history.back();
-        });
+        if (this.isValidDto()) {
+            axios.post('/api/ttns/', {
+                driverId: this.state.ttnDto.driver.id,
+                products: this.state.ttnDto.products,
+                transportId: this.state.ttnDto.transport.id,
+            })
+            .then(response => {
+                this.props.showMessage('Ttn has been updated successfully!');
+                window.history.back();
+            })
+            .catch( error => {
+                this.props.showErrorMessage( error.toString() )
+            });
+        }
+    }
+
+    isValidDto() {
+        let ttnDto = this.state.ttnDto;
+        let result = true;
+
+        if (ttnDto.products.length <= 0) {
+            this.props.showErrorMessage('Select one product at least!')
+            result = false;
+        }
+        if (!ttnDto.transport.id) {
+            this.props.showErrorMessage('Select transport before!')
+            result = false;
+        }
+        if (!ttnDto.driver.id) {
+            this.props.showErrorMessage('Select driver before!')
+            result = false;
+        }
+
+        return result;
     }
 
     handleAddButton = id => {
@@ -192,7 +234,7 @@ class UpdateTtnConteiner extends Component {
 
     updateProductAmount(id, extension) {
         let ttnDto = this.state.ttnDto;
-        ttnDto.products[id].amount  = ttnDto.products[id].amount + extension;
+        ttnDto.products[id].amount = ttnDto.products[id].amount + extension;
 
         this.setState({
             ...this.state,
@@ -200,9 +242,48 @@ class UpdateTtnConteiner extends Component {
         })
     }
 
+    handleDeedAddButton = id => {
+        this.updateDeedProductAmount(id, +1);
+    }
+
+    handleDeedRemoveButton = id => {
+        this.updateDeedProductAmount(id, -1);
+    }
+
+    updateDeedProductAmount(id, extension) {
+        let ttnDto = this.state.ttnDto;
+
+        if (this.isChangeable(id, extension)) {
+            ttnDto.products[id].deed = ttnDto.products[id].deed + extension;
+
+            this.setState({
+                ...this.state,
+                ttnDto: ttnDto,
+            })
+        }
+    }
+
+    isChangeable(id, extension) {
+        let result = false;
+        let ttnDto = this.state.ttnDto;
+
+        let nextAmount = ttnDto.products[id].amount;
+        let nextDeed = ttnDto.products[id].deed + extension;
+
+        if (nextDeed <= nextAmount && nextDeed >= 0) {
+            result = true;
+        }
+        if (!result) {
+            this.props.showErrorMessage('You can\'t increase  or decrease deed any more!')
+        }
+
+        return result;
+    }
+
     handelDeleteButton = id => {
         let ttnDto = this.state.ttnDto;
         ttnDto.products.splice(id, 1);
+        console.log(ttnDto.products)
 
         this.setState({
             ...this.state,
@@ -233,10 +314,14 @@ class UpdateTtnConteiner extends Component {
     }
 
     handleProductDetailsSearch = isOpnen => {
-        this.setState({
-            ...this.state,
-            productSearchShow: isOpnen,
-        });
+        if (!this.state.ttnDto.transport.bodyType) {
+            this.props.showErrorMessage('Please select transport before!');
+        } else {
+            this.setState({
+                ...this.state,
+                productSearchShow: isOpnen,
+            });
+        }
     }
 
     handleProductDetailsClick = id => {
@@ -246,6 +331,7 @@ class UpdateTtnConteiner extends Component {
             ttnDto.products.push({
                 productDetails: response.data,
                 amount: 0,
+                deed: 0,
             })
 
             this.setState({
@@ -268,6 +354,7 @@ class UpdateTtnConteiner extends Component {
         .then ( response => {
             let ttnDto = this.state.ttnDto;
             ttnDto.transport = response.data;
+            console.log(response)
             this.setState({
                 ...this.state,
                 ttnDto: ttnDto,
@@ -288,26 +375,56 @@ class UpdateTtnConteiner extends Component {
                     <TableCell style={this.tableStyle.TableCell}>{child.productDetails.title}</TableCell>
                     <TableCell style={this.tableStyle.TableCell} align="right">{child.productDetails.price}</TableCell>
                     <TableCell style={this.tableStyle.TableCell} align="right">{child.productDetails.requiredType}</TableCell>
-                    <TableCell style={this.tableStyle.TableButton}>
-                    <Button variant="contained" color="primary" size="small" style={testStyle} onClick={() => {this.handleRemoveButton(index)}}>Remove</Button>
-                   </TableCell>
-                   <TableCell style={this.tableStyle.TableCell} align="right">
-                        <TextField
-                            id={index}
-                            label="Amount"
-                            style={this.tableStyle.TableInputStyle}
-                            value={child.amount}
-                            onChange={this.handleChange(index)}
-                            margin="normal"
-                            />
+                    <TableCell style={{padding:'0', paddingRight: '10px'}}>
+                        <TableCell style={this.tableStyle.TableButton}>
+                            <IconButton variant="contained" color="primary" size="small" style={testStyle} onClick={() => {this.handleRemoveButton(index)}}>
+                                <KeyboardArrowLeft />
+                            </IconButton>
                     </TableCell>
-                    <TableCell style={this.tableStyle.TableButton}>
-                        <Button variant="contained" color="primary" size="small" style={testStyle} onClick={() => {this.handleAddButton(index)}}>Add</Button>
+                    <TableCell style={this.tableStyle.TableCell} align="right">
+                            <TextField
+                                id={index}
+                                label="Amount"
+                                style={this.tableStyle.TableInputStyle}
+                                value={child.amount}
+                                onChange={this.handleChange(index)}
+                                margin="normal"
+                                />
+                        </TableCell>
+                        <TableCell style={this.tableStyle.TableButton}>
+                            <IconButton variant="contained" color="primary" size="small" style={testStyle} onClick={() => {this.handleAddButton(index)}}>
+                                <KeyboardArrowRight />
+                            </IconButton>
+                        </TableCell>
+                    </TableCell>
+                    <TableCell style={{padding:'0', paddingRight: '10px'}}>
+                        <TableCell style={this.tableStyle.TableButton}>
+                            <IconButton variant="contained" color="primary" size="small" style={testStyle} onClick={() => {this.handleDeedRemoveButton(index)}}>
+                                <KeyboardArrowLeft />
+                            </IconButton>
+                    </TableCell>
+                    <TableCell style={this.tableStyle.TableCell} align="right">
+                            <TextField
+                                id={index}
+                                label="Deed"
+                                style={this.tableStyle.TableInputStyle}
+                                value={child.deed}
+                                onChange={this.handleDeedChange(index)}
+                                margin="normal"
+                                />
+                        </TableCell>
+                        <TableCell style={this.tableStyle.TableButton}>
+                            <IconButton variant="contained" color="primary" size="small" style={testStyle} onClick={() => {this.handleDeedAddButton(index)}}>
+                                <KeyboardArrowRight />
+                            </IconButton>
+                        </TableCell>
                     </TableCell>
                    <TableCell style={this.tableStyle.TableButton}>
-                    <IconButton aria-label="Delete" className='Button' onClick={() => {this.handelDeleteButton(index)}}>
-                       <DeleteIcon fontSize="small" />
-                    </IconButton>
+                    <div style={{margin: 'auto'}}>
+                        <IconButton aria-label="Delete" className='Button' onClick={() => {this.handelDeleteButton(index)}}>
+                        <DeleteIcon fontSize="small" />
+                        </IconButton>
+                    </div>
                    </TableCell>
                 </TableRow>
             )
@@ -345,7 +462,7 @@ class UpdateTtnConteiner extends Component {
                                         style={{borderBottom: '1px solid rgba(0,0,0,0.2)', padding: '5px', paddingBottom: '0'}}
                                         onClose={() => this.handleProductDetailsSearch(false)}>
                                         <p style={{float:'left', padding: '12px'}}>
-                                            Modal title
+                                            Product search
                                         </p>
                                         <IconButton style={{float: 'right'}} aria-label="Close" onClick={() => this.handleProductDetailsSearch(false)}>
                                             <CloseIcon />
@@ -353,12 +470,13 @@ class UpdateTtnConteiner extends Component {
                                     </DialogTitle>
                                     <DialogContent style={{paddingTop: '10px', width: '400px', overflow: 'visible'}}>
                                         <QuickSearch
-                                            searchQuery={'/api/product-details/quickSearch/'} 
+                                            placeholder="Search by id, title, required type or price..."
+                                            searchQuery={'/api/product-details/quickSearch/'  + this.state.ttnDto.transport.bodyType + ' '} 
                                             handleClick={this.handleProductDetailsClick}
                                             objectMappingResult={{
-                                                title: '',
-                                                price: '',
-                                                requiredType:'',
+                                                title: 'Title',
+                                                price: 'Price',
+                                                requiredType:'Required type',
                                             }}
                                         />
                                     </DialogContent>
@@ -378,10 +496,10 @@ class UpdateTtnConteiner extends Component {
                     </p>
                     
                     <p>
-                        Name: {this.state.driverName}
+                        Name: {this.state.ttnDto.driver.name}
                     </p>
                     <p>
-                        Surname: {this.state.driverSurname}
+                        Surname: {this.state.ttnDto.driver.surname}
                     </p>
                     <Button style={{float:'right'}} variant="outlined" color="primary" onClick={() => this.handleUpdateDriverSelectWindow(true)}>
                         Select driver
@@ -396,7 +514,7 @@ class UpdateTtnConteiner extends Component {
                             style={{borderBottom: '1px solid rgba(0,0,0,0.2)', padding: '5px', paddingBottom: '0'}}
                             onClose={() => this.handleUpdateDriverSelectWindow(false)}>
                             <p style={{float:'left', padding: '12px'}}>
-                                Modal title
+                                Driver search
                             </p>
                             <IconButton style={{float: 'right'}} aria-label="Close" onClick={() => this.handleUpdateDriverSelectWindow(false)}>
                                 <CloseIcon />
@@ -404,13 +522,14 @@ class UpdateTtnConteiner extends Component {
                         </DialogTitle>
                         <DialogContent style={{paddingTop: '10px', width: '400px', overflow: 'visible'}}>
                             <QuickSearch
+                                placeholder="Search by email address, phone number, or user UID..."
                                 searchQuery={'/api/users/quickSearch/'} 
                                 handleClick={this.handleDriverClick}
                                 objectMappingResult={{
-                                    name: '',
-                                    surname:'',
-                                    email: '',
-                                    phone: '',
+                                    name: 'Name',
+                                    surname:'Surname',
+                                    email: 'Email',
+                                    phone: 'Phone',
                                 }}
                             />
                         </DialogContent>
@@ -450,11 +569,13 @@ class UpdateTtnConteiner extends Component {
                         </DialogTitle>
                         <DialogContent style={{paddingTop: '10px', width: '400px', overflow: 'visible'}}>
                             <QuickSearch
+                                placeholder="Search by id, title, body type or consumption..."
                                 searchQuery={'/api/transports/quickSearch/'} 
                                 handleClick={this.handleTransportClicked}
                                 objectMappingResult={{
-                                    bodyType: '',
-                                    consumption:'',
+                                    title: 'Title',
+                                    bodyType: 'Body type',
+                                    consumption:'Consumption',
                                 }}
                             />
                         </DialogContent>
@@ -468,7 +589,8 @@ class UpdateTtnConteiner extends Component {
 
 const MapToStore = dispatch => {
     return {
-        showMessage: (message) => dispatch({type: messageActions.SHOW_MESSAGE, message: message})
+        showMessage: (message) => dispatch({type: messageActions.SHOW_MESSAGE, message: message}),
+        showErrorMessage: (message) => dispatch({type: messageActions.SHOW_ERROR_MESSAGE, message: message})
     }
 };
 

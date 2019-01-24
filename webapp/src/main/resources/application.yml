@@ -1,7 +1,7 @@
 spring:
   datasource:
-#    url: jdbc:postgresql://db:5432/jbsrm
-    url: jdbc:postgresql://localhost:5336/jbsrm
+    url: jdbc:postgresql://db:5432/jbsrm
+#    url: jdbc:postgresql://localhost:5336/jbsrm
     username: admin
     password: 123qwe123
   resources:
@@ -40,6 +40,10 @@ jbsrm.mail_sender:
   port: 587
   username: jbsrm.mail@gmail.com
   password: 123qwe234
+
+info.app.name: JBSrm
+info.app.description: JBSrm test project
+info.app.version: 1.2.1
 
 #logging.level.org.hibernate.SQL: DEBUG
 #logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE

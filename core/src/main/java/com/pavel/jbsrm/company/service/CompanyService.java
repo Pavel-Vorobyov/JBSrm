@@ -1,5 +1,6 @@
 package com.pavel.jbsrm.company.service;
 
+import com.pavel.jbsrm.company.CompanyFilter;
 import com.pavel.jbsrm.company.dto.CompanyDto;
 import com.pavel.jbsrm.company.dto.CreateCompanyDto;
 import com.pavel.jbsrm.company.dto.UpdateCompanyDto;
@@ -24,5 +25,5 @@ public interface CompanyService {
 
     List<CompanyDto> findAllByPropsMatch(String searchParams);
 
-    Page<CompanyDto> findAllPageByFilter(boolean deleted, Pageable pageable);
+    Page<CompanyDto> findAllPageByFilter(CompanyFilter filter, Pageable pageable);
 }

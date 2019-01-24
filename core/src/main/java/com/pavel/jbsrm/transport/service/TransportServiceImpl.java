@@ -45,9 +45,9 @@ public class TransportServiceImpl implements TransportService {
     public Optional<TransportDto> update(long id, @Valid UpdateTransportDto updateTransportDto) {
         Transport transport = transportRepository.getOne(id);
         ObjectMapperUtills.mapTo(updateTransportDto, transport);
-//        transport.setId(id);
+        transport.setId(id);
         transport.setOwner(companyRepository.getOne(updateTransportDto.getOwnerId())); //todo company.id from 3 to 0
-//        transport.getOwner().setId(updateTransportDto.getOwnerId());
+        transport.getOwner().setId(updateTransportDto.getOwnerId());
         return Optional.of(ObjectMapperUtills.mapTo(transportRepository.save(transport), TransportDto.class));
     }
 
@@ -94,6 +94,9 @@ public class TransportServiceImpl implements TransportService {
             }
             if (filter.getTransportState() != null) {
                 whereBuilder.and(QTransport.transport.transportState.eq(filter.getTransportState()));
+            }
+            if (filter.getBodyType() != null) {
+                whereBuilder.and(QTransport.transport.bodyType.eq(filter.getBodyType()));
             }
         }
         return whereBuilder;

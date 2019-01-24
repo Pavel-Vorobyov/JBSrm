@@ -39,11 +39,13 @@ class QuickSearch extends Component {
     }
 
     render() {
+        let { placeholder } = this.props;
+
         return (
             <div className='SearchBar' style={{fontSize:'18px'}}>
                <TextField
                     fullWidth
-                    placeholder="Search by email address, phone number, or user UID"
+                    placeholder={placeholder}
                     InputProps={{
                     disableUnderline: true,
                     }}

@@ -3,6 +3,8 @@ package com.pavel.jbsrm.company.service;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
 import com.pavel.jbsrm.common.utill.StringConverter;
 import com.pavel.jbsrm.company.Company;
+import com.pavel.jbsrm.company.CompanyFilter;
+import com.pavel.jbsrm.company.QCompany;
 import com.pavel.jbsrm.company.dto.CompanyDto;
 import com.pavel.jbsrm.company.dto.CreateCompanyDto;
 import com.pavel.jbsrm.company.dto.UpdateCompanyDto;
@@ -10,6 +12,7 @@ import com.pavel.jbsrm.company.repository.CompanyRepository;
 import com.pavel.jbsrm.user.User;
 import com.pavel.jbsrm.user.UserRole;
 import com.pavel.jbsrm.user.repository.UserRepository;
+import com.querydsl.core.BooleanBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -104,8 +107,20 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<CompanyDto> findAllPageByFilter(boolean deleted, Pageable pageable) {
-        return companyRepository.findByDeleted(deleted, pageable)
+    public Page<CompanyDto> findAllPageByFilter(CompanyFilter filter, Pageable pageable) {
+        return companyRepository.findAll(buildFilter(filter), pageable)
                 .map(company -> ObjectMapperUtills.mapTo(company, CompanyDto.class));
+    }
+
+    private BooleanBuilder buildFilter(CompanyFilter filter) {
+        BooleanBuilder whereBuilder = new BooleanBuilder();
+
+        if (filter != null) {
+            if (filter.getDeleted() != null) {
+                whereBuilder.and(QCompany.company.deleted.eq(filter.getDeleted()));
+            }
+        }
+
+        return whereBuilder;
     }
 }

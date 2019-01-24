@@ -3,7 +3,15 @@
     max-width: 377px;
     margin-top: 50px;
     padding: 20px;
-    height: 410px;
+    height: 403px;
+}
+
+.create-company-details {
+    margin: auto;
+    max-width: 377px;
+    margin-top: 50px;
+    padding: 20px;
+    height: 472px;
 }
 
 .TtnProducts {

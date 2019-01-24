@@ -2,6 +2,7 @@ package com.pavel.jbsrm.ttn.service;
 
 import com.pavel.jbsrm.common.auth.UserPrinciple;
 import com.pavel.jbsrm.common.utill.ObjectMapperUtills;
+import com.pavel.jbsrm.product.product.ProductState;
 import com.pavel.jbsrm.transport.TransportState;
 import com.pavel.jbsrm.transport.repository.TransportRepository;
 import com.pavel.jbsrm.ttn.QTtn;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,6 +56,9 @@ public class TtnServiceImpl implements TtnService {
         ttn.getDriver().setId(createTtnDto.getDriverId());
         ttn.getTransport().setId(createTtnDto.getTransportId());
         ttn.getTransport().setTransportState(TransportState.BUSY);
+        ttn.getProducts().forEach(pr -> pr.setProductState(ProductState.ACCEPTED));
+        ttn.setCreateAt(LocalDate.now());
+
         return ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class);
     }
 
@@ -62,10 +67,11 @@ public class TtnServiceImpl implements TtnService {
     public Optional<TtnDto> update(long id, @Valid UpdateTtnDto updateTtnDto) {
         Ttn ttn = ttnRepository.getOne(id);
         ObjectMapperUtills.mapTo(updateTtnDto, ttn);
+        ttn.setProducts(updateTtnDto.getProducts());
         ttn.setId(id);
         ttn.setDriver(userRepository.getOne(updateTtnDto.getDriverId()));
         ttn.setTransport(transportRepository.getOne(updateTtnDto.getTransportId()));
-        ttn.getDriver().setId(updateTtnDto.getDriverId());//todo user.id from 4 to 0
+        ttn.getDriver().setId(updateTtnDto.getDriverId()); //todo user.id from 4 to 0
         ttn.getTransport().setId(updateTtnDto.getTransportId());
 
         return Optional.of(ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class));

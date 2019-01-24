@@ -1,5 +1,6 @@
 /.idea
 /target
+/build
 .project
 .classpath
 .settings
@@ -50,3 +51,17 @@ Thumbs.db
 
 /webapp/src/main/webapp
 /core/target/
+/web-ui/node_modules
+/web-ui/coverage
+/web-ui/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
