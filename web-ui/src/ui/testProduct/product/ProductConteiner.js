@@ -10,7 +10,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 
 import '../../common/contentTable.css';
 
-import Table from '../../../components/table/table';
+import Table from './table/table';
 import QuickSearch from '../../../components/quickSearch/QuickSearch';
 
 class TestTable extends Component {
@@ -26,8 +26,9 @@ class TestTable extends Component {
             rowsPerPage: null,
             count: null,
         },
-        companyFilter: {
+        productFilter: {
             deleted: false,
+            requiredType: 'NONE',
             page: 0,
             size: 20,
         },
@@ -58,16 +59,22 @@ class TestTable extends Component {
                     <QuickSearch 
                         placeholder="Search by title, price or required type..."
                         searchQuery={'/api/product-details/quickSearch/'} 
-                        handleClick={this.handleDetailsClick}
+                        handleClick={(id) => this.handleDetailsClick(id)}
                         objectMappingResult={{
-                            title: 'Title:',
-                            email:'Email:',
-                            phone: 'Phone:',
+                            title: 'Title',
+                            description:'Description',
+                            price: 'Price',
+                            requiredType: 'Required type',
                         }}/>
                 </Grid>
             </Toolbar>
         </div>
     )
+
+    handleDetailsClick = id => {
+        let currentPath = this.props.history.location.pathname;
+        this.props.history.push(currentPath + '/update/' + id);
+    }
 
     componentWillMount() {
         this.updatePage(0, 10, false);
@@ -77,9 +84,14 @@ class TestTable extends Component {
         let pageContent = this.state.page;
         let page = currentPage; 
         let size = rowsPerPage && rowsPerPage !== 0 ? rowsPerPage : this.state.pageParams.rowsPerPage;
-        let deleted = currentDeleted ? currentDeleted : this.state.companyFilter.deleted;
+        let deleted = this.state.productFilter.deleted;
+        let requiredType = this.state.productFilter.requiredType;
+
+        let url = requiredType === 'NONE'
+            ? '/api/product-details/?page=' + page + '&size=' + size + '&deleted=' + deleted
+            : '/api/product-details/?page=' + page + '&size=' + size + '&deleted=' + deleted + '&requiredType=' + requiredType
         
-        axios.get('/api/product-details/?page=' + page + '&size=' + size + '&deleted=' + deleted)
+        axios.get(url)
         .then ( response => {
             pageContent = response.data;
             this.setState({
@@ -120,7 +132,7 @@ class TestTable extends Component {
     handleChangeRowsPerPage = event => {
         let currentPage = this.state.page.number;
         let currentRowsPerPage = event.target.value ? event.target.value : this.state.page.rowsPerPage;
-        axios.get('/api/product-details/?page=' + currentPage + '&size=' + currentRowsPerPage + '&deleted=' + this.state.companyFilter.deleted)
+        axios.get('/api/product-details/?page=' + currentPage + '&size=' + currentRowsPerPage + '&deleted=' + this.state.productFilter.deleted)
         .then ( response => {
             let pageParams = this.state.pageParams;
             pageParams.rowsPerPage = event.target.value;
@@ -134,12 +146,24 @@ class TestTable extends Component {
 
     };
 
+    handlePropChange = (name, event) => {
+        let productFilter = this.state.productFilter;
+        productFilter[name] = event.target.value;
+        this.setState({
+            productFilter: productFilter,
+          });
+        this.updatePage(0, null);
+    }
+
     render() {
 
         return (
             <div className="test-table">
                 <Table 
+                    handlePropChange={(name, event) => this.handlePropChange(name, event)}
+                    propsValue={this.state.productFilter}
                     rows={this.rows}
+                    filters={this.filters}
                     pageParams={this.state.pageParams}
                     newClicked={() => this.handleNewButtonClicked()}
                     rowOnClick={(id) => this.handleRowClicked(id)}

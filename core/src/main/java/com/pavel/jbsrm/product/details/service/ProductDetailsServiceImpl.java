@@ -87,6 +87,9 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
             if (filter.getTitle() != null) {
                 whereBuilder.and(QProductDetails.productDetails.title.eq(filter.getTitle()));
             }
+            if (filter.getRequiredType() != null) {
+                whereBuilder.and(QProductDetails.productDetails.requiredType.eq(filter.getRequiredType()));
+            }
         }
         return whereBuilder;
     }

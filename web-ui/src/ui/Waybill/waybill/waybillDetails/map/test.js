@@ -56,7 +56,6 @@ class Test extends Component {
                     waybillDto: waybillDto,
                     selectTtnShow: false,
                 })
-                console.log(this.state.waybillDto)
             });
         }
     }

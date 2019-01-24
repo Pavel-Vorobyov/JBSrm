@@ -10,16 +10,18 @@ services:
       POSTGRES_USER: admin
       POSTGRES_DB: jbsrm
 
-#  jbsrb-static-server:
-#    image: "jbsrm-static-server:latest"
-#    container_name: jbsrm-server
-#    ports:
-#      - "50031:80"
-#
-#  jbsrb-rest-server:
-#    image: "jbsrm-rest-server:latest"
-#    container_name: jbsrm-rest-server
-#    depends_on:
-#      - db
-#    ports:
-#      - "8080:8080"
+  jbsrb-static-server:
+    image: "jbsrm-static-server:latest"
+    container_name: jbsrm-server
+    ports:
+      - "50031:80"
+    links:
+      - jbsrb-rest-server
+
+  jbsrb-rest-server:
+    image: "jbsrm-rest-server:latest"
+    container_name: jbsrb-rest-server
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"

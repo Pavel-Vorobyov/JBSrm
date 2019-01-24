@@ -49,6 +49,25 @@ function getSorting(order, orderBy) {
   return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
+const bodyType = [
+  {
+    value: 'NONE',
+    label: 'None',
+  },
+  {
+    value: 'COVERED_BODY',
+    label: 'Covered body',
+  },
+  {
+    value: 'REFRIGERATOR',
+    label: 'Refrigerator',
+  },
+  {
+    value: 'TANK',
+    label: 'Tank',
+  },
+];
+
 const transportState = [
   {
     value: 'FREE',
@@ -185,7 +204,29 @@ let EnhancedTableToolbar = props => {
             </IconButton>
           </Tooltip>
         ) : (
-          <div style={{width: '479px', height: '0'}}>
+          <div style={{width: '645px', height: '0'}}>
+
+          <TextField
+              id="standard-select-currency-native"
+              select
+              style={{marginRight: '20px'}}
+              label="Body type"
+              value={propsValue.bodyType}
+              className='table-search-props'
+              onChange={(event) => props.handlePropChange('bodyType', event)}
+              SelectProps={{
+                MenuProps: {
+                  className: 'prop-menu',
+                },
+              }}
+              margin="normal"
+            > 
+            {bodyType.map(option => (
+              <MenuItem className='prop-option' key={option.value} value={option.value}>
+                  {option.label}
+            </MenuItem>
+            ))}
+          </TextField>
 
           <TextField
               id="standard-select-currency-native"

@@ -1,6 +1,5 @@
 package com.pavel.jbsrm.transport;
 
-import com.pavel.jbsrm.transport.TransportState;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,4 +9,5 @@ public class TransportFilter {
 
     private Boolean deleted;
     private TransportState transportState;
+    private TransportType bodyType;
 }

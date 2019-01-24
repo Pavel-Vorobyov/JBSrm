@@ -10,7 +10,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 
 import '../../common/contentTable.css';
 
-import Table from '../../../components/table/table';
+import Table from './table/table';
 import QuickSearch from '../../../components/quickSearch/QuickSearch';
 
 class TestTable extends Component {
@@ -26,8 +26,10 @@ class TestTable extends Component {
             rowsPerPage: null,
             count: null,
         },
-        companyFilter: {
+        transportFilter: {
             deleted: false,
+            transportState: 'FREE',
+            bodyType: 'NONE',
             page: 0,
             size: 20,
         },
@@ -58,30 +60,41 @@ class TestTable extends Component {
                     <QuickSearch 
                         placeholder="Search by id, title, body type or consumption..."
                         searchQuery={'/api/transports/quickSearch/'} 
-                        handleClick={this.handleDetailsClick}
+                        handleClick={(id) => this.handleDetailsClick(id)}
                         objectMappingResult={{
-                            title: 'Title:',
-                            email:'Email:',
-                            phone: 'Phone:',
+                            title: 'Title',
+                            consumption:'Consumption',
+                            bodyType: 'Body type',
+                            transportState: 'Transport state',
                         }}/>
                 </Grid>
             </Toolbar>
         </div>
     )
 
-    componentWillMount() {
-        this.updatePage(0, 10, false);
+    handleDetailsClick = id => {
+        let currentPath = this.props.history.location.pathname;
+        this.props.history.push(currentPath + '/update/' + id);
     }
 
-    updatePage(currentPage, rowsPerPage, currentDeleted) {
+    componentWillMount() {
+        this.updatePage(0, 10);
+    }
+
+    updatePage(currentPage, rowsPerPage) {
         let pageContent = this.state.page;
         let page = currentPage; 
         let size = rowsPerPage && rowsPerPage !== 0 ? rowsPerPage : this.state.pageParams.rowsPerPage;
-        let deleted = currentDeleted ? currentDeleted : this.state.companyFilter.deleted;
+        let deleted = this.state.transportFilter.deleted;
+        let transportState = this.state.transportFilter.transportState;
+        let bodyType = this.state.transportFilter.bodyType;
         
-        axios.get('/api/transports/?page=' + page + '&size=' + size + '&deleted=' + deleted)
+        let url = bodyType === 'NONE'
+            ? '/api/transports/?page=' + page + '&size=' + size + '&deleted=' + deleted + '&transportState=' + transportState
+            : '/api/transports/?page=' + page + '&size=' + size + '&deleted=' + deleted + '&transportState=' + transportState  + '&bodyType=' + bodyType
+
+        axios.get(url)
         .then ( response => {
-            console.log(response)
             pageContent = response.data;
             this.setState({
                 ...this.state, 
@@ -92,6 +105,8 @@ class TestTable extends Component {
                     count: pageContent.totalElements,
                 }
             });
+        })
+        .catch( error => {
         });
     }
 
@@ -121,7 +136,7 @@ class TestTable extends Component {
     handleChangeRowsPerPage = event => {
         let currentPage = this.state.page.number;
         let currentRowsPerPage = event.target.value ? event.target.value : this.state.page.rowsPerPage;
-        axios.get('/api/transports/?page=' + currentPage + '&size=' + currentRowsPerPage + '&deleted=' + this.state.companyFilter.deleted)
+        axios.get('/api/transports/?page=' + currentPage + '&size=' + currentRowsPerPage + '&deleted=' + this.state.transportFilter.deleted)
         .then ( response => {
             let pageParams = this.state.pageParams;
             pageParams.rowsPerPage = event.target.value;
@@ -131,7 +146,6 @@ class TestTable extends Component {
       };
 
     handleChangePage = (event, page) => {
-        console.log(page)
         this.updatePage(page, null)
 
     };
@@ -139,10 +153,19 @@ class TestTable extends Component {
     updateData(data) {
         if (data.length !== 0 && this.state.page) {
             data.forEach(element => {
-                element['owner'] = this.state.page.content.find(c => c.id = element.id).owner.title;
+                element['owner'] = this.state.page.content.find(c => c.id === element.id).owner.title;
             });
         }
         return data;
+    }
+
+    handlePropChange = (name, event) => {
+        let transportFilter = this.state.transportFilter;
+        transportFilter[name] = event.target.value;
+        this.setState({
+            transportFilter: transportFilter,
+          });
+        this.updatePage(0, null);
     }
 
     render() {
@@ -150,6 +173,8 @@ class TestTable extends Component {
         return (
             <div className="test-table">
                 <Table 
+                    handlePropChange={(name, event) => this.handlePropChange(name, event)}
+                    propsValue={this.state.transportFilter}
                     rows={this.rows}
                     pageParams={this.state.pageParams}
                     newClicked={() => this.handleNewButtonClicked()}
@@ -160,6 +185,7 @@ class TestTable extends Component {
                     handleChangeRowsPerPage={(event) => this.handleChangeRowsPerPage(event)}
                     handleChangePage={(event, page) => this.handleChangePage(event, page)}
                     deleteButtonClicked={(selected) => this.handleDeleteButton(selected)}
+                />
                 />
             </div>
         )

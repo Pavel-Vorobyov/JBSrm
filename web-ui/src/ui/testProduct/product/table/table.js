@@ -49,6 +49,25 @@ function getSorting(order, orderBy) {
   return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
+const requiredType = [
+  {
+    value: 'NONE',
+    label: 'None'
+  },
+  {
+    value: 'COVERED_BODY',
+    label: 'Covered body'
+  },
+  {
+    value: 'REFRIGERATOR',
+    label: 'Refrigerator'
+  },
+  {
+    value: 'TANK',
+    label: 'Tank'
+  }
+]
+
 const deleted = [
   {
     value: 'false',
@@ -174,7 +193,29 @@ let EnhancedTableToolbar = props => {
             </IconButton>
           </Tooltip>
         ) : (
-          <div style={{width: '322px', height: '0'}}>
+          <div style={{width: '480px', height: '0'}}>
+
+            <TextField
+              id="standard-select-currency-native"
+              select
+              style={{marginRight: '20px'}}
+              label="Required type"
+              value={propsValue.requiredType}
+              className='table-search-props'
+              onChange={(event) => handlePropChange('requiredType', event)}
+              SelectProps={{
+                MenuProps: {
+                  className: 'prop-menu',
+                },
+              }}
+              margin="normal"
+            > 
+            {requiredType.map(option => (
+              <MenuItem className='prop-option' key={option.value} value={option.value}>
+                  {option.label}
+            </MenuItem>
+            ))}
+          </TextField>
 
             <TextField
               id="standard-select-currency-native"

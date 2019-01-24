@@ -174,9 +174,10 @@ class test2 extends Component {
                         <Button style={{float:'left'}} variant="outlined" color="primary" onClick={() => this.props.handleSaveButton()}>
                             Save
                         </Button>
-                        <Button style={{float:'right'}} variant="outlined" color="primary" onClick={() => this.props.handleUpdateTtnSelectWindow(true)}>
-                            Select ttn
-                        </Button>
+                        { window.location.pathname.includes('create') && 
+                            <Button style={{float:'right'}} variant="outlined" color="primary" onClick={() => this.props.handleUpdateTtnSelectWindow(true)}>
+                                Select ttn
+                            </Button>}
                         <Dialog
                             onClose={() => this.props.handleUpdateTtnSelectWindow(false)}
                             aria-labelledby="customized-dialog-title"

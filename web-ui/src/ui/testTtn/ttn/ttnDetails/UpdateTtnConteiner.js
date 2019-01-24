@@ -216,7 +216,7 @@ class UpdateTtnConteiner extends Component {
                 window.history.back();
             })
             .catch( error => {
-                this.props.showErrorMessage( error.toSting() );
+                this.props.showErrorMessage( error.toString() );
             });
         }
     }
@@ -300,7 +300,6 @@ class UpdateTtnConteiner extends Component {
     handelDeleteButton = id => {
         let ttnDto = this.state.ttnDto;
         ttnDto.products.splice(id, 1);
-        console.log(ttnDto.products)
 
         this.setState({
             ...this.state,
@@ -371,7 +370,6 @@ class UpdateTtnConteiner extends Component {
         .then ( response => {
             let ttnDto = this.state.ttnDto;
             ttnDto.transport = response.data;
-            console.log(response)
             this.setState({
                 ...this.state,
                 ttnDto: ttnDto,

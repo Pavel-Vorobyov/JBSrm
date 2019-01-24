@@ -61,16 +61,22 @@ class TestTable extends Component {
                     <QuickSearch 
                         placeholder="Search by id, title, transport consumption or driver..."
                         searchQuery={'/api/waybills/quickSearch/'} 
-                        handleClick={this.handleDetailsClick}
+                        handleClick={(id) => this.handleDetailsClick(id)}
                         objectMappingResult={{
-                            title: 'Title:',
-                            email:'Email:',
-                            phone: 'Phone:',
+                            createdAt: 'Create at',
+                            startDate:'Start date',
+                            endDate: 'End date',
+                            ttnState: 'Ttn state',
                         }}/>
                 </Grid>
             </Toolbar>
         </div>
     )
+
+    handleDetailsClick = id => {
+        let currentPath = this.props.history.location.pathname;
+        this.props.history.push(currentPath + '/update/' + id);
+    }
 
     componentWillMount() {
         this.updatePage(0, 10, false);
@@ -154,11 +160,11 @@ class TestTable extends Component {
         console.log(this.state.page.content)
         if (data.length !== 0 && this.state.page) {
             data.forEach(element => {
-                element['driverName'] = this.state.page.content.find(c => c.id = element.id).ttn.driver.name + ' ' + this.state.page.content.find(c => c.id = element.id).ttn.driver.surname;
-                element['ttnState'] = this.state.page.content.find(c => c.id = element.id).ttn.ttnState;
-                element['startDate'] = this.state.page.content.find(c => c.id = element.id).startDate;
-                element['endDate'] = this.state.page.content.find(c => c.id = element.id).endDate;
-                element['createAt'] = this.state.page.content.find(c => c.id = element.id).createdAt;
+                element['driverName'] = this.state.page.content.find(c => c.id === element.id).ttn.driver.name + ' ' + this.state.page.content.find(c => c.id === element.id).ttn.driver.surname;
+                element['ttnState'] = this.state.page.content.find(c => c.id === element.id).ttn.ttnState;
+                element['startDate'] = this.state.page.content.find(c => c.id === element.id).startDate;
+                element['endDate'] = this.state.page.content.find(c => c.id === element.id).endDate;
+                element['createAt'] = this.state.page.content.find(c => c.id === element.id).createdAt;
                 console.log(element);
                 console.log(this.state.page.content);
                 console.log(this.state.page.content.find(c => c.id = element.id));

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserRepositoryImpl extends QuerydslRepositorySupport implements UserRepositoryCustom {
-    private final String queryStart = "select id, password, name, surname, user_gender, passport_series, passport_issued_by, birthday, email, phone, company_id, user_role, create_at, " +
+    private final String queryStart = "select id, password, name, surname, usergender, passport_series, passport_issued_by, birthday, email, phone, company_id, userrole, create_at, " +
             "deleted from users where as_tsvector(name, surname, email, phone) @@ to_tsquery('";
     private final String queryEnd = "') LIMIT (10);"; //todo replace query
 
