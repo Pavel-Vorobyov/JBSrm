@@ -39,8 +39,6 @@ public class UserServiceTest {
     private CompanyRepository companyRepository;
     @Mock
     private RegistrationLinkManager linkManager;
-    @Mock
-    private MailSender mailSender;
     @InjectMocks
     private UserServiceImpl userService;
 
