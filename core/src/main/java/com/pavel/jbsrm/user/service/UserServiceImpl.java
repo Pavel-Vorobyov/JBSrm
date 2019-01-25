@@ -15,6 +15,7 @@ import com.pavel.jbsrm.user.dto.UserDto;
 import com.pavel.jbsrm.user.repository.UserRepository;
 import com.querydsl.core.BooleanBuilder;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
@@ -41,6 +42,7 @@ public class UserServiceImpl implements UserService {
     private RegistrationLinkManager linkManager;
     private MailSender mailSender;
 
+    @Autowired
     public UserServiceImpl(UserRepository userRepository, CompanyRepository companyRepository, RegistrationLinkManager linkManager, MailSender mailSender) {
         this.userRepository = userRepository;
         this.companyRepository = companyRepository;

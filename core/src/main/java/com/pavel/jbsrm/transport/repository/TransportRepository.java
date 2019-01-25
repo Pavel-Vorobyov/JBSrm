@@ -8,7 +8,6 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
 public interface TransportRepository extends JpaRepository<Transport, Long>, QuerydslPredicateExecutor<Transport>, TransportRepositoryCustom {
     Page<Transport> findByDeleted(boolean deletedValue, Pageable pageable);
 }

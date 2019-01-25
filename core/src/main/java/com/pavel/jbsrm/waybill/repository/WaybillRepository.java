@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.stereotype.Repository;
 
-@Repository
 public interface WaybillRepository extends JpaRepository<Waybill, Long>, QuerydslPredicateExecutor<Waybill>, WaybillRepositoryCustom {
     Page<Waybill> findByDeleted(boolean deletedValue, Pageable pageable);
 }
