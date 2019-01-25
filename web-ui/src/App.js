@@ -50,6 +50,8 @@ import Analytics from './ui/analytics/analitycsConteiner';
 
 import TestTable from './ui/testTable/testTable';
 
+import BuildInfo from './ui/buildInfo/buildInfo';
+
 class App extends Component {
   
   render() {
@@ -68,6 +70,7 @@ class App extends Component {
             <Route path='/waybill' component={WaybillHeader} />
             <Route path='/transport' component={TransportHeader} />
             <Route path='/deed' component={DeedHeader} />
+            <Route path='/info' component={BuildInfo} />
           </Switch>
 
           <Switch>
@@ -117,6 +120,7 @@ class App extends Component {
             <Route path='/profile' exact component={UserHeader} />
             <Route path='/waybill' component={WaybillHeader} />
             <Route path='/deed' component={DeedHeader} />
+            <Route path='/info' component={BuildInfo} />
           </Switch>
           <Switch>
             <Route path='/profile' exact component={Profile} />
@@ -147,7 +151,7 @@ class App extends Component {
               <source src={BackgroundVideo} type='video/mp4' />
             </video>
           </div>
-          <Auth />
+          {window.location.pathname.includes('info') ? <BuildInfo /> : <Auth />}
         </div>}
       </div>
     );
