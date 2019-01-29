@@ -7,7 +7,6 @@ import java.util.function.Function;
 
 public class ObjectMapperUtills {
     private static ModelMapper modelMapper;
-    private static final ObjectMapperUtills INSTANCE = new ObjectMapperUtills();
 
     private ObjectMapperUtills() {
         modelMapper = new ModelMapper();

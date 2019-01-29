@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    // baseURL: window.location.origin,
-    baseURL: 'http://localhost:8080',
+    baseURL: window.location.origin,
+    // baseURL: 'http://localhost:8080',
     timeout: 10000,
 });
 

@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.test.context.ActiveProfiles;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -18,14 +20,11 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = {"com.pavel.jbsrm"})
 public class IntegrationTestConfig {
 
-//    @Bean
-
-
     @Bean(destroyMethod = "shutdown")
     DataSource dataSource(Environment env) {
         HikariConfig config = new HikariConfig();
 
-        config.setDataSourceProperties(PropertiesUtil.getSubProperties("C:\\Users\\Pavel.Varabyou\\Desktop\\operator-finder-java11\\JBSrm\\core\\src\\test\\resources\\test.properties", "datasource.properties."));
+        config.setDataSourceProperties(PropertiesUtil.getSubProperties("C:\\Users\\Pavel.Varabyou\\Desktop\\New folder (3)\\JBSrm\\core\\src\\test\\resources\\test.properties", "datasource.properties."));
         config.setDataSourceClassName(env.getProperty("datasource.dataSourceClassName"));
         return new HikariDataSource(config);
     }

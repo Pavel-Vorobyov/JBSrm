@@ -15,11 +15,13 @@ import com.pavel.jbsrm.user.dto.UserDto;
 import com.pavel.jbsrm.user.repository.UserRepository;
 import com.querydsl.core.BooleanBuilder;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +42,7 @@ public class UserServiceImpl implements UserService {
     private RegistrationLinkManager linkManager;
     private MailSender mailSender;
 
+    @Autowired
     public UserServiceImpl(UserRepository userRepository, CompanyRepository companyRepository, RegistrationLinkManager linkManager, MailSender mailSender) {
         this.userRepository = userRepository;
         this.companyRepository = companyRepository;
@@ -54,7 +57,7 @@ public class UserServiceImpl implements UserService {
             throw new EntityExistsException("Such email is present!");
         }
 
-        createUserDto.setPassword(StringConverter.getHash(createUserDto.getPassword()));
+        createUserDto.setPassword(BCrypt.hashpw(createUserDto.getPassword(), BCrypt.gensalt(10)));
         User userToCreate = ObjectMapperUtills.mapTo(createUserDto, User.class);
 
         User systemAdmin = userRepository.getOne(((UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
@@ -65,7 +68,6 @@ public class UserServiceImpl implements UserService {
                 MailTemplate.builder()
                 .to(createUserDto.getEmail())
                 .subject("Verification")
-                .text(linkManager.getLink(user.getId()).orElse("Something goes bad..."))
                 .build());
 
         return ObjectMapperUtills.mapTo(user, UserDto.class);
@@ -74,13 +76,16 @@ public class UserServiceImpl implements UserService {
     @Async
     private void sendMail(long userId, MailTemplate mail) {
         linkManager.getLink(userId)
-                .ifPresent(link -> mailSender.sendMail(mail));
+                .ifPresent(link -> {
+                    mail.setText(link);
+                    mailSender.sendMail(mail);
+                });
     }
 
     @Transactional
     @Override
     public Optional<UserDto> update(long id, @Valid UpdateUserDto updateUserDto) {
-        User user = userRepository.getOne(id); //todo from new created users returns invalid id, always 1
+        User user = userRepository.getOne(id);
         user.setId(id);
         ObjectMapperUtills.mapTo(updateUserDto, user);
         user.setCompany(companyRepository.getOne(updateUserDto.getCompanyId()));
