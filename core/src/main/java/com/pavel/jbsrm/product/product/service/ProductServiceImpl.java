@@ -17,7 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,40 +40,46 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ProductDto create(@Valid CreateProductDto createProductDto) {
         Product product = ObjectMapperUtills.mapTo(createProductDto, Product.class);
         product.setProductDetails(productDetailsRepository.getOne(createProductDto.getProductDetailsId()));
+
         if (createProductDto.getProductState() != null) {
             product.setProductState(createProductDto.getProductState());
         } else {
             product.setProductState(ProductState.ACCEPTED);
         }
 
-        return ObjectMapperUtills.mapTo(productRepository.save(product), ProductDto.class);
+        return ObjectMapperUtills.mapTo(product, ProductDto.class);
     }
 
     @Override
+    @Transactional
     public Optional<ProductDto> update(long id, @Valid UpdateProductDto updateProductDto) {
         Product product = productRepository.getOne(id);
         ObjectMapperUtills.mapTo(updateProductDto, product);
         product.setProductDetails(productDetailsRepository.getOne(updateProductDto.getProductDetailsId()));
 
-        return Optional.of(ObjectMapperUtills.mapTo(productRepository.save(product), ProductDto.class));
+        return Optional.of(ObjectMapperUtills.mapTo(product, ProductDto.class));
     }
 
     @Override
+    @Transactional
     public void updateDeleted(long id, boolean deleted) {
         Product product = productRepository.getOne(id);
         product.setDeleted(deleted);
-        productRepository.save(product);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<ProductDto> find(long id) {
-        return Optional.of(ObjectMapperUtills.mapTo(productRepository.findById(id).get(), ProductDto.class));
+        return productRepository.findById(id)
+                .map(product -> ObjectMapperUtills.mapTo(product, ProductDto.class));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ProductQuickSearchDto> findAllByPropsMatch(String searchParams) {
         List<ProductQuickSearchDto> result = new ArrayList<>();
         if (!StringUtils.isBlank(searchParams)) {
@@ -86,6 +94,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<ProductDto> findAllPageByFilter(ProductFilter filter, Pageable pageable) {
         return productRepository.findAll(buildFilter(filter), pageable)
                 .map(product -> ObjectMapperUtills.mapTo(product, ProductDto.class));

@@ -41,6 +41,7 @@ public class WaybillServiceImpl implements WaybillService {
     @Override
     public WaybillDto create(@Valid CreateWaybillDto createWaybillDto) {
         Waybill waybill = ObjectMapperUtills.mapTo(createWaybillDto, Waybill.class);
+
         waybill.setTtn(ttnRepository.getOne(createWaybillDto.getTtnId()));
         waybill.getCheckPoints().forEach(cp -> cp.setCheckPointStatus(CheckPointStatus.NOT_PASSED));
         waybill.getTtn().setTtnState(TtnState.TRANSPORTATION_STARTED);
@@ -53,6 +54,7 @@ public class WaybillServiceImpl implements WaybillService {
     public Optional<WaybillDto> update(long id, @Valid UpdateWaybillDto updateWaybillDto) {
         Waybill waybill = waybillRepository.getOne(id);
         ObjectMapperUtills.mapTo(updateWaybillDto, waybill);
+
         waybill.setTtn(ttnRepository.getOne(updateWaybillDto.getTtnId()));
         waybill.setId(id);
         waybill.getTtn().setId(updateWaybillDto.getTtnId());
@@ -68,24 +70,23 @@ public class WaybillServiceImpl implements WaybillService {
             waybill.getTtn().getTransport().setTransportState(TransportState.FREE);
         }
 
-        return Optional.of(ObjectMapperUtills.mapTo(waybillRepository.save(waybill), WaybillDto.class));
+        return Optional.of(ObjectMapperUtills.mapTo(waybill, WaybillDto.class));
     }
 
     @Override
     public void updateDeleted(long id, boolean deleted) {
         Waybill waybill = waybillRepository.getOne(id);
         waybill.setDeleted(deleted);
-        waybillRepository.save(waybill);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<WaybillDto> find(long id) {
-        return Optional.of(ObjectMapperUtills.mapTo(waybillRepository.findById(id).orElse(Waybill.builder().build()), WaybillDto.class));
+        return waybillRepository.findById(id).map(waybill -> ObjectMapperUtills.mapTo(waybill, WaybillDto.class));
     }
 
-    @Transactional(readOnly = true)
     @Override
+    @Transactional(readOnly = true)
     public List<WaybillDto> findAllByPropsMatch(String searchParams) {
         List<WaybillDto> result = new ArrayList<>();
         if (!StringUtils.isBlank(searchParams)) {
@@ -100,8 +101,8 @@ public class WaybillServiceImpl implements WaybillService {
         return result;
     }
 
-    @Transactional(readOnly = true)
     @Override
+    @Transactional(readOnly = true)
     public Page<WaybillDto> findAllPageByFilter(WaybillFilter filter, Pageable pageable) {
         return waybillRepository.findAll(buildFilter(filter), pageable)
                 .map(waybill -> ObjectMapperUtills.mapTo(waybill, WaybillDto.class));

@@ -8,6 +8,7 @@ import com.pavel.jbsrm.deed.dto.UpdateDeedDto;
 import com.pavel.jbsrm.deed.repository.DeedRepository;
 import com.pavel.jbsrm.product.details.repository.ProductDetailsRepository;
 import com.pavel.jbsrm.product.product.Product;
+import com.pavel.jbsrm.product.product.ProductState;
 import com.pavel.jbsrm.product.product.repository.ProductRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,45 +37,47 @@ public class DeedServiceImpl implements DeedService {
         this.productDetailsRepository = productDetailsRepository;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public DeedDto create(@Valid CreateDeedDto createDeedDto) {
         Deed deed = ObjectMapperUtills.mapTo(createDeedDto, Deed.class);
         Product product = new Product();
+
         product.setProductDetails(productDetailsRepository.getOne(createDeedDto.getProductDetailsId()));
         product.setAmount(createDeedDto.getAmount());
+        product.setProductState(ProductState.LOST);
+
         deed.setProduct(productRepository.save(product));
-        deed.setId(0L);
+
         return ObjectMapperUtills.mapTo(deedRepository.save(deed), DeedDto.class);
     }
 
-    @Transactional
     @Override
+    @Transactional
     public Optional<DeedDto> update(long id, @Valid UpdateDeedDto updateDeedDto) {
         Deed deed = deedRepository.getOne(id);
         ObjectMapperUtills.mapTo(updateDeedDto, deed);
+
         Product product = productRepository.getOne(updateDeedDto.getProductId());
         product.setAmount(updateDeedDto.getAmount());
-        deed.setProduct(product);
 
-        return Optional.of(ObjectMapperUtills.mapTo(deedRepository.save(deed), DeedDto.class));
+        return Optional.of(ObjectMapperUtills.mapTo(deed, DeedDto.class));
     }
 
     @Override
     public void updateDeleted(long id, boolean deleted) {
         Deed deed = deedRepository.getOne(id);
         deed.setDeleted(deleted);
-        deedRepository.save(deed);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<DeedDto> find(long id) {
-        return Optional.of(ObjectMapperUtills.mapTo(deedRepository.findById(id).orElse(Deed.builder().build()), DeedDto.class));
+        return deedRepository.findById(id).map(deed -> ObjectMapperUtills.mapTo(deed, DeedDto.class));
     }
 
-    @Transactional(readOnly = true)
     @Override
+    @Transactional(readOnly = true)
     public List<DeedDto> findAllByPropsMatch(String searchParams) {
         List<DeedDto> result = new ArrayList<>();
         if (!StringUtils.isBlank(searchParams)) {
@@ -88,8 +92,8 @@ public class DeedServiceImpl implements DeedService {
         return result;
     }
 
-    @Transactional(readOnly = true)
     @Override
+    @Transactional(readOnly = true)
     public Page<DeedDto> findAllPageByFilter(boolean deleted, Pageable pageable) {
         return deedRepository.findByDeleted(deleted, pageable)
                 .map(deed -> ObjectMapperUtills.mapTo(deed, DeedDto.class));

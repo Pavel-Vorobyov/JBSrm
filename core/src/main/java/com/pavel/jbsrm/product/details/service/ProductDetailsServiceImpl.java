@@ -41,19 +41,19 @@ public class ProductDetailsServiceImpl implements ProductDetailsService {
         ProductDetails productDetails = productDetailsRepository.getOne(id);
         ObjectMapperUtills.mapTo(updateProductDto, productDetails);
 
-        return Optional.of(ObjectMapperUtills.mapTo(productDetailsRepository.save(productDetails), ProductDetailsDto.class));
+        return Optional.of(ObjectMapperUtills.mapTo(productDetails, ProductDetailsDto.class));
     }
 
     @Override
     public void updateDeleted(long id, boolean deleted) {
         ProductDetails product = productDetailsRepository.getOne(id);
         product.setDeleted(deleted);
-        productDetailsRepository.save(product);
     }
 
     @Override
     public Optional<ProductDetailsDto> find(long id) {
-        return Optional.of(ObjectMapperUtills.mapTo(productDetailsRepository.findById(id).get(), ProductDetailsDto.class));
+        return productDetailsRepository.findById(id)
+                .map(productDetails -> ObjectMapperUtills.mapTo(productDetails, ProductDetailsDto.class));
     }
 
     @Override

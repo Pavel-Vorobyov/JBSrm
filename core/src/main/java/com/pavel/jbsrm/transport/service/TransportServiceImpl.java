@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,8 +37,11 @@ public class TransportServiceImpl implements TransportService {
     @Override
     public TransportDto create(@Valid CreateTransportDto createTransportDto) {
         Transport transportToCreate = ObjectMapperUtills.mapTo(createTransportDto, Transport.class);
-        transportToCreate.setOwner(companyRepository.findById(createTransportDto.getOwnerId()).get());
+
+        transportToCreate.setOwner(companyRepository
+                .findById(createTransportDto.getOwnerId()).orElseThrow(EntityNotFoundException::new));
         transportToCreate.getOwner().setId(createTransportDto.getOwnerId());
+
         return ObjectMapperUtills.mapTo(transportRepository.save(transportToCreate), TransportDto.class);
     }
 
@@ -45,23 +49,22 @@ public class TransportServiceImpl implements TransportService {
     public Optional<TransportDto> update(long id, @Valid UpdateTransportDto updateTransportDto) {
         Transport transport = transportRepository.getOne(id);
         ObjectMapperUtills.mapTo(updateTransportDto, transport);
-//        transport.setId(id);
-        transport.setOwner(companyRepository.getOne(updateTransportDto.getOwnerId())); //todo company.id from 3 to 0
-//        transport.getOwner().setId(updateTransportDto.getOwnerId());
-        return Optional.of(ObjectMapperUtills.mapTo(transportRepository.save(transport), TransportDto.class));
+
+        transport.setOwner(companyRepository.getOne(updateTransportDto.getOwnerId()));
+
+        return Optional.of(ObjectMapperUtills.mapTo(transport, TransportDto.class));
     }
 
     @Override
     public void updateDeleted(long id, boolean deleted) {
         Transport transport = transportRepository.getOne(id);
         transport.setDeleted(deleted);
-        transportRepository.save(transport);
     }
 
     @Override
     public Optional<TransportDto> find(long id) {
-        return Optional.of(ObjectMapperUtills
-                .mapTo(transportRepository.findById(id).orElse(Transport.builder().build()), TransportDto.class));
+        return transportRepository.findById(id)
+                .map(transport -> ObjectMapperUtills.mapTo(transport, TransportDto.class));
     }
 
     @Override

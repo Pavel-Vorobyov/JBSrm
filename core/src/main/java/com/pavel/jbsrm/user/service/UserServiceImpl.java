@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,7 +41,11 @@ public class UserServiceImpl implements UserService {
     private RegistrationLinkManager linkManager;
     private MailSender mailSender;
 
-    public UserServiceImpl(UserRepository userRepository, CompanyRepository companyRepository, RegistrationLinkManager linkManager, MailSender mailSender) {
+    public UserServiceImpl(UserRepository userRepository,
+                           CompanyRepository companyRepository,
+                           RegistrationLinkManager linkManager,
+                           MailSender mailSender) {
+
         this.userRepository = userRepository;
         this.companyRepository = companyRepository;
         this.linkManager = linkManager;
@@ -54,21 +59,22 @@ public class UserServiceImpl implements UserService {
             throw new EntityExistsException("Such email is present!");
         }
 
-        createUserDto.setPassword(StringConverter.getHash(createUserDto.getPassword()));
+        createUserDto.setPassword(BCrypt.hashpw(createUserDto.getPassword(), BCrypt.gensalt(10)));
         User userToCreate = ObjectMapperUtills.mapTo(createUserDto, User.class);
 
-        User systemAdmin = userRepository.getOne(((UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
-        userToCreate.setCompany(companyRepository.getOne(systemAdmin.getCompany().getId()));
-        User user = userRepository.save(userToCreate);
+        long systemAdminId = ((UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
 
-        sendMail(user.getId(),
+        User systemAdmin = userRepository.getOne(systemAdminId);
+        userToCreate.setCompany(companyRepository.getOne(systemAdmin.getCompany().getId()));
+
+        sendMail(systemAdmin.getId(),
                 MailTemplate.builder()
                 .to(createUserDto.getEmail())
                 .subject("Verification")
-                .text(linkManager.getLink(user.getId()).orElse("Something goes bad..."))
+                .text(linkManager.getLink(systemAdmin.getId()).orElse("Something goes bad..."))
                 .build());
 
-        return ObjectMapperUtills.mapTo(user, UserDto.class);
+        return ObjectMapperUtills.mapTo(systemAdmin, UserDto.class);
     }
 
     @Async
@@ -80,26 +86,25 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public Optional<UserDto> update(long id, @Valid UpdateUserDto updateUserDto) {
-        User user = userRepository.getOne(id); //todo from new created users returns invalid id, always 1
-        user.setId(id);
+        User user = userRepository.getOne(id);
         ObjectMapperUtills.mapTo(updateUserDto, user);
-        user.setCompany(companyRepository.getOne(updateUserDto.getCompanyId()));
 
-        return Optional.of(ObjectMapperUtills.mapTo(userRepository.save(user), UserDto.class));
+        user.setCompany(companyRepository.getOne(updateUserDto.getCompanyId()));
+        user.setId(id);
+
+        return Optional.of(ObjectMapperUtills.mapTo(user, UserDto.class));
     }
 
     @Override
     public void updateDeleted(long id, boolean deleted) {
         User user = userRepository.getOne(id);
         user.setDeleted(deleted);
-        userRepository.save(user);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<UserDto> find(long id) {
-        return userRepository.findById(id)
-                .map(user -> ObjectMapperUtills.mapTo(user, UserDto.class));
+        return userRepository.findById(id).map(user -> ObjectMapperUtills.mapTo(user, UserDto.class));
     }
 
     @Transactional(readOnly = true)

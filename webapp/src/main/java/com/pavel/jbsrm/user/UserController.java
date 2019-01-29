@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @RestController
@@ -57,7 +58,7 @@ public class UserController {
             userDto = ResponseEntity.ok().body(userService.create(createDto));
         } catch (EntityExistsException e) {
             userDto = ResponseEntity.status(HttpStatus.CONFLICT).build();
-        } catch (RuntimeException e) {
+        } catch (EntityNotFoundException e) {
             userDto = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return userDto;

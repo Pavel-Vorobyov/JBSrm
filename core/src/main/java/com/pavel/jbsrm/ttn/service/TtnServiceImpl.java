@@ -22,6 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,33 +43,39 @@ public class TtnServiceImpl implements TtnService {
         this.userRepository = userRepository;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public TtnDto create(@Valid CreateTtnDto createTtnDto) {
         Ttn ttn = ObjectMapperUtills.mapTo(createTtnDto, Ttn.class);
-        ttn.setCreatedBy(userRepository.findById(((UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()).get());
-        ttn.setDriver(userRepository.findById(createTtnDto.getDriverId()).get());
-        ttn.setTransport(transportRepository.findById(createTtnDto.getTransportId()).get());
+        long createdByUserId = ((UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+
+        ttn.setCreatedBy(userRepository.getOne(createdByUserId));
+        ttn.setDriver(userRepository.getOne(createTtnDto.getDriverId()));
+        ttn.setTransport(transportRepository.getOne(createTtnDto.getTransportId()));
+        ttn.getTransport().setTransportState(TransportState.BUSY);
         ttn.setTtnState(TtnState.ACCEPTED);
-        ttn.getCreatedBy().setId(((UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+
+        ttn.getCreatedBy().setId(createdByUserId);
         ttn.getDriver().setId(createTtnDto.getDriverId());
         ttn.getTransport().setId(createTtnDto.getTransportId());
-        ttn.getTransport().setTransportState(TransportState.BUSY);
+
         return ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class);
     }
 
-    @Transactional
     @Override
+    @Transactional
     public Optional<TtnDto> update(long id, @Valid UpdateTtnDto updateTtnDto) {
         Ttn ttn = ttnRepository.getOne(id);
         ObjectMapperUtills.mapTo(updateTtnDto, ttn);
-        ttn.setId(id);
+
         ttn.setDriver(userRepository.getOne(updateTtnDto.getDriverId()));
         ttn.setTransport(transportRepository.getOne(updateTtnDto.getTransportId()));
-        ttn.getDriver().setId(updateTtnDto.getDriverId());//todo user.id from 4 to 0
-        ttn.getTransport().setId(updateTtnDto.getTransportId());
 
-        return Optional.of(ObjectMapperUtills.mapTo(ttnRepository.save(ttn), TtnDto.class));
+        ttn.getDriver().setId(updateTtnDto.getDriverId());
+        ttn.getTransport().setId(updateTtnDto.getTransportId());
+        ttn.setId(id);
+
+        return Optional.of(ObjectMapperUtills.mapTo(ttn, TtnDto.class));
     }
 
     @Transactional
@@ -76,18 +83,16 @@ public class TtnServiceImpl implements TtnService {
     public void updateDeleted(long id, boolean deleted) {
         Ttn ttn = ttnRepository.getOne(id);
         ttn.setDeleted(deleted);
-        ttnRepository.save(ttn);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<TtnDto> find(long id) {
-        return Optional.of(ObjectMapperUtills
-                .mapTo(ttnRepository.findById(id).orElse(Ttn.builder().build()), TtnDto.class));
+        return ttnRepository.findById(id).map(ttn -> ObjectMapperUtills.mapTo(ttn, TtnDto.class));
     }
 
-    @Transactional(readOnly = true)
     @Override
+    @Transactional(readOnly = true)
     public List<TtnQuickSearchDto> findAllByPropsMatch(String searchParams) {
         List<TtnQuickSearchDto> result = new ArrayList<>();
         if (StringUtils.isNotBlank(searchParams)) {
@@ -101,8 +106,8 @@ public class TtnServiceImpl implements TtnService {
         return result;
     }
 
-    @Transactional(readOnly = true)
     @Override
+    @Transactional(readOnly = true)
     public Page<TtnDto> findAllPageByFilter(TtnFilter filter, Pageable pageable) {
         return ttnRepository.findAll(buildFilter(filter), pageable)
                 .map(ttn -> ObjectMapperUtills.mapTo(ttn, TtnDto.class));
