@@ -8,11 +8,7 @@ import org.springframework.core.env.Environment;
 
 import javax.sql.DataSource;
 
-/**
- * Configuration for Liquibase. Parent application should import it explicitly to start applying DB changes
- */
 @Configuration
-@PropertySource(value = "classpath:liquibase.properties", ignoreResourceNotFound = true)
 public class LiquibaseConfig {
 
     @Bean

@@ -8,10 +8,9 @@ spring:
     chain:
       enabled: true
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        dialect: com.pavel.jbsrm.common.postgres.CustomFullTextPostgresDialect
         cache.use_second_level_cache: false
         cache.use_query_cache: false
         generate_statistics: false

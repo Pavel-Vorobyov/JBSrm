@@ -3,10 +3,7 @@ package com.pavel.jbsrm.transport;
 import com.pavel.jbsrm.common.hibernate.EnumType;
 import com.pavel.jbsrm.common.hibernate.Enumerated;
 import com.pavel.jbsrm.company.Company;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -42,6 +39,7 @@ public class Transport {
     @JoinColumn(name = "company_id")
     private Company owner;
 
+    @Setter
     @Enumerated(EnumType.POSTGRES)
     private TransportState transportState;
 
