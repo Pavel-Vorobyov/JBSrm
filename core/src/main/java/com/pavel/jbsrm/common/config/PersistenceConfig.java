@@ -49,6 +49,4 @@ public class PersistenceConfig {
     public TransactionTemplate transactionTemplate(JpaTransactionManager transactionManager) {
         return new TransactionTemplate(transactionManager);
     }
-
-
 }
